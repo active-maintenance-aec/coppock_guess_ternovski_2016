@@ -1,0 +1,60 @@
+\begin{table}
+\centering
+\begin{talltblr}[         %% tabularray outer open
+caption={Study 2: heterogeneous effects of treatments. Columns 1 to 4 take signing as the outcome, columns 5 to 8 tweeting.},
+note{}={Robust standard errors (HC2) in parentheses. Eigenvector centrality, number of followers and days on Twitter in standard units and centred at zero.},
+]                     %% tabularray outer close
+{                     %% tabularray inner open
+colspec={Q[]Q[]Q[]Q[]Q[]Q[]Q[]Q[]Q[]},
+hline{2}={1-9}{solid, black, 0.05em},
+hline{42}={1-9}{solid, black, 0.05em},
+hline{1}={1-9}{solid, black, 0.08em},
+hline{44}={1-9}{solid, black, 0.08em},
+column{2-9}={}{halign=c},
+column{1}={}{halign=l},
+}                     %% tabularray inner close
+& (1) & (2) & (3) & (4) & (5) & (6) & (7) & (8) \\
+(Intercept) & -0.000 & -0.000 & -0.000 & -0.000 & -0.000 & -0.000 & -0.000 & -0.000 \\
+& (0.000) &  & (0.000) & (0.000) &  &  &  & (0.000) \\
+treatfol & 0.046 & 0.046 & 0.046 & 0.044 & 0.014 & 0.014 & 0.014 & 0.010 \\
+& (0.004) & (0.004) & (0.004) & (0.007) & (0.002) & (0.002) & (0.002) & (0.003) \\
+treatorg & 0.042 & 0.043 & 0.043 & 0.053 & 0.011 & 0.011 & 0.011 & 0.010 \\
+& (0.004) & (0.004) & (0.004) & (0.008) & (0.002) & (0.002) & (0.002) & (0.003) \\
+centrality\_centered & 0.000 &  &  &  & -0.000 &  &  &  \\
+&  &  &  &  & (0.000) &  &  &  \\
+treatfol × centrality\_centered & -0.002 &  &  &  & 0.001 &  &  &  \\
+& (0.003) &  &  &  & (0.002) &  &  &  \\
+treatorg × centrality\_centered & -0.006 &  &  &  & -0.001 &  &  &  \\
+& (0.003) &  &  &  & (0.001) &  &  &  \\
+num\_followers\_centered &  & -0.000 &  &  &  & 0.000 &  &  \\
+&  & (0.000) &  &  &  & (0.000) &  &  \\
+treatfol × num\_followers\_centered &  & -0.001 &  &  &  & 0.003 &  &  \\
+&  & (0.004) &  &  &  & (0.003) &  &  \\
+treatorg × num\_followers\_centered &  & -0.004 &  &  &  & 0.003 &  &  \\
+&  & (0.003) &  &  &  & (0.003) &  &  \\
+days\_on\_twitter\_centered &  &  & 0.000 &  &  &  & -0.000 &  \\
+&  &  & (0.000) &  &  &  &  &  \\
+treatfol × days\_on\_twitter\_centered &  &  & -0.002 &  &  &  & -0.001 &  \\
+&  &  & (0.005) &  &  &  & (0.003) &  \\
+treatorg × days\_on\_twitter\_centered &  &  & 0.000 &  &  &  & -0.002 &  \\
+&  &  & (0.004) &  &  &  & (0.002) &  \\
+account\_typemale &  &  &  & 0.000 &  &  &  & 0.000 \\
+account\_typeorg &  &  &  & 0.000 &  &  &  & -0.000 \\
+&  &  &  &  &  &  &  & (0.000) \\
+account\_typeunknown &  &  &  & 0.000 &  &  &  & -0.000 \\
+treatfol × account\_typemale &  &  &  & 0.019 &  &  &  & 0.010 \\
+&  &  &  & (0.011) &  &  &  & (0.006) \\
+treatorg × account\_typemale &  &  &  & -0.001 &  &  &  & 0.007 \\
+&  &  &  & (0.010) &  &  &  & (0.005) \\
+treatfol × account\_typeorg &  &  &  & -0.026 &  &  &  & 0.001 \\
+&  &  &  & (0.009) &  &  &  & (0.006) \\
+treatorg × account\_typeorg &  &  &  & -0.038 &  &  &  & -0.007 \\
+&  &  &  & (0.009) &  &  &  & (0.004) \\
+treatfol × account\_typeunknown &  &  &  & 0.006 &  &  &  & 0.012 \\
+&  &  &  & (0.020) &  &  &  & (0.013) \\
+treatorg × account\_typeunknown &  &  &  & -0.026 &  &  &  & -0.004 \\
+&  &  &  & (0.015) &  &  &  & (0.008) \\
+Num.Obs. & 8507 & 8507 & 8507 & 8507 & 8507 & 8507 & 8507 & 8507 \\
+R2 & 0.019 & 0.019 & 0.019 & 0.025 & 0.006 & 0.006 & 0.006 & 0.007 \\
+\end{talltblr}
+\end{table}

@@ -1,0 +1,547 @@
+---
+title: "Active Maintenance Report: coppock_guess_ternovski_2016"
+subtitle: "Coppock, Guess and Ternovski (2016, Political Behavior): When Treatments Are Tweets"
+date: today
+format:
+  gfm:
+    output-file: README.md
+    toc: true
+  pdf:
+    output-file: coppock_guess_ternovski_2016_report.pdf
+    toc: true
+    toc-depth: 2
+    number-sections: true
+execute:
+  echo: false
+  warning: false
+  message: false
+---
+
+```{r setup}
+library(here)
+library(tidyverse)
+library(knitr)
+library(kableExtra)
+
+here::i_am("README.qmd")
+
+# kableExtra's styling verbs emit LaTeX and have no meaning under gfm, where the same
+# table renders as a pipe table. Each call site says what LaTeX alone gets.
+latex_out <- knitr::is_latex_output()
+latex_only <- function(k, f) if (latex_out) f(k) else k
+
+# value_paper is the string the article prints, and the trailing zeros in it are the
+# record of how precisely it was printed, so it is read as text rather than re-parsed.
+gt <- read_csv(here::here("ground_truth", "coppock_guess_ternovski_2016_ground_truth.csv"),
+               col_types = cols(value_paper = col_character(), .default = col_guess()))
+manifest <- read_csv(here::here("original_manifest.csv"), show_col_types = FALSE)
+run_status <- read_csv(here::here("ground_truth", "archive_run_status.csv"),
+                       show_col_types = FALSE)
+out <- function(f) read_csv(here::here("maintained", "output", f), show_col_types = FALSE)
+
+# Every number quoted in the prose below is pulled through this, which fails loudly
+# rather than silently averaging or recycling if a pattern stops matching one row.
+one <- function(pattern, column, cond = TRUE) {
+  hit <- gt |> filter(str_detect(claim, pattern), {{ cond }}) |> pull({{ column }})
+  stopifnot(length(hit) == 1)
+  hit
+}
+```
+
+This repository holds the actively maintained replication code for Coppock, Guess and Ternovski (2016), together with the reproducibility report that documents what the original archive did and did not do. It is part of a program applying the maintenance proposal in Peer, Orr and Coppock (2021, *PS: Political Science & Politics*, doi [10.1017/S1049096521000366](https://doi.org/10.1017/S1049096521000366)) to a set of published archives.
+
+*Drafted by Claude Opus 5 under the supervision of Alex Coppock.*
+
+| | |
+|---|---|
+| Article | [10.1007/s11109-015-9308-6](https://doi.org/10.1007/s11109-015-9308-6) |
+| Replication archive | [10.7910/DVN/29548](https://doi.org/10.7910/DVN/29548) |
+| Pre-analysis plan | None |
+
+**The data are not redistributed here.** The deposit is `r round(sum(manifest$bytes) / 1024)` KB across `r nrow(manifest)` files and lives at Harvard Dataverse, which is the only copy this repository points at. `download_original.R` fetches it and verifies every file against the checksum and byte size recorded in `original_manifest.csv`, and stops if `original/` holds anything the manifest does not list. The exact bytes this code was written against are therefore pinned in version control even though the bytes themselves are not. Checksums are quoted only from the manifest: a file this pipeline writes, such as a figure PDF, records the time it was written and hashes differently on every run.
+
+**Repository layout.** `maintained/` is the maintained rewrite: one script per published table or figure, writing to `output/`, which is committed so a reader can compare a fresh run against it without downloading anything. `ground_truth/` ties every published number to the code that produces it. `published_claims.csv` is the extraction: every numeric token in the article and its appendix, read off the pages and classified by hand. `extract_archive_values.R` runs the deposited archive in a scratch copy and records what it produces. `build_ground_truth.R` joins the two together with the rewrite's output. `maintained/in_text_claims.R` reaches the same numbers by a second, independent path and prints each one beside the sentence it comes from. `original/` is created by the download script and is deliberately absent from the repository. This file is the reproducibility report, also available as a PDF in `report/`.
+
+**License.** CC0 1.0 Universal, matching the terms of the deposit this repository maintains. See `LICENSE`.
+
+**To reproduce.** Clone or download the repository, open `coppock_guess_ternovski_2016.Rproj`, and run:
+
+``` r
+source("run_all.R")
+```
+
+That fetches the deposit, verifies its `r nrow(manifest)` files, and produces every table and figure into `maintained/output/`. Required packages for the rewrite: tidyverse, estimatr, randomizr, nnet, modelsummary, knitr, kableExtra and here. Running the deposited archive needs AER, stargazer, xtable, lmtest and sandwich in addition, which `ground_truth/extract_archive_values.R` does in a scratch directory: set `ARCHIVE_RUN_DIR` to choose where, or leave it and the script uses a folder inside `tempdir()`. The deposit is never run in place, because running it writes files. Paths resolve through `here`, so nothing depends on the working directory. Most of the runtime is six randomization inference tests, each permuting assignment 1,000 times and refitting a pair of multinomial logits on every draw; every other script takes seconds. A successful run overwrites `maintained/output/`, which is committed: **`git diff` on that folder is the reproduction check**, and a clean run leaves only the figure PDFs changed.
+
+# Summary
+
+```{r summary_setup, include=FALSE}
+n_claims <- nrow(gt)
+n_archive_verifiable <- sum(!is.na(gt$match))
+n_archive_match <- sum(gt$match == 1, na.rm = TRUE)
+n_archive_fail <- sum(gt$match == 0, na.rm = TRUE)
+n_rewrite_verifiable <- sum(!is.na(gt$match_rewrite))
+n_rewrite_match <- sum(gt$match_rewrite == 1, na.rm = TRUE)
+n_rewrite_fail <- sum(gt$match_rewrite == 0, na.rm = TRUE)
+
+a2_paper <- one("^Omnibus p-value$", value_paper, table_figure == "table_a2")
+a2_archive <- one("^Omnibus p-value$", value_script, table_figure == "table_a2")
+a2_rewrite <- one("^Omnibus p-value$", value_rewrite, table_figure == "table_a2")
+a2_old <- one("pre-R-3.6", value_script, table_figure == "table_a2")
+a3_paper <- one("^Omnibus p-value$", value_paper, table_figure == "table_a3")
+a3_archive <- one("^Omnibus p-value$", value_script, table_figure == "table_a3")
+a3_rewrite <- one("^Omnibus p-value$", value_rewrite, table_figure == "table_a3")
+a3_old <- one("pre-R-3.6", value_script, table_figure == "table_a3")
+
+signers_2 <- out("table_3_study2_outcomes.csv") |> filter(arm == "Total") |> pull(n_signed)
+pool_paper <- one("Study 2: subjects of the second-stage", value_paper)
+pool_data <- one("Study 2: subjects of the second-stage", value_rewrite)
+pool_sample <- out("text_summary_stats.csv") |>
+  filter(study == "Study 2", quantity == "Second-stage analysis sample") |> pull(value)
+types_paper <- one("types 5 to 7 combined, Study 2", value_paper)
+types_data <- one("types 5 to 7 combined, Study 2", value_rewrite)
+
+fmt3 <- \(x) sprintf("%.3f", x)
+```
+
+Two questions, answered before the detail.
+
+## Does the deposited archive run?
+
+No. Both analysis scripts stop with an error partway through. `LCV Experiments 1 and 2 analysis.R` dies at the Table 6 `stargazer()` call, taking Tables 7, 8, 9 and Figure 3 with it. `LCV Appendix analysis.R` dies earlier still, at the Study 1 omnibus balance test, because `complete_ra()` no longer accepts the argument `condition_names`; the current argument is `conditions`. Repair that and the appendix script dies at the Table A4 `stargazer()` call in turn, and one of its `print.xtable()` calls writes to a personal directory path that exists on no other machine.
+
+Patch those three faults and everything computes, but one published number does not come back. The Study 1 omnibus balance p-value is `r a2_paper` in the appendix and `r fmt3(a2_archive)` here. It is a randomization inference p-value drawn with `set.seed(343)` over 1,000 permutations from `complete_ra()`, and the archive's own comments install randomizr from GitHub rather than from CRAN, pinned to nothing, so the random number stream that produced `r a2_paper` belongs to a state of that repository a reader cannot now obtain. The Study 2 omnibus p-value has the same shape but a happier ending: `r a3_paper` in the appendix, `r fmt3(a3_archive)` under a current R, and `r fmt3(a3_old)` under `RNGkind(sample.kind = "Rounding")`. That one is the R 3.6 sampler change and nothing else, because Study 2's permutation function is written out by hand in the deposit instead of coming from a package.
+
+## Does the maintained rewrite reproduce the paper?
+
+Yes, with `r n_rewrite_fail` exceptions out of `r n_rewrite_verifiable` published values, and none of them touches a result.
+
+Two are the omnibus balance p-values, which are simulation output and are reported as such: `r fmt3(a2_rewrite)` against a published `r a2_paper` for Study 1, and `r fmt3(a3_rewrite)` against a published `r a3_paper` for Study 2, both far from any threshold and both within the Monte Carlo error of a 1,000-draw permutation test. The third is a count: the article says the `r signers_2` Study 2 petition signers "were followed by `r pool_paper` other users", and the deposited data hold `r pool_data` subjects with a positive probability of exposure, of whom the `r pool_sample` whose probability is strictly below one are the sample Table 9 analyses. The fourth is the appendix's statement that subject types 5 through 7 make up "approximately `r types_paper`%" of the Study 2 population, where the signing rate among direct message subjects is `r sprintf("%.2f", types_data)`%.
+
+Everything else matches to the precision the article prints: all of Tables 2 through 9, both balance tables, both heterogeneity tables, the account type shares in the Figure 3 caption, and every quantity the results sections state in running text as a number rather than as an inequality.
+
+# Paper overview
+
+**Citation**: Coppock, A., Guess, A. and Ternovski, J. (2016). "When treatments are tweets: A network mobilization experiment over Twitter." *Political Behavior*, 38(1), 105-128. DOI: 10.1007/s11109-015-9308-6
+
+```{r overview_setup, include=FALSE}
+n_1 <- out("table_2_study1_outcomes.csv") |> filter(arm == "Total") |> pull(n)
+n_2 <- out("table_3_study2_outcomes.csv") |> filter(arm == "Total") |> pull(n)
+effects <- out("text_treatment_effects.csv")
+dm_1 <- effects |> filter(study == "Study 1", str_detect(quantity, "any direct message")) |> pull(estimate)
+dm_2 <- effects |> filter(study == "Study 2", str_detect(quantity, "any direct message")) |> pull(estimate)
+iv_2 <- out("table_9_study2_network.csv") |>
+  filter(model == "M3 signed, IV", term == "actual_exposure") |> pull(estimate)
+```
+
+**Summary**: Two field experiments run with the League of Conservation Voters test whether direct appeals over Twitter mobilize participation, and whether that mobilization spreads through the network. In each study LCV posted a public tweet asking supporters to sign an online petition, and subjects were randomly assigned to receive, in addition, a direct message addressing them as a "follower", a direct message addressing them as an "organizer", or nothing beyond the public tweet. Petition signers were then randomly shown a tweet button encouraging them to pass the link on, which randomly exposed the subjects' own followers to additional tweets and makes the second stage an experiment in its own right, analysed with inverse probability of exposure weights and instrumental variables. Study 1 (N = `r format(n_1, big.mark = ",")`) ran in February 2014, Study 2 (N = `r format(n_2, big.mark = ",")`) in July 2014. A direct message of either kind raised the signature rate by `r sprintf("%.1f", dm_1)` percentage points in Study 1 and `r sprintf("%.1f", dm_2)` in Study 2 while the public tweet moved nothing at all, and in Study 2 exposure to a signer's tweet raised signing among compliers by `r sprintf("%.1f", 100 * iv_2)` percentage points.
+
+# Original archive reproducibility
+
+```{r repro_table}
+r_version <- paste(R.version$major, R.version$minor, sep = ".")
+
+shipped <- run_status |>
+  filter(variant == "as shipped") |>
+  select(file, shipped_message = message)
+
+repaired <- run_status |>
+  filter(variant == "repaired") |>
+  summarize(
+    expressions = n(),
+    failing = paste0(sum(status == "error"), " (lines ",
+                     paste(first_line[status == "error"], collapse = ", "), ")"),
+    .by = file
+  )
+
+shipped |>
+  left_join(repaired, by = "file") |>
+  transmute(Script = file, Expressions = expressions,
+            Stops = shipped_message, Failing = failing) |>
+  kable(
+    booktabs = TRUE,
+    col.names = c("Script", "Top-level expressions", "Error that stops source()",
+                  "Expressions still failing when repaired and run one at a time"),
+    caption = paste0("The deposited archive on R ", r_version, ". LCVsource.r is not ",
+                     "listed: it defines functions, is sourced by both scripts, and ",
+                     "needs no changes.")
+  ) |>
+  latex_only(\(k) k |>
+    kable_styling(latex_options = c("hold_position", "scale_down"), font_size = 7) |>
+    column_spec(1, width = "3.5cm") |>
+    column_spec(3, width = "4.5cm") |>
+    column_spec(4, width = "4cm"))
+```
+
+```{r stargazer_counts, include=FALSE}
+stargazer_calls <- run_status |> filter(variant == "repaired", kind == "stargazer call")
+n_stargazer <- nrow(stargazer_calls)
+n_stargazer_fail <- sum(stargazer_calls$status == "error")
+figure_3_rows <- nrow(read_csv(here::here("ground_truth", "archive_figure_3_values.csv"),
+                               show_col_types = FALSE))
+stargazer_built <- packageDescription("stargazer")$Date
+```
+
+Every package the archive names still installs from CRAN: `stargazer`, `AER`, `ggplot2`, `dplyr`, `nnet`, `xtable` and `randomizr`, along with the `lmtest` and `sandwich` that `LCVsource.r` calls for by hand. The exposure is not availability but maintenance. The installed `stargazer` is version `r packageVersion("stargazer")`, dated `r stargazer_built`, and it carries the call-parsing defect described below. `randomizr` is under active development, and the argument the archive passes to `complete_ra()` is not one the installed version `r packageVersion("randomizr")` accepts.
+
+Running the two scripts expression by expression, so that one failure does not hide the next, separates the faults cleanly. Of the `r n_stargazer` `stargazer()` calls across the two files, `r n_stargazer_fail` fail: the two exposure tables of the main text, which are Tables 6 and 9, and both of the appendix's heterogeneity tables, A4 and A5. The `r n_stargazer - n_stargazer_fail` that succeed deparse to a shorter call. Every other expression in the main script runs, including the whole Figure 3 block, which assembles all `r figure_3_rows` plotted estimates and writes its PNG as intended. The appendix script adds two faults of its own, the `condition_names` argument and the hardcoded `print.xtable()` path. Run as shipped, the first of those also takes down the `hist()` and `abline()` calls that follow it, because the vector they plot was never filled; both edits together are what leaves only the two `stargazer()` failures in the table above.
+
+## The stargazer call-length failure
+
+The error is `the condition has length > 1`, raised inside `stargazer`'s own `.get.object.names`. What decides it is neither the models nor the arguments:
+
+``` r
+short <- aaaaaaaaaaaaaaaaaaaaaaaa.1
+stargazer(short, type = "text")                                           # fine
+stargazer(aaaaaaaaaaaaaaaaaaaaaaaa.1, aaaaaaaaaaaaaaaaaaaaaaaa.1,
+          type = "text")                                                  # fine
+stargazer(aaaaaaaaaaaaaaaaaaaaaaaa.1, aaaaaaaaaaaaaaaaaaaaaaaa.1,
+          aaaaaaaaaaaaaaaaaaaaaaaa.1, type = "text")                      # error
+```
+
+All three tabulate the same model, and the name is 26 characters long. `stargazer` deparses the call it was given in order to label the columns, and `deparse()` breaks its result into several strings once the text is long enough. The package then tests that vector with `if (is.na(s))`, which was a warning before R 4.2 and has been an error since. Any archive that names its model objects descriptively and tabulates several of them at once is exposed, which is a large class of archives. The maintained rewrite tabulates with `modelsummary` and does not inherit the problem.
+
+## What still works
+
+`prepareforgg()`, the Figure 3 helper, chains two `dplyr::do()` calls and takes the coefficients out of the second with `.$mod`. Both `do()` and that idiom are superseded, and the rewrite replaces them, but neither is broken: on dplyr 1.2.1 the chain runs and returns the correct eight rows per call. The reason Figure 3 never appears in a batch run is that the file stops at the third of its six `stargazer()` calls, well before the figure block and in a part of the script that has nothing to do with the figure.
+
+## The balance check that could not fail
+
+```{r imbalance_setup, include=FALSE}
+imbalance_archive <- one("tweet encouragement assignment predicting signing", value_script)
+imbalance_rewrite <- one("tweet encouragement assignment predicting signing", value_rewrite)
+study_2_assigned <- out("table_3_study2_outcomes.csv") |>
+  filter(arm == "Signers: total") |> pull(n)
+```
+
+The article reports an anomaly in Study 1: assignment to the tweet encouragement predicted petition signing at `p < .01`, which should have been impossible, since the encouragement was displayed only after a subject had signed. The deposit fits that regression with `lm()` and gets `r signif(imbalance_archive, 2)`; the rewrite fits it with HC2 errors and gets `r signif(imbalance_rewrite, 2)`. Both are below the threshold the article names, so the anomaly it reports is in the data rather than in the reporting of it.
+
+The deposit runs the same check on Study 2 and its comment records no imbalance. That check cannot detect one. In Study 2 the encouragement was assigned inside the survey software after a subject clicked through, so `tweetbutton` is recorded only for the `r study_2_assigned` petition signers, and within them the signing outcome is constant at one. The regression therefore has no outcome variation to explain, and it would return the same verdict whatever the data held. The design change is what rules out a Study 2 imbalance, not the regression.
+
+# Errata
+
+```{r errata_setup, include=FALSE}
+arms <- c(pub = "Public tweet", fol = "Follower DM", org = "Organizer DM")
+a3_days <- map_dbl(names(arms), \(a) out("table_a3_study2_balance.csv") |>
+                     filter(covariate == "days_on_twitter", treat == a) |> pull(mean))
+a3_published <- map_chr(unname(arms),
+                        \(a) one(paste0("^Days on Twitter, ", a, ", mean$"), value_paper,
+                                 table_figure == "table_a3"))
+```
+
+One published label is wrong, and the deposit shows how. Table A3 reports a Study 2 covariate as "Number of Tweets" with arm means of `r paste(a3_published, collapse = ", ")`. The line that produces those numbers is `mean_days = mean(days_on_twitter, na.rm = TRUE)`, and the row label comes from a separate hand-written vector that says "Number of Tweets" where Table A2's equivalent says "Days on Twitter". The rewrite takes the mean of `days_on_twitter` within each arm and gets `r paste(sprintf("%.3f", a3_days), collapse = ", ")`, the same three numbers to every printed decimal. The row is days on Twitter, the values are right, and the label is a slip. The maintained rewrite labels it "Days on Twitter" and the ground truth records the values as matching.
+
+The archive's `strata_ra()` helper carries a second slip with no consequence: it writes `"ord"` where it means `"org"` when labelling the third arm of a simulated assignment. Since the labels only feed a multinomial logit whose deviance does not depend on them, the Study 2 omnibus p-value is unaffected. The rewrite permutes with `randomizr::block_ra()` instead, which draws the same block-by-block arm sizes.
+
+# Number-by-number comparison
+
+```{r extraction_setup, include=FALSE}
+claims <- read_csv(here::here("ground_truth", "published_claims.csv"),
+                   col_types = cols(value_paper = col_character(), .default = col_guess()))
+n_extracted <- nrow(claims)
+claim_type_counts <- claims |> count(claim_type)
+n_pipeline <- claim_type_counts$n[claim_type_counts$claim_type == "pipeline"]
+n_descriptive <- claim_type_counts$n[claim_type_counts$claim_type == "descriptive"]
+n_not_pipeline <- n_extracted - n_pipeline - n_descriptive
+```
+
+What gets checked is fixed in advance, by an extraction rather than by what the pipeline happens to produce. `ground_truth/published_claims.csv` lists every numeric token in the article and its online appendix, read off the pages and classified by hand into `r nrow(claim_type_counts)` kinds: `r n_pipeline` are pipeline quantities, `r n_descriptive` are claims about a shape, a sign or a threshold rather than a value, and `r n_not_pipeline` are definitional or structural constants that no analysis can move. Every pipeline and descriptive claim must have both a row in the ground truth and a block in `maintained/in_text_claims.R`, and the build stops if either is missing.
+
+The ground truth then pairs each published claim with two independently produced values: `value_script`, read out of the models the deposited code fits when it is run in a scratch copy of the archive, and `value_rewrite`, read out of `maintained/output/`. A published value enters only from the extraction, never from a script run, and the verdicts are computed by comparing the two against the string the article prints, at the precision it prints. A qualitative claim carries the same machinery with a truth value in place of a number, so an article contradicting its own estimates registers as a mismatch like any other. The complete table is `ground_truth/coppock_guess_ternovski_2016_ground_truth.csv`; the summary and every non-matching row are below.
+
+```{r gt_summary}
+float_labels <- c(
+  table_1 = "Table 1: organizations' Twitter accounts",
+  table_2 = "Table 2: Study 1 design and outcomes",
+  table_3 = "Table 3: Study 2 design and outcomes",
+  table_4 = "Table 4: Study 1 direct message effects",
+  table_5 = "Table 5: Study 1 tweet encouragement",
+  table_6 = "Table 6: Study 1 network effects",
+  table_7 = "Table 7: Study 2 direct message effects",
+  table_8 = "Table 8: Study 2 tweet encouragement",
+  table_9 = "Table 9: Study 2 network effects",
+  figure_1 = "Figure 1: Study 1 follower network",
+  figure_2 = "Figure 2: LCV tweets per weekday",
+  figure_3 = "Figure 3: effects by account type",
+  table_a1 = "Table A1: possible subject types",
+  table_a2 = "Table A2: Study 1 balance",
+  table_a3 = "Table A3: Study 2 balance",
+  table_a4 = "Table A4: Study 1 heterogeneity",
+  table_a5 = "Table A5: Study 2 heterogeneity",
+  figures_a1_a6 = "Figures A1 to A6: screenshots",
+  text = "Running text"
+)
+
+# The published float list, taken from the article's and the appendix's own numbered
+# floats. The ground truth build gates on the same list, so a float with no row there
+# stops the pipeline rather than going missing from this table.
+stopifnot(all(setdiff(names(float_labels), "text") %in% gt$table_figure))
+
+gt |>
+  summarize(
+    rows = n(),
+    archive = sum(match == 1, na.rm = TRUE),
+    archive_of = sum(!is.na(match)),
+    rewrite = sum(match_rewrite == 1, na.rm = TRUE),
+    rewrite_of = sum(!is.na(match_rewrite)),
+    .by = table_figure
+  ) |>
+  arrange(match(table_figure, names(float_labels))) |>
+  transmute(
+    Float = unname(float_labels[table_figure]),
+    Rows = rows,
+    Archive = paste0(archive, " / ", archive_of),
+    Rewrite = paste0(rewrite, " / ", rewrite_of)
+  ) |>
+  kable(
+    booktabs = TRUE,
+    col.names = c("Published float", "Rows", "Archive matches", "Rewrite matches"),
+    caption = "Ground truth coverage, by published float. Matches are counted against the rows that can be compared at all."
+  ) |>
+  latex_only(\(k) k |>
+    kable_styling(latex_options = "hold_position", font_size = 8) |>
+    column_spec(1, width = "7cm"))
+```
+
+```{r deposit_contents, include=FALSE}
+n_data_files <- sum(str_detect(manifest$file, "\\.rdata$"))
+n_code_files <- sum(str_detect(manifest$file, "\\.[rR]$"))
+n_other_files <- nrow(manifest) - n_data_files - n_code_files
+```
+
+Of the `r n_claims` recorded claims, `r n_archive_verifiable` can be compared against a value the deposited code produces. `r n_archive_match` match and `r n_archive_fail` do not. Every published float in the article and the appendix has a row here, including the ones nothing in the deposit can reach: the deposit is `r n_data_files` data files, `r n_code_files` code files and `r n_other_files` README, with no stored results at all, so Table 1, Figure 1 and Figure 2 have no source in it. Those rows are listed as uncovered with the reason.
+
+```{r gt_uncovered}
+gt |>
+  filter(claim_type == "pipeline", is.na(match), is.na(match_rewrite)) |>
+  transmute(Float = unname(float_labels[table_figure]), Claim = claim,
+            Paper = replace_na(as.character(value_paper), ""), Note = notes) |>
+  kable(
+    booktabs = TRUE, longtable = TRUE,
+    caption = "Published claims recorded as not comparable, and why."
+  ) |>
+  latex_only(\(k) k |>
+    kable_styling(latex_options = "repeat_header", font_size = 6) |>
+    column_spec(1, width = "3cm") |>
+    column_spec(2, width = "4cm") |>
+    column_spec(4, width = "6cm"))
+```
+
+Where a table's `stargazer()` call fails, the models behind it still fit, and the archive values recorded here come from those model objects. The model objects are the informative comparison, because they separate a printing failure from an estimation failure, and here the failure is entirely in the printing.
+
+```{r gt_unverifiable}
+se_undefined <- gt |> filter(str_detect(replace_na(notes, ""), "^Standard error undefined"))
+n_se_undefined <- nrow(se_undefined)
+n_se_substituted <- sum(se_undefined$value_script == 0.00004)
+```
+
+A further `r n_se_undefined` cells are recorded as unverifiable rather than as matches or mismatches. Each is a standard error on a coefficient identified only within the public tweet arm, where no subject signed or tweeted, so every residual there is zero and the robust variance of the term is zero up to floating point, coming back very slightly negative. The published tables print `0.000` for all of them, by two different routes: in `r n_se_undefined - n_se_substituted` cells `vcovHC()` returns a tiny positive variance whose square root rounds to zero, and in the other `r n_se_substituted` it returns `NaN` and the deposit's own wrapper replaces the `NaN` with `0.00004`. `estimatr::lm_robust()` takes the square root and returns `NaN`, which is the correct answer for a variance that is not positive, and the ground truth carries the reason on each row.
+
+# Maintained rewrite
+
+```{r rewrite_setup, include=FALSE}
+scripts <- list.files(here::here("maintained"), pattern = "\\.R$")
+n_scripts <- length(setdiff(scripts, "helpers.R"))
+```
+
+The rewrite lives in `maintained/`: a shared `helpers.R` and `r n_scripts` scripts covering one cleaning step, the eight published tables of the main text, the four appendix tables that come from data, Figure 3, two scripts for the quantities the article states only in running text, one that turns the article's qualitative claims into truth values, one that prints every published number beside the sentence it appears in, and one that re-runs the archive's own omnibus tests under the sampler R shipped before 3.6.0. It is a translation, not a reanalysis: every estimator, specification and sample restriction is the one the paper used.
+
+## Architecture
+
+`clean_lcv.R` reads the two deposited data frames and writes tibbles with explicit factor levels for treatment and account type, and with the centred covariates flattened from the one-column matrices `scale()` leaves behind. Everything downstream reads those two files, so no analysis script touches `original/` directly.
+
+The archive computes robust standard errors by fitting with `lm()` and then passing the fit through a `coeftest(fit, vcovHC(fit, type = "HC2"))` wrapper defined in `LCVsource.r`. The rewrite calls `estimatr::lm_robust()`, whose default `se_type` is already HC2, and `iv_robust()` in place of `AER::ivreg()` with the same wrapper. Those are the same estimators with the same standard errors.
+
+Two places need care rather than translation. The article reports the follower against organizer difference by refitting on the two direct message arms alone; `lm()` silently drops the now-empty `pub` level and `lm_robust()` does not, so the rewrite calls `droplevels()` and the reference category comes out where the published table puts it. Figure 3 is the one output where the paper does not use robust standard errors: its intervals come from `coef(summary(lm(...)))`. The figure script therefore passes `se_type = "classical"` explicitly, with a comment saying why, rather than quietly plotting a different interval from the one the article shows.
+
+## Deprecated patterns replaced
+
+```{r replacements_table}
+tibble(
+  Original = c(
+    "`rm(list = ls())`",
+    "`setwd(\"\")`",
+    "`lm()` + `coeftest(vcovHC, 'HC2')`",
+    "`AER::ivreg()` + the same wrapper",
+    "`stargazer` (eight calls, four of them fatal)",
+    "`xtable` + `print.xtable` to a hardcoded path",
+    "chained `do(mod = lm(...))` + `do(data.frame(...))`",
+    "`complete_ra(condition_names = )`",
+    "hand-written `strata_ra()`",
+    "`coord_flip()` + `geom_pointrange` + legend",
+    "magrittr pipe"
+  ),
+  Replacement = c(
+    "(omitted)",
+    "`here::here()`",
+    "`estimatr::lm_robust()`",
+    "`estimatr::iv_robust()`",
+    "`modelsummary(output = )` plus a tidy `.csv`",
+    "`knitr::kable()` to `output/`",
+    "`nest()` + `map()` + `unnest()`",
+    "`complete_ra(conditions = )`",
+    "`randomizr::block_ra()`",
+    "estimate on `x`, `geom_linerange`, direct labels",
+    "native pipe"
+  )
+) |>
+  kable(
+    booktabs = TRUE,
+    col.names = c("Original pattern", "Replacement"),
+    caption = "Deprecated patterns and their replacements in the maintained rewrite."
+  ) |>
+  latex_only(\(k) k |>
+    kable_styling(latex_options = c("hold_position", "scale_down"), font_size = 8) |>
+    column_spec(1, width = "6cm") |>
+    column_spec(2, width = "6.5cm"))
+```
+
+Nothing in `maintained/output/` is typed in. Every value there, including the two omnibus p-values and the four percentages in the Figure 3 caption, is computed from the deposited data by the script that writes it.
+
+# The omnibus balance tests
+
+The appendix reports one omnibus balance p-value per study, each from a randomization inference procedure: fit a multinomial logit of assignment on all four covariates, take the likelihood ratio against an intercept-only fit, then repeat against 1,000 assignments permuted under the study's own protocol.
+
+```{r omnibus_table}
+tibble(
+  Study = c("Study 1 (Table A2)", "Study 2 (Table A3)"),
+  Published = c(a2_paper, a3_paper),
+  Archive = fmt3(c(a2_archive, a3_archive)),
+  `Archive, old sampler` = fmt3(c(a2_old, a3_old)),
+  Rewrite = fmt3(c(a2_rewrite, a3_rewrite)),
+  Protocol = c("complete_ra(), from a 2015 GitHub randomizr",
+               "strata_ra(), written out in the deposit")
+) |>
+  kable(
+    booktabs = TRUE,
+    caption = "Omnibus balance p-values, 1,000 permutations each. The old sampler column re-runs the deposit's own permutation code under RNGkind(sample.kind = \"Rounding\")."
+  ) |>
+  latex_only(\(k) k |> kable_styling(latex_options = "hold_position", font_size = 7))
+```
+
+Study 2's number is recoverable and Study 1's is not, and the difference is where the permutation comes from. Study 2 permutes with a function written out inside `LCVsource.r`, so the only thing standing between the published p-value and a current R is the sampler: `RNGkind(sample.kind = "Rounding")` returns `r a3_paper` exactly. Study 1 permutes with `complete_ra()`, which the archive's own comments say to install with `devtools::install_github("acoppock/randomizr")`. That names no version, and the released package has since dropped the very argument the archive passes it, so the draws behind `r a2_paper` cannot be reconstructed, and the old sampler does not recover them either. The rewrite keeps the modern sampler in both cases and reports what it gets. Neither p-value is close to a threshold under any of the four routes above, so the balance conclusion the appendix draws is unaffected.
+
+# Figure 3
+
+```{r fig3_setup, include=FALSE}
+fig3_note <- one("plotted conditional effects", notes)
+```
+
+The figure plots conditional average treatment effects of the two direct message treatments within each account type, for each outcome and each study. `r fig3_note` What the article does print is the caption, which reports the account type composition of both samples, and all eight of those percentages reproduce.
+
+```{r fig3_caption_table}
+# Pipeline rows only. The figure_3 rows also include the caption's qualitative claims,
+# whose value_rewrite is a truth value rather than a percentage, and they belong in the
+# descriptive table below rather than in a table of sample composition.
+gt |>
+  filter(table_figure == "figure_3", claim_type == "pipeline", !is.na(value_rewrite)) |>
+  transmute(
+    Quantity = str_remove(claim, "^Figure 3 caption: "),
+    Paper = value_paper,
+    Rewrite = sprintf("%.1f", value_rewrite),
+    Match = match_rewrite
+  ) |>
+  kable(booktabs = TRUE, caption = "Figure 3 caption: sample composition by account type, in percent.") |>
+  latex_only(\(k) k |> kable_styling(latex_options = "hold_position", font_size = 8))
+```
+
+```{r fig3_image, out.width="100%", fig.cap="Figure 3 as reproduced by the maintained rewrite."}
+# Relative to this file, never absolute. Pandoc rewrites a leading slash into a
+# relative path when it emits LaTeX, so an absolute path renders fine under gfm and
+# then fails to find the image under pdf.
+knitr::include_graphics(
+  if (latex_out) {
+    "maintained/output/figure_3_het_account_type.pdf"
+  } else {
+    "maintained/output/figure_3_het_account_type.png"
+  }
+)
+```
+
+The rewrite's version differs from the published figure in presentation rather than content: the treatment arms are labelled beside the estimates instead of in a legend, the horizontal layout is built by mapping the account type to `y` rather than by flipping a vertical plot, and the interval is the fitted model's own 95 per cent confidence interval rather than the estimate plus or minus 1.96 standard errors.
+
+# Maintained rewrite verification
+
+**`r n_rewrite_match`** of `r n_rewrite_verifiable` published values are reproduced to the precision the article prints. The `r n_rewrite_fail` that are not are listed below with what separates them, and with where the fault lies.
+
+```{r rewrite_fails}
+gt |>
+  filter(match_rewrite == 0) |>
+  transmute(Float = unname(float_labels[table_figure]), Claim = claim,
+            Paper = value_paper,
+            Rewrite = map_chr(value_rewrite, \(v) format(signif(v, 4), trim = TRUE)),
+            Fault = defect_locus, Note = notes) |>
+  kable(
+    booktabs = TRUE, longtable = TRUE,
+    caption = "Published values the maintained rewrite does not reproduce."
+  ) |>
+  latex_only(\(k) k |>
+    kable_styling(latex_options = "repeat_header", font_size = 6) |>
+    column_spec(1, width = "2.5cm") |>
+    column_spec(2, width = "3.5cm") |>
+    column_spec(6, width = "6cm"))
+```
+
+```{r fault_counts, include=FALSE}
+n_paper_internal <- sum(gt$defect_locus == "paper_internal", na.rm = TRUE)
+```
+
+`r n_paper_internal` of the `r n_rewrite_fail` sit in the article rather than in any code. The published follower count and the published subject type share are both stated in the text, and both disagree with the deposited data by a rounding or a transcription; the rewrite reports what the data hold. The Study 1 omnibus p-value is unrecoverable from the deposit for the reason given above, and the Study 2 one moves with the sampler that R shipped in 3.6.0, which is a property of the environment rather than a defect in either the archive or the rewrite.
+
+# In-text claims
+
+```{r claims_setup, include=FALSE}
+claim_lines <- read_lines(here::here("maintained", "in_text_claims.R"))
+n_blocks <- sum(str_detect(claim_lines, "^# covers: "))
+descriptive_out <- out("text_descriptive_claims.csv")
+n_descriptive_hold <- sum(descriptive_out$holds == 1)
+```
+
+Numbers stated in running prose are where a paper drifts from its own analysis, and a coverage check built around floats cannot see them. `maintained/in_text_claims.R` prints every published quantity beside the sentence it appears in, in the article's own units and to the article's own precision, section by section in reading order. It reads the same files in `maintained/output/` that the ground truth reads, and does its own filtering, unit conversion and rounding: two paths from one set of estimates to one claimed number, so a disagreement between them is a finding rather than a formality. It fits nothing, and `r n_blocks` blocks between them cover every pipeline and descriptive claim in the extraction.
+
+The `r nrow(descriptive_out)` qualitative claims are handled separately, because they assert a shape rather than a value. Each is turned into a statement about the estimates and evaluated: that the organization conditional effects are the smallest of the four account types, that the follower prime is more than twice as effective as the organizer prime, that no subject in either public tweet arm signed or retweeted. `r n_descriptive_hold` of `r nrow(descriptive_out)` hold, and each carries the numbers behind the verdict in `maintained/output/text_descriptive_claims.csv`.
+
+```{r descriptive_table}
+descriptive_out |>
+  transmute(
+    Claim = str_remove(str_remove(claim_id, "^[^|]*\\|"), "\\|holds$"),
+    Holds = if_else(holds == 1, "yes", "no"),
+    Evidence = evidence
+  ) |>
+  kable(
+    booktabs = TRUE, longtable = TRUE,
+    caption = "The article's qualitative claims, evaluated against the estimates the maintained rewrite produces."
+  ) |>
+  latex_only(\(k) k |>
+    kable_styling(latex_options = "repeat_header", font_size = 6) |>
+    column_spec(1, width = "4cm") |>
+    column_spec(3, width = "8.5cm"))
+```
+
+# R environment
+
+```{r env}
+si <- sessionInfo()
+tibble(
+  Item = c("R version", "Platform", "Date run"),
+  Value = c(
+    paste(si$R.version$major, si$R.version$minor, sep = "."),
+    si$platform,
+    format(Sys.Date())
+  )
+) |>
+  kable(booktabs = TRUE) |>
+  latex_only(\(k) k |>
+    kable_styling(latex_options = "hold_position"))
+```
+
+```{r env_pkgs}
+pkgs <- c("estimatr", "randomizr", "nnet", "modelsummary", "AER", "dplyr", "ggplot2",
+          "tidyr", "purrr", "here")
+tibble(
+  Package = pkgs,
+  Version = map_chr(pkgs, \(p) as.character(packageVersion(p)))
+) |>
+  kable(booktabs = TRUE, caption = "Package versions used for the run behind this report.") |>
+  latex_only(\(k) k |>
+    kable_styling(latex_options = "hold_position"))
+```

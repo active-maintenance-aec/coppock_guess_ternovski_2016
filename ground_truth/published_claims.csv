@@ -1,0 +1,739 @@
+claim_id,location,claim_type,value_paper
+table_2|pub|n,"Table 2, p. 113",pipeline,3687
+table_2|pub|n_signed,"Table 2, p. 113",pipeline,0
+table_2|pub|pct_signed,"Table 2, p. 113",pipeline,0.0
+table_2|pub|n_tweeted,"Table 2, p. 113",pipeline,0
+table_2|pub|pct_tweeted,"Table 2, p. 113",pipeline,0.0
+table_2|org_enc|n,"Table 2, p. 113",pipeline,500
+table_2|org_enc|n_signed,"Table 2, p. 113",pipeline,22
+table_2|org_enc|pct_signed,"Table 2, p. 113",pipeline,4.4
+table_2|org_enc|n_tweeted,"Table 2, p. 113",pipeline,12
+table_2|org_enc|pct_tweeted,"Table 2, p. 113",pipeline,2.4
+table_2|org_noenc|n,"Table 2, p. 113",pipeline,1000
+table_2|org_noenc|n_signed,"Table 2, p. 113",pipeline,28
+table_2|org_noenc|pct_signed,"Table 2, p. 113",pipeline,2.8
+table_2|org_noenc|n_tweeted,"Table 2, p. 113",pipeline,12
+table_2|org_noenc|pct_tweeted,"Table 2, p. 113",pipeline,1.2
+table_2|fol_enc|n,"Table 2, p. 113",pipeline,500
+table_2|fol_enc|n_signed,"Table 2, p. 113",pipeline,28
+table_2|fol_enc|pct_signed,"Table 2, p. 113",pipeline,5.6
+table_2|fol_enc|n_tweeted,"Table 2, p. 113",pipeline,25
+table_2|fol_enc|pct_tweeted,"Table 2, p. 113",pipeline,5.0
+table_2|fol_noenc|n,"Table 2, p. 113",pipeline,1000
+table_2|fol_noenc|n_signed,"Table 2, p. 113",pipeline,31
+table_2|fol_noenc|pct_signed,"Table 2, p. 113",pipeline,3.1
+table_2|fol_noenc|n_tweeted,"Table 2, p. 113",pipeline,16
+table_2|fol_noenc|pct_tweeted,"Table 2, p. 113",pipeline,1.6
+table_2|total|n,"Table 2, p. 113",pipeline,6687
+table_2|total|n_signed,"Table 2, p. 113",pipeline,109
+table_2|total|pct_signed,"Table 2, p. 113",pipeline,1.6
+table_2|total|n_tweeted,"Table 2, p. 113",pipeline,65
+table_2|total|pct_tweeted,"Table 2, p. 113",pipeline,1.0
+table_3|pub|n,"Table 3, p. 115",pipeline,3495
+table_3|pub|n_signed,"Table 3, p. 115",pipeline,0
+table_3|pub|pct_signed,"Table 3, p. 115",pipeline,0.0
+table_3|pub|n_tweeted,"Table 3, p. 115",pipeline,0
+table_3|pub|pct_tweeted,"Table 3, p. 115",pipeline,0.0
+table_3|org|n,"Table 3, p. 115",pipeline,2514
+table_3|org|n_signed,"Table 3, p. 115",pipeline,107
+table_3|org|pct_signed,"Table 3, p. 115",pipeline,4.3
+table_3|org|n_tweeted,"Table 3, p. 115",pipeline,28
+table_3|org|pct_tweeted,"Table 3, p. 115",pipeline,1.1
+table_3|fol|n,"Table 3, p. 115",pipeline,2498
+table_3|fol|n_signed,"Table 3, p. 115",pipeline,114
+table_3|fol|pct_signed,"Table 3, p. 115",pipeline,4.6
+table_3|fol|n_tweeted,"Table 3, p. 115",pipeline,36
+table_3|fol|pct_tweeted,"Table 3, p. 115",pipeline,1.4
+table_3|total|n,"Table 3, p. 115",pipeline,8507
+table_3|total|n_signed,"Table 3, p. 115",pipeline,221
+table_3|total|pct_signed,"Table 3, p. 115",pipeline,2.6
+table_3|total|n_tweeted,"Table 3, p. 115",pipeline,64
+table_3|total|pct_tweeted,"Table 3, p. 115",pipeline,0.8
+table_3|signers_enc|n,"Table 3, p. 115",pipeline,111
+table_3|signers_enc|n_signed,"Table 3, p. 115",pipeline,111
+table_3|signers_enc|pct_signed,"Table 3, p. 115",pipeline,100.0
+table_3|signers_enc|n_tweeted,"Table 3, p. 115",pipeline,50
+table_3|signers_enc|pct_tweeted,"Table 3, p. 115",pipeline,45
+table_3|signers_noenc|n,"Table 3, p. 115",pipeline,110
+table_3|signers_noenc|n_signed,"Table 3, p. 115",pipeline,110
+table_3|signers_noenc|pct_signed,"Table 3, p. 115",pipeline,100.0
+table_3|signers_noenc|n_tweeted,"Table 3, p. 115",pipeline,11
+table_3|signers_noenc|pct_tweeted,"Table 3, p. 115",pipeline,10
+table_3|signers_total|n,"Table 3, p. 115",pipeline,221
+table_3|signers_total|n_signed,"Table 3, p. 115",pipeline,221
+table_3|signers_total|pct_signed,"Table 3, p. 115",pipeline,100.0
+table_3|signers_total|n_tweeted,"Table 3, p. 115",pipeline,61
+table_3|signers_total|pct_tweeted,"Table 3, p. 115",pipeline,27.6
+table_4|m1:treat_fol|coef,"Table 4, p. 117",pipeline,0.039
+table_4|m1:treat_fol|se,"Table 4, p. 117",pipeline,0.005
+table_4|m1:treat_org|coef,"Table 4, p. 117",pipeline,0.033
+table_4|m1:treat_org|se,"Table 4, p. 117",pipeline,0.005
+table_4|m1:constant|coef,"Table 4, p. 117",pipeline,0.000
+table_4|m1:constant|se,"Table 4, p. 117",pipeline,0.000
+table_4|m2:treat_fol|coef,"Table 4, p. 117",pipeline,0.040
+table_4|m2:treat_fol|se,"Table 4, p. 117",pipeline,0.005
+table_4|m2:treat_org|coef,"Table 4, p. 117",pipeline,0.033
+table_4|m2:treat_org|se,"Table 4, p. 117",pipeline,0.005
+table_4|m2:account_male|coef,"Table 4, p. 117",pipeline,-0.004
+table_4|m2:account_male|se,"Table 4, p. 117",pipeline,0.004
+table_4|m2:account_org|coef,"Table 4, p. 117",pipeline,-0.018
+table_4|m2:account_org|se,"Table 4, p. 117",pipeline,0.004
+table_4|m2:account_unknown|coef,"Table 4, p. 117",pipeline,-0.012
+table_4|m2:account_unknown|se,"Table 4, p. 117",pipeline,0.007
+table_4|m2:centrality|coef,"Table 4, p. 117",pipeline,0.002
+table_4|m2:centrality|se,"Table 4, p. 117",pipeline,0.002
+table_4|m2:followers|coef,"Table 4, p. 117",pipeline,-0.001
+table_4|m2:followers|se,"Table 4, p. 117",pipeline,0.001
+table_4|m2:days|coef,"Table 4, p. 117",pipeline,-0.001
+table_4|m2:days|se,"Table 4, p. 117",pipeline,0.002
+table_4|m2:days_missing|coef,"Table 4, p. 117",pipeline,0.014
+table_4|m2:days_missing|se,"Table 4, p. 117",pipeline,0.014
+table_4|m2:constant|coef,"Table 4, p. 117",pipeline,0.006
+table_4|m2:constant|se,"Table 4, p. 117",pipeline,0.003
+table_4|m3:treat_fol|coef,"Table 4, p. 117",pipeline,0.027
+table_4|m3:treat_fol|se,"Table 4, p. 117",pipeline,0.004
+table_4|m3:treat_org|coef,"Table 4, p. 117",pipeline,0.016
+table_4|m3:treat_org|se,"Table 4, p. 117",pipeline,0.003
+table_4|m3:constant|coef,"Table 4, p. 117",pipeline,0.000
+table_4|m3:constant|se,"Table 4, p. 117",pipeline,0.000
+table_4|m4:treat_fol|coef,"Table 4, p. 117",pipeline,0.027
+table_4|m4:treat_fol|se,"Table 4, p. 117",pipeline,0.004
+table_4|m4:treat_org|coef,"Table 4, p. 117",pipeline,0.016
+table_4|m4:treat_org|se,"Table 4, p. 117",pipeline,0.003
+table_4|m4:account_male|coef,"Table 4, p. 117",pipeline,0.001
+table_4|m4:account_male|se,"Table 4, p. 117",pipeline,0.003
+table_4|m4:account_org|coef,"Table 4, p. 117",pipeline,-0.003
+table_4|m4:account_org|se,"Table 4, p. 117",pipeline,0.003
+table_4|m4:account_unknown|coef,"Table 4, p. 117",pipeline,0.004
+table_4|m4:account_unknown|se,"Table 4, p. 117",pipeline,0.007
+table_4|m4:centrality|coef,"Table 4, p. 117",pipeline,-0.000
+table_4|m4:centrality|se,"Table 4, p. 117",pipeline,0.001
+table_4|m4:followers|coef,"Table 4, p. 117",pipeline,-0.001
+table_4|m4:followers|se,"Table 4, p. 117",pipeline,0.001
+table_4|m4:days|coef,"Table 4, p. 117",pipeline,-0.001
+table_4|m4:days|se,"Table 4, p. 117",pipeline,0.001
+table_4|m4:days_missing|coef,"Table 4, p. 117",pipeline,0.010
+table_4|m4:days_missing|se,"Table 4, p. 117",pipeline,0.015
+table_4|m4:constant|coef,"Table 4, p. 117",pipeline,-0.000
+table_4|m4:constant|se,"Table 4, p. 117",pipeline,0.002
+table_4|m1|n,"Table 4, p. 117",pipeline,6687
+table_4|m1|r2,"Table 4, p. 117",pipeline,0.021
+table_4|m2|n,"Table 4, p. 117",pipeline,6687
+table_4|m2|r2,"Table 4, p. 117",pipeline,0.024
+table_4|m3|n,"Table 4, p. 117",pipeline,6687
+table_4|m3|r2,"Table 4, p. 117",pipeline,0.014
+table_4|m4|n,"Table 4, p. 117",pipeline,6687
+table_4|m4|r2,"Table 4, p. 117",pipeline,0.014
+table_7|m1:treat_fol|coef,"Table 7, p. 120",pipeline,0.046
+table_7|m1:treat_fol|se,"Table 7, p. 120",pipeline,0.004
+table_7|m1:treat_org|coef,"Table 7, p. 120",pipeline,0.043
+table_7|m1:treat_org|se,"Table 7, p. 120",pipeline,0.004
+table_7|m1:constant|coef,"Table 7, p. 120",pipeline,0.000
+table_7|m1:constant|se,"Table 7, p. 120",pipeline,0.000
+table_7|m2:treat_fol|coef,"Table 7, p. 120",pipeline,0.046
+table_7|m2:treat_fol|se,"Table 7, p. 120",pipeline,0.004
+table_7|m2:treat_org|coef,"Table 7, p. 120",pipeline,0.043
+table_7|m2:treat_org|se,"Table 7, p. 120",pipeline,0.004
+table_7|m2:account_male|coef,"Table 7, p. 120",pipeline,0.005
+table_7|m2:account_male|se,"Table 7, p. 120",pipeline,0.004
+table_7|m2:account_org|coef,"Table 7, p. 120",pipeline,-0.019
+table_7|m2:account_org|se,"Table 7, p. 120",pipeline,0.004
+table_7|m2:account_unknown|coef,"Table 7, p. 120",pipeline,-0.003
+table_7|m2:account_unknown|se,"Table 7, p. 120",pipeline,0.008
+table_7|m2:centrality|coef,"Table 7, p. 120",pipeline,-0.002
+table_7|m2:centrality|se,"Table 7, p. 120",pipeline,0.001
+table_7|m2:followers|coef,"Table 7, p. 120",pipeline,0.001
+table_7|m2:followers|se,"Table 7, p. 120",pipeline,0.002
+table_7|m2:days|coef,"Table 7, p. 120",pipeline,-0.002
+table_7|m2:days|se,"Table 7, p. 120",pipeline,0.002
+table_7|m2:days_missing|coef,"Table 7, p. 120",pipeline,-0.019
+table_7|m2:days_missing|se,"Table 7, p. 120",pipeline,0.014
+table_7|m2:constant|coef,"Table 7, p. 120",pipeline,0.003
+table_7|m2:constant|se,"Table 7, p. 120",pipeline,0.003
+table_7|m3:treat_fol|coef,"Table 7, p. 120",pipeline,0.014
+table_7|m3:treat_fol|se,"Table 7, p. 120",pipeline,0.002
+table_7|m3:treat_org|coef,"Table 7, p. 120",pipeline,0.011
+table_7|m3:treat_org|se,"Table 7, p. 120",pipeline,0.002
+table_7|m3:constant|coef,"Table 7, p. 120",pipeline,0.000
+table_7|m3:constant|se,"Table 7, p. 120",pipeline,0.000
+table_7|m4:treat_fol|coef,"Table 7, p. 120",pipeline,0.014
+table_7|m4:treat_fol|se,"Table 7, p. 120",pipeline,0.002
+table_7|m4:treat_org|coef,"Table 7, p. 120",pipeline,0.011
+table_7|m4:treat_org|se,"Table 7, p. 120",pipeline,0.002
+table_7|m4:account_male|coef,"Table 7, p. 120",pipeline,0.005
+table_7|m4:account_male|se,"Table 7, p. 120",pipeline,0.002
+table_7|m4:account_org|coef,"Table 7, p. 120",pipeline,-0.003
+table_7|m4:account_org|se,"Table 7, p. 120",pipeline,0.002
+table_7|m4:account_unknown|coef,"Table 7, p. 120",pipeline,0.002
+table_7|m4:account_unknown|se,"Table 7, p. 120",pipeline,0.004
+table_7|m4:centrality|coef,"Table 7, p. 120",pipeline,-0.001
+table_7|m4:centrality|se,"Table 7, p. 120",pipeline,0.001
+table_7|m4:followers|coef,"Table 7, p. 120",pipeline,0.003
+table_7|m4:followers|se,"Table 7, p. 120",pipeline,0.001
+table_7|m4:days|coef,"Table 7, p. 120",pipeline,-0.002
+table_7|m4:days|se,"Table 7, p. 120",pipeline,0.001
+table_7|m4:days_missing|coef,"Table 7, p. 120",pipeline,0.003
+table_7|m4:days_missing|se,"Table 7, p. 120",pipeline,0.013
+table_7|m4:constant|coef,"Table 7, p. 120",pipeline,-0.001
+table_7|m4:constant|se,"Table 7, p. 120",pipeline,0.001
+table_7|m1|n,"Table 7, p. 120",pipeline,8507
+table_7|m1|r2,"Table 7, p. 120",pipeline,0.019
+table_7|m2|n,"Table 7, p. 120",pipeline,8507
+table_7|m2|r2,"Table 7, p. 120",pipeline,0.022
+table_7|m3|n,"Table 7, p. 120",pipeline,8507
+table_7|m3|r2,"Table 7, p. 120",pipeline,0.005
+table_7|m4|n,"Table 7, p. 120",pipeline,8507
+table_7|m4|r2,"Table 7, p. 120",pipeline,0.008
+table_5|m1:encouragement|coef,"Table 5, p. 118",pipeline,0.454
+table_5|m1:encouragement|se,"Table 5, p. 118",pipeline,0.086
+table_5|m1:constant|coef,"Table 5, p. 118",pipeline,0.186
+table_5|m1:constant|se,"Table 5, p. 118",pipeline,0.051
+table_5|m2:encouragement|coef,"Table 5, p. 118",pipeline,0.624
+table_5|m2:encouragement|se,"Table 5, p. 118",pipeline,0.104
+table_5|m2:treat_org|coef,"Table 5, p. 118",pipeline,0.053
+table_5|m2:treat_org|se,"Table 5, p. 118",pipeline,0.104
+table_5|m2:encouragement_x_org|coef,"Table 5, p. 118",pipeline,-0.384
+table_5|m2:encouragement_x_org|se,"Table 5, p. 118",pipeline,0.170
+table_5|m2:constant|coef,"Table 5, p. 118",pipeline,0.161
+table_5|m2:constant|se,"Table 5, p. 118",pipeline,0.067
+table_5|m1|n,"Table 5, p. 118",pipeline,109
+table_5|m1|r2,"Table 5, p. 118",pipeline,0.214
+table_5|m2|n,"Table 5, p. 118",pipeline,109
+table_5|m2|r2,"Table 5, p. 118",pipeline,0.267
+table_8|m1:encouragement|coef,"Table 8, p. 121",pipeline,0.350
+table_8|m1:encouragement|se,"Table 8, p. 121",pipeline,0.055
+table_8|m1:constant|coef,"Table 8, p. 121",pipeline,0.100
+table_8|m1:constant|se,"Table 8, p. 121",pipeline,0.029
+table_8|m2:encouragement|coef,"Table 8, p. 121",pipeline,0.472
+table_8|m2:encouragement|se,"Table 8, p. 121",pipeline,0.077
+table_8|m2:treat_org|coef,"Table 8, p. 121",pipeline,0.037
+table_8|m2:treat_org|se,"Table 8, p. 121",pipeline,0.059
+table_8|m2:encouragement_x_org|coef,"Table 8, p. 121",pipeline,-0.241
+table_8|m2:encouragement_x_org|se,"Table 8, p. 121",pipeline,0.110
+table_8|m2:constant|coef,"Table 8, p. 121",pipeline,0.083
+table_8|m2:constant|se,"Table 8, p. 121",pipeline,0.036
+table_8|m1|n,"Table 8, p. 121",pipeline,221
+table_8|m1|r2,"Table 8, p. 121",pipeline,0.154
+table_8|m2|n,"Table 8, p. 121",pipeline,221
+table_8|m2|r2,"Table 8, p. 121",pipeline,0.181
+table_6|m1:exposure|coef,"Table 6, p. 119",pipeline,0.628
+table_6|m1:exposure|se,"Table 6, p. 119",pipeline,0.029
+table_6|m1:constant|coef,"Table 6, p. 119",pipeline,0.150
+table_6|m1:constant|se,"Table 6, p. 119",pipeline,0.025
+table_6|m2:exposure|coef,"Table 6, p. 119",pipeline,0.005
+table_6|m2:exposure|se,"Table 6, p. 119",pipeline,0.006
+table_6|m2:constant|coef,"Table 6, p. 119",pipeline,0.010
+table_6|m2:constant|se,"Table 6, p. 119",pipeline,0.005
+table_6|m3:actual_exposure|coef,"Table 6, p. 119",pipeline,0.008
+table_6|m3:actual_exposure|se,"Table 6, p. 119",pipeline,0.010
+table_6|m3:constant|coef,"Table 6, p. 119",pipeline,0.008
+table_6|m3:constant|se,"Table 6, p. 119",pipeline,0.006
+table_6|m4:exposure|coef,"Table 6, p. 119",pipeline,-0.004
+table_6|m4:exposure|se,"Table 6, p. 119",pipeline,0.010
+table_6|m4:constant|coef,"Table 6, p. 119",pipeline,0.012
+table_6|m4:constant|se,"Table 6, p. 119",pipeline,0.010
+table_6|m5:actual_exposure|coef,"Table 6, p. 119",pipeline,-0.006
+table_6|m5:actual_exposure|se,"Table 6, p. 119",pipeline,0.016
+table_6|m5:constant|coef,"Table 6, p. 119",pipeline,0.013
+table_6|m5:constant|se,"Table 6, p. 119",pipeline,0.012
+table_6|m1|n,"Table 6, p. 119",pipeline,1176
+table_6|m1|r2,"Table 6, p. 119",pipeline,0.374
+table_6|m2|n,"Table 6, p. 119",pipeline,1176
+table_6|m2|r2,"Table 6, p. 119",pipeline,0.0004
+table_6|m3|n,"Table 6, p. 119",pipeline,1176
+table_6|m3|r2,"Table 6, p. 119",pipeline,-0.001
+table_6|m4|n,"Table 6, p. 119",pipeline,1176
+table_6|m4|r2,"Table 6, p. 119",pipeline,0.0003
+table_6|m5|n,"Table 6, p. 119",pipeline,1176
+table_6|m5|r2,"Table 6, p. 119",pipeline,0.001
+table_9|m1:exposure|coef,"Table 9, p. 122",pipeline,0.352
+table_9|m1:exposure|se,"Table 9, p. 122",pipeline,0.031
+table_9|m1:constant|coef,"Table 9, p. 122",pipeline,0.137
+table_9|m1:constant|se,"Table 9, p. 122",pipeline,0.027
+table_9|m2:exposure|coef,"Table 9, p. 122",pipeline,0.020
+table_9|m2:exposure|se,"Table 9, p. 122",pipeline,0.006
+table_9|m2:constant|coef,"Table 9, p. 122",pipeline,0.010
+table_9|m2:constant|se,"Table 9, p. 122",pipeline,0.004
+table_9|m3:actual_exposure|coef,"Table 9, p. 122",pipeline,0.056
+table_9|m3:actual_exposure|se,"Table 9, p. 122",pipeline,0.018
+table_9|m3:constant|coef,"Table 9, p. 122",pipeline,0.002
+table_9|m3:constant|se,"Table 9, p. 122",pipeline,0.006
+table_9|m4:exposure|coef,"Table 9, p. 122",pipeline,0.004
+table_9|m4:exposure|se,"Table 9, p. 122",pipeline,0.003
+table_9|m4:constant|coef,"Table 9, p. 122",pipeline,0.004
+table_9|m4:constant|se,"Table 9, p. 122",pipeline,0.002
+table_9|m5:actual_exposure|coef,"Table 9, p. 122",pipeline,0.013
+table_9|m5:actual_exposure|se,"Table 9, p. 122",pipeline,0.010
+table_9|m5:constant|coef,"Table 9, p. 122",pipeline,0.003
+table_9|m5:constant|se,"Table 9, p. 122",pipeline,0.003
+table_9|m1|n,"Table 9, p. 122",pipeline,1975
+table_9|m1|r2,"Table 9, p. 122",pipeline,0.142
+table_9|m2|n,"Table 9, p. 122",pipeline,1975
+table_9|m2|r2,"Table 9, p. 122",pipeline,0.005
+table_9|m3|n,"Table 9, p. 122",pipeline,1975
+table_9|m3|r2,"Table 9, p. 122",pipeline,-0.051
+table_9|m4|n,"Table 9, p. 122",pipeline,1975
+table_9|m4|r2,"Table 9, p. 122",pipeline,0.001
+table_9|m5|n,"Table 9, p. 122",pipeline,1975
+table_9|m5|r2,"Table 9, p. 122",pipeline,-0.008
+table_a2|account_female:pub|mean,"Online Appendix 2, Table A2",pipeline,0.309
+table_a2|account_female:pub|se,"Online Appendix 2, Table A2",pipeline,0.008
+table_a2|account_female:fol|mean,"Online Appendix 2, Table A2",pipeline,0.287
+table_a2|account_female:fol|se,"Online Appendix 2, Table A2",pipeline,0.012
+table_a2|account_female:org|mean,"Online Appendix 2, Table A2",pipeline,0.307
+table_a2|account_female:org|se,"Online Appendix 2, Table A2",pipeline,0.012
+table_a2|account_male:pub|mean,"Online Appendix 2, Table A2",pipeline,0.381
+table_a2|account_male:pub|se,"Online Appendix 2, Table A2",pipeline,0.008
+table_a2|account_male:fol|mean,"Online Appendix 2, Table A2",pipeline,0.375
+table_a2|account_male:fol|se,"Online Appendix 2, Table A2",pipeline,0.013
+table_a2|account_male:org|mean,"Online Appendix 2, Table A2",pipeline,0.401
+table_a2|account_male:org|se,"Online Appendix 2, Table A2",pipeline,0.013
+table_a2|account_org:pub|mean,"Online Appendix 2, Table A2",pipeline,0.245
+table_a2|account_org:pub|se,"Online Appendix 2, Table A2",pipeline,0.007
+table_a2|account_org:fol|mean,"Online Appendix 2, Table A2",pipeline,0.254
+table_a2|account_org:fol|se,"Online Appendix 2, Table A2",pipeline,0.011
+table_a2|account_org:org|mean,"Online Appendix 2, Table A2",pipeline,0.230
+table_a2|account_org:org|se,"Online Appendix 2, Table A2",pipeline,0.011
+table_a2|account_unknown:pub|mean,"Online Appendix 2, Table A2",pipeline,0.065
+table_a2|account_unknown:pub|se,"Online Appendix 2, Table A2",pipeline,0.004
+table_a2|account_unknown:fol|mean,"Online Appendix 2, Table A2",pipeline,0.083
+table_a2|account_unknown:fol|se,"Online Appendix 2, Table A2",pipeline,0.007
+table_a2|account_unknown:org|mean,"Online Appendix 2, Table A2",pipeline,0.061
+table_a2|account_unknown:org|se,"Online Appendix 2, Table A2",pipeline,0.006
+table_a2|num_followers:pub|mean,"Online Appendix 2, Table A2",pipeline,596.240
+table_a2|num_followers:pub|se,"Online Appendix 2, Table A2",pipeline,14.146
+table_a2|num_followers:fol|mean,"Online Appendix 2, Table A2",pipeline,616.603
+table_a2|num_followers:fol|se,"Online Appendix 2, Table A2",pipeline,22.099
+table_a2|num_followers:org|mean,"Online Appendix 2, Table A2",pipeline,635.733
+table_a2|num_followers:org|se,"Online Appendix 2, Table A2",pipeline,23.357
+table_a2|days_on_twitter:pub|mean,"Online Appendix 2, Table A2",pipeline,1631.438
+table_a2|days_on_twitter:pub|se,"Online Appendix 2, Table A2",pipeline,8.983
+table_a2|days_on_twitter:fol|mean,"Online Appendix 2, Table A2",pipeline,1637.362
+table_a2|days_on_twitter:fol|se,"Online Appendix 2, Table A2",pipeline,14.189
+table_a2|days_on_twitter:org|mean,"Online Appendix 2, Table A2",pipeline,1637.179
+table_a2|days_on_twitter:org|se,"Online Appendix 2, Table A2",pipeline,14.153
+table_a2|centrality:pub|mean,"Online Appendix 2, Table A2",pipeline,0.039
+table_a2|centrality:pub|se,"Online Appendix 2, Table A2",pipeline,0.001
+table_a2|centrality:fol|mean,"Online Appendix 2, Table A2",pipeline,0.038
+table_a2|centrality:fol|se,"Online Appendix 2, Table A2",pipeline,0.002
+table_a2|centrality:org|mean,"Online Appendix 2, Table A2",pipeline,0.038
+table_a2|centrality:org|se,"Online Appendix 2, Table A2",pipeline,0.002
+table_a2|account_type|p_value,"Online Appendix 2, Table A2",pipeline,0.072
+table_a2|num_followers|p_value,"Online Appendix 2, Table A2",pipeline,0.312
+table_a2|days_on_twitter|p_value,"Online Appendix 2, Table A2",pipeline,0.910
+table_a2|centrality|p_value,"Online Appendix 2, Table A2",pipeline,0.960
+table_a2|pub|n,"Online Appendix 2, Table A2",pipeline,3687
+table_a2|fol|n,"Online Appendix 2, Table A2",pipeline,1500
+table_a2|org|n,"Online Appendix 2, Table A2",pipeline,1500
+table_a2|omnibus|p_value,"Online Appendix 2, Table A2",pipeline,0.607
+table_a3|account_female:pub|mean,"Online Appendix 2, Table A3",pipeline,0.315
+table_a3|account_female:pub|se,"Online Appendix 2, Table A3",pipeline,0.008
+table_a3|account_female:fol|mean,"Online Appendix 2, Table A3",pipeline,0.329
+table_a3|account_female:fol|se,"Online Appendix 2, Table A3",pipeline,0.009
+table_a3|account_female:org|mean,"Online Appendix 2, Table A3",pipeline,0.348
+table_a3|account_female:org|se,"Online Appendix 2, Table A3",pipeline,0.010
+table_a3|account_male:pub|mean,"Online Appendix 2, Table A3",pipeline,0.405
+table_a3|account_male:pub|se,"Online Appendix 2, Table A3",pipeline,0.008
+table_a3|account_male:fol|mean,"Online Appendix 2, Table A3",pipeline,0.392
+table_a3|account_male:fol|se,"Online Appendix 2, Table A3",pipeline,0.010
+table_a3|account_male:org|mean,"Online Appendix 2, Table A3",pipeline,0.379
+table_a3|account_male:org|se,"Online Appendix 2, Table A3",pipeline,0.010
+table_a3|account_org:pub|mean,"Online Appendix 2, Table A3",pipeline,0.224
+table_a3|account_org:pub|se,"Online Appendix 2, Table A3",pipeline,0.007
+table_a3|account_org:fol|mean,"Online Appendix 2, Table A3",pipeline,0.222
+table_a3|account_org:fol|se,"Online Appendix 2, Table A3",pipeline,0.008
+table_a3|account_org:org|mean,"Online Appendix 2, Table A3",pipeline,0.214
+table_a3|account_org:org|se,"Online Appendix 2, Table A3",pipeline,0.008
+table_a3|account_unknown:pub|mean,"Online Appendix 2, Table A3",pipeline,0.056
+table_a3|account_unknown:pub|se,"Online Appendix 2, Table A3",pipeline,0.004
+table_a3|account_unknown:fol|mean,"Online Appendix 2, Table A3",pipeline,0.056
+table_a3|account_unknown:fol|se,"Online Appendix 2, Table A3",pipeline,0.005
+table_a3|account_unknown:org|mean,"Online Appendix 2, Table A3",pipeline,0.059
+table_a3|account_unknown:org|se,"Online Appendix 2, Table A3",pipeline,0.005
+table_a3|num_followers:pub|mean,"Online Appendix 2, Table A3",pipeline,585.599
+table_a3|num_followers:pub|se,"Online Appendix 2, Table A3",pipeline,14.469
+table_a3|num_followers:fol|mean,"Online Appendix 2, Table A3",pipeline,580.738
+table_a3|num_followers:fol|se,"Online Appendix 2, Table A3",pipeline,16.999
+table_a3|num_followers:org|mean,"Online Appendix 2, Table A3",pipeline,581.281
+table_a3|num_followers:org|se,"Online Appendix 2, Table A3",pipeline,16.996
+table_a3|days_on_twitter:pub|mean,"Online Appendix 2, Table A3",pipeline,1559.503
+table_a3|days_on_twitter:pub|se,"Online Appendix 2, Table A3",pipeline,10.067
+table_a3|days_on_twitter:fol|mean,"Online Appendix 2, Table A3",pipeline,1554.428
+table_a3|days_on_twitter:fol|se,"Online Appendix 2, Table A3",pipeline,12.131
+table_a3|days_on_twitter:org|mean,"Online Appendix 2, Table A3",pipeline,1552.586
+table_a3|days_on_twitter:org|se,"Online Appendix 2, Table A3",pipeline,11.988
+table_a3|centrality:pub|mean,"Online Appendix 2, Table A3",pipeline,0.032
+table_a3|centrality:pub|se,"Online Appendix 2, Table A3",pipeline,0.001
+table_a3|centrality:fol|mean,"Online Appendix 2, Table A3",pipeline,0.031
+table_a3|centrality:fol|se,"Online Appendix 2, Table A3",pipeline,0.001
+table_a3|centrality:org|mean,"Online Appendix 2, Table A3",pipeline,0.030
+table_a3|centrality:org|se,"Online Appendix 2, Table A3",pipeline,0.001
+table_a3|account_type|p_value,"Online Appendix 2, Table A3",pipeline,0.425
+table_a3|num_followers|p_value,"Online Appendix 2, Table A3",pipeline,0.535
+table_a3|days_on_twitter|p_value,"Online Appendix 2, Table A3",pipeline,0.601
+table_a3|centrality|p_value,"Online Appendix 2, Table A3",pipeline,0.537
+table_a3|pub|n,"Online Appendix 2, Table A3",pipeline,3495
+table_a3|fol|n,"Online Appendix 2, Table A3",pipeline,2498
+table_a3|org|n,"Online Appendix 2, Table A3",pipeline,2514
+table_a3|omnibus|p_value,"Online Appendix 2, Table A3",pipeline,0.113
+table_a4|m1:treat_fol|coef,"Online Appendix 3, Table A4",pipeline,0.039
+table_a4|m1:treat_fol|se,"Online Appendix 3, Table A4",pipeline,0.005
+table_a4|m1:treat_org|coef,"Online Appendix 3, Table A4",pipeline,0.033
+table_a4|m1:treat_org|se,"Online Appendix 3, Table A4",pipeline,0.005
+table_a4|m1:centrality|coef,"Online Appendix 3, Table A4",pipeline,0.000
+table_a4|m1:centrality|se,"Online Appendix 3, Table A4",pipeline,0.000
+table_a4|m1:fol_x_centrality|coef,"Online Appendix 3, Table A4",pipeline,-0.006
+table_a4|m1:fol_x_centrality|se,"Online Appendix 3, Table A4",pipeline,0.003
+table_a4|m1:org_x_centrality|coef,"Online Appendix 3, Table A4",pipeline,0.006
+table_a4|m1:org_x_centrality|se,"Online Appendix 3, Table A4",pipeline,0.009
+table_a4|m1:constant|coef,"Online Appendix 3, Table A4",pipeline,0.000
+table_a4|m1:constant|se,"Online Appendix 3, Table A4",pipeline,0.000
+table_a4|m1|n,"Online Appendix 3, Table A4",pipeline,6687
+table_a4|m1|r2,"Online Appendix 3, Table A4",pipeline,0.022
+table_a4|m2:treat_fol|coef,"Online Appendix 3, Table A4",pipeline,0.039
+table_a4|m2:treat_fol|se,"Online Appendix 3, Table A4",pipeline,0.005
+table_a4|m2:treat_org|coef,"Online Appendix 3, Table A4",pipeline,0.033
+table_a4|m2:treat_org|se,"Online Appendix 3, Table A4",pipeline,0.005
+table_a4|m2:followers|coef,"Online Appendix 3, Table A4",pipeline,0.000
+table_a4|m2:followers|se,"Online Appendix 3, Table A4",pipeline,0.000
+table_a4|m2:fol_x_followers|coef,"Online Appendix 3, Table A4",pipeline,-0.005
+table_a4|m2:fol_x_followers|se,"Online Appendix 3, Table A4",pipeline,0.003
+table_a4|m2:org_x_followers|coef,"Online Appendix 3, Table A4",pipeline,-0.002
+table_a4|m2:org_x_followers|se,"Online Appendix 3, Table A4",pipeline,0.004
+table_a4|m2:constant|coef,"Online Appendix 3, Table A4",pipeline,0.000
+table_a4|m2:constant|se,"Online Appendix 3, Table A4",pipeline,0.000
+table_a4|m2|n,"Online Appendix 3, Table A4",pipeline,6687
+table_a4|m2|r2,"Online Appendix 3, Table A4",pipeline,0.021
+table_a4|m3:treat_fol|coef,"Online Appendix 3, Table A4",pipeline,0.039
+table_a4|m3:treat_fol|se,"Online Appendix 3, Table A4",pipeline,0.005
+table_a4|m3:treat_org|coef,"Online Appendix 3, Table A4",pipeline,0.033
+table_a4|m3:treat_org|se,"Online Appendix 3, Table A4",pipeline,0.005
+table_a4|m3:days|coef,"Online Appendix 3, Table A4",pipeline,0.000
+table_a4|m3:days|se,"Online Appendix 3, Table A4",pipeline,0.000
+table_a4|m3:fol_x_days|coef,"Online Appendix 3, Table A4",pipeline,-0.002
+table_a4|m3:fol_x_days|se,"Online Appendix 3, Table A4",pipeline,0.006
+table_a4|m3:org_x_days|coef,"Online Appendix 3, Table A4",pipeline,0.001
+table_a4|m3:org_x_days|se,"Online Appendix 3, Table A4",pipeline,0.005
+table_a4|m3:constant|coef,"Online Appendix 3, Table A4",pipeline,0.000
+table_a4|m3:constant|se,"Online Appendix 3, Table A4",pipeline,0.000
+table_a4|m3|n,"Online Appendix 3, Table A4",pipeline,6687
+table_a4|m3|r2,"Online Appendix 3, Table A4",pipeline,0.021
+table_a4|m4:treat_fol|coef,"Online Appendix 3, Table A4",pipeline,0.053
+table_a4|m4:treat_fol|se,"Online Appendix 3, Table A4",pipeline,0.011
+table_a4|m4:treat_org|coef,"Online Appendix 3, Table A4",pipeline,0.048
+table_a4|m4:treat_org|se,"Online Appendix 3, Table A4",pipeline,0.010
+table_a4|m4:account_male|coef,"Online Appendix 3, Table A4",pipeline,0.000
+table_a4|m4:account_male|se,"Online Appendix 3, Table A4",pipeline,0.000
+table_a4|m4:account_org|coef,"Online Appendix 3, Table A4",pipeline,0.000
+table_a4|m4:account_org|se,"Online Appendix 3, Table A4",pipeline,0.000
+table_a4|m4:account_unknown|coef,"Online Appendix 3, Table A4",pipeline,0.000
+table_a4|m4:account_unknown|se,"Online Appendix 3, Table A4",pipeline,0.000
+table_a4|m4:fol_x_male|coef,"Online Appendix 3, Table A4",pipeline,-0.005
+table_a4|m4:fol_x_male|se,"Online Appendix 3, Table A4",pipeline,0.014
+table_a4|m4:org_x_male|coef,"Online Appendix 3, Table A4",pipeline,-0.011
+table_a4|m4:org_x_male|se,"Online Appendix 3, Table A4",pipeline,0.013
+table_a4|m4:fol_x_org|coef,"Online Appendix 3, Table A4",pipeline,-0.043
+table_a4|m4:fol_x_org|se,"Online Appendix 3, Table A4",pipeline,0.012
+table_a4|m4:org_x_org|coef,"Online Appendix 3, Table A4",pipeline,-0.036
+table_a4|m4:org_x_org|se,"Online Appendix 3, Table A4",pipeline,0.011
+table_a4|m4:fol_x_unknown|coef,"Online Appendix 3, Table A4",pipeline,-0.013
+table_a4|m4:fol_x_unknown|se,"Online Appendix 3, Table A4",pipeline,0.021
+table_a4|m4:org_x_unknown|coef,"Online Appendix 3, Table A4",pipeline,-0.026
+table_a4|m4:org_x_unknown|se,"Online Appendix 3, Table A4",pipeline,0.018
+table_a4|m4:constant|coef,"Online Appendix 3, Table A4",pipeline,0.000
+table_a4|m4:constant|se,"Online Appendix 3, Table A4",pipeline,0.000
+table_a4|m4|n,"Online Appendix 3, Table A4",pipeline,6687
+table_a4|m4|r2,"Online Appendix 3, Table A4",pipeline,0.027
+table_a4|m5:treat_fol|coef,"Online Appendix 3, Table A4",pipeline,0.027
+table_a4|m5:treat_fol|se,"Online Appendix 3, Table A4",pipeline,0.004
+table_a4|m5:treat_org|coef,"Online Appendix 3, Table A4",pipeline,0.016
+table_a4|m5:treat_org|se,"Online Appendix 3, Table A4",pipeline,0.003
+table_a4|m5:centrality|coef,"Online Appendix 3, Table A4",pipeline,0.000
+table_a4|m5:centrality|se,"Online Appendix 3, Table A4",pipeline,0.000
+table_a4|m5:fol_x_centrality|coef,"Online Appendix 3, Table A4",pipeline,-0.003
+table_a4|m5:fol_x_centrality|se,"Online Appendix 3, Table A4",pipeline,0.002
+table_a4|m5:org_x_centrality|coef,"Online Appendix 3, Table A4",pipeline,-0.002
+table_a4|m5:org_x_centrality|se,"Online Appendix 3, Table A4",pipeline,0.001
+table_a4|m5:constant|coef,"Online Appendix 3, Table A4",pipeline,0.000
+table_a4|m5:constant|se,"Online Appendix 3, Table A4",pipeline,0.000
+table_a4|m5|n,"Online Appendix 3, Table A4",pipeline,6687
+table_a4|m5|r2,"Online Appendix 3, Table A4",pipeline,0.014
+table_a4|m6:treat_fol|coef,"Online Appendix 3, Table A4",pipeline,0.027
+table_a4|m6:treat_fol|se,"Online Appendix 3, Table A4",pipeline,0.004
+table_a4|m6:treat_org|coef,"Online Appendix 3, Table A4",pipeline,0.016
+table_a4|m6:treat_org|se,"Online Appendix 3, Table A4",pipeline,0.003
+table_a4|m6:followers|coef,"Online Appendix 3, Table A4",pipeline,0.000
+table_a4|m6:followers|se,"Online Appendix 3, Table A4",pipeline,0.000
+table_a4|m6:fol_x_followers|coef,"Online Appendix 3, Table A4",pipeline,-0.004
+table_a4|m6:fol_x_followers|se,"Online Appendix 3, Table A4",pipeline,0.003
+table_a4|m6:org_x_followers|coef,"Online Appendix 3, Table A4",pipeline,-0.003
+table_a4|m6:org_x_followers|se,"Online Appendix 3, Table A4",pipeline,0.002
+table_a4|m6:constant|coef,"Online Appendix 3, Table A4",pipeline,0.000
+table_a4|m6:constant|se,"Online Appendix 3, Table A4",pipeline,0.000
+table_a4|m6|n,"Online Appendix 3, Table A4",pipeline,6687
+table_a4|m6|r2,"Online Appendix 3, Table A4",pipeline,0.014
+table_a4|m7:treat_fol|coef,"Online Appendix 3, Table A4",pipeline,0.027
+table_a4|m7:treat_fol|se,"Online Appendix 3, Table A4",pipeline,0.004
+table_a4|m7:treat_org|coef,"Online Appendix 3, Table A4",pipeline,0.016
+table_a4|m7:treat_org|se,"Online Appendix 3, Table A4",pipeline,0.003
+table_a4|m7:days|coef,"Online Appendix 3, Table A4",pipeline,0.000
+table_a4|m7:days|se,"Online Appendix 3, Table A4",pipeline,0.000
+table_a4|m7:fol_x_days|coef,"Online Appendix 3, Table A4",pipeline,-0.004
+table_a4|m7:fol_x_days|se,"Online Appendix 3, Table A4",pipeline,0.005
+table_a4|m7:org_x_days|coef,"Online Appendix 3, Table A4",pipeline,0.000
+table_a4|m7:org_x_days|se,"Online Appendix 3, Table A4",pipeline,0.003
+table_a4|m7:constant|coef,"Online Appendix 3, Table A4",pipeline,0.000
+table_a4|m7:constant|se,"Online Appendix 3, Table A4",pipeline,0.000
+table_a4|m7|n,"Online Appendix 3, Table A4",pipeline,6687
+table_a4|m7|r2,"Online Appendix 3, Table A4",pipeline,0.014
+table_a4|m8:treat_fol|coef,"Online Appendix 3, Table A4",pipeline,0.028
+table_a4|m8:treat_fol|se,"Online Appendix 3, Table A4",pipeline,0.008
+table_a4|m8:treat_org|coef,"Online Appendix 3, Table A4",pipeline,0.015
+table_a4|m8:treat_org|se,"Online Appendix 3, Table A4",pipeline,0.006
+table_a4|m8:account_male|coef,"Online Appendix 3, Table A4",pipeline,0.000
+table_a4|m8:account_male|se,"Online Appendix 3, Table A4",pipeline,0.000
+table_a4|m8:account_org|coef,"Online Appendix 3, Table A4",pipeline,0.000
+table_a4|m8:account_org|se,"Online Appendix 3, Table A4",pipeline,0.000
+table_a4|m8:account_unknown|coef,"Online Appendix 3, Table A4",pipeline,0.000
+table_a4|m8:account_unknown|se,"Online Appendix 3, Table A4",pipeline,0.000
+table_a4|m8:fol_x_male|coef,"Online Appendix 3, Table A4",pipeline,-0.001
+table_a4|m8:fol_x_male|se,"Online Appendix 3, Table A4",pipeline,0.010
+table_a4|m8:org_x_male|coef,"Online Appendix 3, Table A4",pipeline,0.005
+table_a4|m8:org_x_male|se,"Online Appendix 3, Table A4",pipeline,0.008
+table_a4|m8:fol_x_org|coef,"Online Appendix 3, Table A4",pipeline,-0.007
+table_a4|m8:fol_x_org|se,"Online Appendix 3, Table A4",pipeline,0.011
+table_a4|m8:org_x_org|coef,"Online Appendix 3, Table A4",pipeline,-0.006
+table_a4|m8:org_x_org|se,"Online Appendix 3, Table A4",pipeline,0.008
+table_a4|m8:fol_x_unknown|coef,"Online Appendix 3, Table A4",pipeline,0.020
+table_a4|m8:fol_x_unknown|se,"Online Appendix 3, Table A4",pipeline,0.021
+table_a4|m8:org_x_unknown|coef,"Online Appendix 3, Table A4",pipeline,0.007
+table_a4|m8:org_x_unknown|se,"Online Appendix 3, Table A4",pipeline,0.016
+table_a4|m8:constant|coef,"Online Appendix 3, Table A4",pipeline,0.000
+table_a4|m8:constant|se,"Online Appendix 3, Table A4",pipeline,0.000
+table_a4|m8|n,"Online Appendix 3, Table A4",pipeline,6687
+table_a4|m8|r2,"Online Appendix 3, Table A4",pipeline,0.015
+table_a5|m1:treat_fol|coef,"Online Appendix 3, Table A5",pipeline,0.046
+table_a5|m1:treat_fol|se,"Online Appendix 3, Table A5",pipeline,0.004
+table_a5|m1:treat_org|coef,"Online Appendix 3, Table A5",pipeline,0.042
+table_a5|m1:treat_org|se,"Online Appendix 3, Table A5",pipeline,0.004
+table_a5|m1:centrality|coef,"Online Appendix 3, Table A5",pipeline,0.000
+table_a5|m1:centrality|se,"Online Appendix 3, Table A5",pipeline,0.000
+table_a5|m1:fol_x_centrality|coef,"Online Appendix 3, Table A5",pipeline,-0.002
+table_a5|m1:fol_x_centrality|se,"Online Appendix 3, Table A5",pipeline,0.003
+table_a5|m1:org_x_centrality|coef,"Online Appendix 3, Table A5",pipeline,-0.006
+table_a5|m1:org_x_centrality|se,"Online Appendix 3, Table A5",pipeline,0.003
+table_a5|m1:constant|coef,"Online Appendix 3, Table A5",pipeline,0.000
+table_a5|m1:constant|se,"Online Appendix 3, Table A5",pipeline,0.000
+table_a5|m1|n,"Online Appendix 3, Table A5",pipeline,8507
+table_a5|m1|r2,"Online Appendix 3, Table A5",pipeline,0.019
+table_a5|m2:treat_fol|coef,"Online Appendix 3, Table A5",pipeline,0.046
+table_a5|m2:treat_fol|se,"Online Appendix 3, Table A5",pipeline,0.004
+table_a5|m2:treat_org|coef,"Online Appendix 3, Table A5",pipeline,0.043
+table_a5|m2:treat_org|se,"Online Appendix 3, Table A5",pipeline,0.004
+table_a5|m2:followers|coef,"Online Appendix 3, Table A5",pipeline,0.000
+table_a5|m2:followers|se,"Online Appendix 3, Table A5",pipeline,0.000
+table_a5|m2:fol_x_followers|coef,"Online Appendix 3, Table A5",pipeline,-0.001
+table_a5|m2:fol_x_followers|se,"Online Appendix 3, Table A5",pipeline,0.004
+table_a5|m2:org_x_followers|coef,"Online Appendix 3, Table A5",pipeline,-0.004
+table_a5|m2:org_x_followers|se,"Online Appendix 3, Table A5",pipeline,0.003
+table_a5|m2:constant|coef,"Online Appendix 3, Table A5",pipeline,0.000
+table_a5|m2:constant|se,"Online Appendix 3, Table A5",pipeline,0.000
+table_a5|m2|n,"Online Appendix 3, Table A5",pipeline,8507
+table_a5|m2|r2,"Online Appendix 3, Table A5",pipeline,0.019
+table_a5|m3:treat_fol|coef,"Online Appendix 3, Table A5",pipeline,0.046
+table_a5|m3:treat_fol|se,"Online Appendix 3, Table A5",pipeline,0.004
+table_a5|m3:treat_org|coef,"Online Appendix 3, Table A5",pipeline,0.043
+table_a5|m3:treat_org|se,"Online Appendix 3, Table A5",pipeline,0.004
+table_a5|m3:days|coef,"Online Appendix 3, Table A5",pipeline,0.000
+table_a5|m3:days|se,"Online Appendix 3, Table A5",pipeline,0.000
+table_a5|m3:fol_x_days|coef,"Online Appendix 3, Table A5",pipeline,-0.002
+table_a5|m3:fol_x_days|se,"Online Appendix 3, Table A5",pipeline,0.005
+table_a5|m3:org_x_days|coef,"Online Appendix 3, Table A5",pipeline,0.000
+table_a5|m3:org_x_days|se,"Online Appendix 3, Table A5",pipeline,0.004
+table_a5|m3:constant|coef,"Online Appendix 3, Table A5",pipeline,0.000
+table_a5|m3:constant|se,"Online Appendix 3, Table A5",pipeline,0.000
+table_a5|m3|n,"Online Appendix 3, Table A5",pipeline,8507
+table_a5|m3|r2,"Online Appendix 3, Table A5",pipeline,0.019
+table_a5|m4:treat_fol|coef,"Online Appendix 3, Table A5",pipeline,0.044
+table_a5|m4:treat_fol|se,"Online Appendix 3, Table A5",pipeline,0.007
+table_a5|m4:treat_org|coef,"Online Appendix 3, Table A5",pipeline,0.053
+table_a5|m4:treat_org|se,"Online Appendix 3, Table A5",pipeline,0.008
+table_a5|m4:account_male|coef,"Online Appendix 3, Table A5",pipeline,0.000
+table_a5|m4:account_male|se,"Online Appendix 3, Table A5",pipeline,0.000
+table_a5|m4:account_org|coef,"Online Appendix 3, Table A5",pipeline,0.000
+table_a5|m4:account_org|se,"Online Appendix 3, Table A5",pipeline,0.000
+table_a5|m4:account_unknown|coef,"Online Appendix 3, Table A5",pipeline,0.000
+table_a5|m4:account_unknown|se,"Online Appendix 3, Table A5",pipeline,0.000
+table_a5|m4:fol_x_male|coef,"Online Appendix 3, Table A5",pipeline,0.019
+table_a5|m4:fol_x_male|se,"Online Appendix 3, Table A5",pipeline,0.011
+table_a5|m4:org_x_male|coef,"Online Appendix 3, Table A5",pipeline,-0.001
+table_a5|m4:org_x_male|se,"Online Appendix 3, Table A5",pipeline,0.010
+table_a5|m4:fol_x_org|coef,"Online Appendix 3, Table A5",pipeline,-0.026
+table_a5|m4:fol_x_org|se,"Online Appendix 3, Table A5",pipeline,0.009
+table_a5|m4:org_x_org|coef,"Online Appendix 3, Table A5",pipeline,-0.038
+table_a5|m4:org_x_org|se,"Online Appendix 3, Table A5",pipeline,0.009
+table_a5|m4:fol_x_unknown|coef,"Online Appendix 3, Table A5",pipeline,0.006
+table_a5|m4:fol_x_unknown|se,"Online Appendix 3, Table A5",pipeline,0.020
+table_a5|m4:org_x_unknown|coef,"Online Appendix 3, Table A5",pipeline,-0.026
+table_a5|m4:org_x_unknown|se,"Online Appendix 3, Table A5",pipeline,0.015
+table_a5|m4:constant|coef,"Online Appendix 3, Table A5",pipeline,0.000
+table_a5|m4:constant|se,"Online Appendix 3, Table A5",pipeline,0.000
+table_a5|m4|n,"Online Appendix 3, Table A5",pipeline,8507
+table_a5|m4|r2,"Online Appendix 3, Table A5",pipeline,0.025
+table_a5|m5:treat_fol|coef,"Online Appendix 3, Table A5",pipeline,0.014
+table_a5|m5:treat_fol|se,"Online Appendix 3, Table A5",pipeline,0.002
+table_a5|m5:treat_org|coef,"Online Appendix 3, Table A5",pipeline,0.011
+table_a5|m5:treat_org|se,"Online Appendix 3, Table A5",pipeline,0.002
+table_a5|m5:centrality|coef,"Online Appendix 3, Table A5",pipeline,0.000
+table_a5|m5:centrality|se,"Online Appendix 3, Table A5",pipeline,0.000
+table_a5|m5:fol_x_centrality|coef,"Online Appendix 3, Table A5",pipeline,0.001
+table_a5|m5:fol_x_centrality|se,"Online Appendix 3, Table A5",pipeline,0.002
+table_a5|m5:org_x_centrality|coef,"Online Appendix 3, Table A5",pipeline,-0.001
+table_a5|m5:org_x_centrality|se,"Online Appendix 3, Table A5",pipeline,0.001
+table_a5|m5:constant|coef,"Online Appendix 3, Table A5",pipeline,0.000
+table_a5|m5:constant|se,"Online Appendix 3, Table A5",pipeline,0.000
+table_a5|m5|n,"Online Appendix 3, Table A5",pipeline,8507
+table_a5|m5|r2,"Online Appendix 3, Table A5",pipeline,0.006
+table_a5|m6:treat_fol|coef,"Online Appendix 3, Table A5",pipeline,0.014
+table_a5|m6:treat_fol|se,"Online Appendix 3, Table A5",pipeline,0.002
+table_a5|m6:treat_org|coef,"Online Appendix 3, Table A5",pipeline,0.011
+table_a5|m6:treat_org|se,"Online Appendix 3, Table A5",pipeline,0.002
+table_a5|m6:followers|coef,"Online Appendix 3, Table A5",pipeline,0.000
+table_a5|m6:followers|se,"Online Appendix 3, Table A5",pipeline,0.000
+table_a5|m6:fol_x_followers|coef,"Online Appendix 3, Table A5",pipeline,0.003
+table_a5|m6:fol_x_followers|se,"Online Appendix 3, Table A5",pipeline,0.003
+table_a5|m6:org_x_followers|coef,"Online Appendix 3, Table A5",pipeline,0.003
+table_a5|m6:org_x_followers|se,"Online Appendix 3, Table A5",pipeline,0.003
+table_a5|m6:constant|coef,"Online Appendix 3, Table A5",pipeline,0.000
+table_a5|m6:constant|se,"Online Appendix 3, Table A5",pipeline,0.000
+table_a5|m6|n,"Online Appendix 3, Table A5",pipeline,8507
+table_a5|m6|r2,"Online Appendix 3, Table A5",pipeline,0.006
+table_a5|m7:treat_fol|coef,"Online Appendix 3, Table A5",pipeline,0.014
+table_a5|m7:treat_fol|se,"Online Appendix 3, Table A5",pipeline,0.002
+table_a5|m7:treat_org|coef,"Online Appendix 3, Table A5",pipeline,0.011
+table_a5|m7:treat_org|se,"Online Appendix 3, Table A5",pipeline,0.002
+table_a5|m7:days|coef,"Online Appendix 3, Table A5",pipeline,0.000
+table_a5|m7:days|se,"Online Appendix 3, Table A5",pipeline,0.000
+table_a5|m7:fol_x_days|coef,"Online Appendix 3, Table A5",pipeline,-0.001
+table_a5|m7:fol_x_days|se,"Online Appendix 3, Table A5",pipeline,0.003
+table_a5|m7:org_x_days|coef,"Online Appendix 3, Table A5",pipeline,-0.002
+table_a5|m7:org_x_days|se,"Online Appendix 3, Table A5",pipeline,0.002
+table_a5|m7:constant|coef,"Online Appendix 3, Table A5",pipeline,0.000
+table_a5|m7:constant|se,"Online Appendix 3, Table A5",pipeline,0.000
+table_a5|m7|n,"Online Appendix 3, Table A5",pipeline,8507
+table_a5|m7|r2,"Online Appendix 3, Table A5",pipeline,0.006
+table_a5|m8:treat_fol|coef,"Online Appendix 3, Table A5",pipeline,0.010
+table_a5|m8:treat_fol|se,"Online Appendix 3, Table A5",pipeline,0.003
+table_a5|m8:treat_org|coef,"Online Appendix 3, Table A5",pipeline,0.010
+table_a5|m8:treat_org|se,"Online Appendix 3, Table A5",pipeline,0.003
+table_a5|m8:account_male|coef,"Online Appendix 3, Table A5",pipeline,0.000
+table_a5|m8:account_male|se,"Online Appendix 3, Table A5",pipeline,0.000
+table_a5|m8:account_org|coef,"Online Appendix 3, Table A5",pipeline,0.000
+table_a5|m8:account_org|se,"Online Appendix 3, Table A5",pipeline,0.000
+table_a5|m8:account_unknown|coef,"Online Appendix 3, Table A5",pipeline,0.000
+table_a5|m8:account_unknown|se,"Online Appendix 3, Table A5",pipeline,0.000
+table_a5|m8:fol_x_male|coef,"Online Appendix 3, Table A5",pipeline,0.010
+table_a5|m8:fol_x_male|se,"Online Appendix 3, Table A5",pipeline,0.006
+table_a5|m8:org_x_male|coef,"Online Appendix 3, Table A5",pipeline,0.007
+table_a5|m8:org_x_male|se,"Online Appendix 3, Table A5",pipeline,0.005
+table_a5|m8:fol_x_org|coef,"Online Appendix 3, Table A5",pipeline,0.001
+table_a5|m8:fol_x_org|se,"Online Appendix 3, Table A5",pipeline,0.006
+table_a5|m8:org_x_org|coef,"Online Appendix 3, Table A5",pipeline,-0.007
+table_a5|m8:org_x_org|se,"Online Appendix 3, Table A5",pipeline,0.004
+table_a5|m8:fol_x_unknown|coef,"Online Appendix 3, Table A5",pipeline,0.012
+table_a5|m8:fol_x_unknown|se,"Online Appendix 3, Table A5",pipeline,0.013
+table_a5|m8:org_x_unknown|coef,"Online Appendix 3, Table A5",pipeline,-0.004
+table_a5|m8:org_x_unknown|se,"Online Appendix 3, Table A5",pipeline,0.008
+table_a5|m8:constant|coef,"Online Appendix 3, Table A5",pipeline,0.000
+table_a5|m8:constant|se,"Online Appendix 3, Table A5",pipeline,0.000
+table_a5|m8|n,"Online Appendix 3, Table A5",pipeline,8507
+table_a5|m8|r2,"Online Appendix 3, Table A5",pipeline,0.007
+text|study1_p_fol_vs_org_signed|p_value,"Study 1 results, Main Effects, p. 116",pipeline,0.38
+text|study1_p_fol_vs_org_tweeted|p_value,"Study 1 results, Main Effects, p. 116",pipeline,0.03
+text|study2_p_fol_vs_org_signed|p_value,"Study 2 results, Main Effects, p. 119",pipeline,0.60
+text|study1_any_dm_signed_pp|estimate,"Study 1 results, Main Effects, p. 116",pipeline,3.6
+text|study1_org_minus_fol_tweeted_pp|estimate,"Study 1 results, Main Effects, p. 116",pipeline,1.1
+text|study1_first_stage_pp|estimate,"Study 1 results, Network Effects, p. 118",pipeline,63
+text|study2_encouragement_fol_pp|estimate,"Study 2 results, Main Effects, p. 119",pipeline,47.2
+text|study2_encouragement_org_pp|estimate,"Study 2 results, Main Effects, p. 119",pipeline,23.1
+text|study1_button_imbalance_p|p_value,"Research design, Study 1, p. 111",pipeline,
+text|study1_signers|n,"Study 1 results, Network Effects, p. 118",pipeline,109
+text|study1_second_stage_pool|n,"Study 1 results, Network Effects, p. 118",pipeline,1176
+text|study2_signers|n,"Research design, Study 2, p. 114",pipeline,221
+text|study2_second_stage_pool|n,"Research design, Study 2, p. 114",pipeline,1990
+figure_3|study1_share_male|percent,"Figure 3 caption, p. 124",pipeline,38.4
+figure_3|study1_share_female|percent,"Figure 3 caption, p. 124",pipeline,30.4
+figure_3|study1_share_org|percent,"Figure 3 caption, p. 124",pipeline,24.4
+figure_3|study1_share_unknown|percent,"Figure 3 caption, p. 124",pipeline,6.8
+figure_3|study2_share_male|percent,"Figure 3 caption, p. 124",pipeline,39.3
+figure_3|study2_share_female|percent,"Figure 3 caption, p. 124",pipeline,32.9
+figure_3|study2_share_org|percent,"Figure 3 caption, p. 124",pipeline,22.1
+figure_3|study2_share_unknown|percent,"Figure 3 caption, p. 124",pipeline,5.7
+table_a1|study1_types_5_to_7|percent,Online Appendix 1,pipeline,3.6
+table_a1|study2_types_5_to_7|percent,Online Appendix 1,pipeline,4.5
+table_a1|type_8_lower|proportion,"Online Appendix 1, Table A1",pipeline,0.955
+table_a1|type_8_upper|proportion,"Online Appendix 1, Table A1",pipeline,0.965
+text|footnote_11_zero_clicks|percent,"Footnote 11, p. 116",pipeline,51
+text|study1_network_members|n,"The organization and its network, p. 109",pipeline,6687
+text|study2_network_members|n,"The organization and its network, p. 109",pipeline,8507
+text|study1_fol_signed_pp|estimate,"Study 1 results, Main Effects, p. 116",pipeline,3.9
+text|study1_org_signed_pp|estimate,"Study 1 results, Main Effects, p. 116",pipeline,3.3
+text|study1_fol_tweeted_pp|estimate,"Study 1 results, Main Effects, p. 116",pipeline,2.7
+text|study2_fol_signed_pp|estimate,"Study 2 results, Main Effects, p. 119",pipeline,4.6
+text|study2_org_signed_pp|estimate,"Study 2 results, Main Effects, p. 119",pipeline,4.3
+text|study2_button_tweeted_pp|estimate,"Study 2 results, Main Effects, p. 119",pipeline,35.0
+text|study2_itt_signed_pp|estimate,"Study 2 results, Network Effects, p. 121",pipeline,2.0
+text|study2_cace_signed_pp|estimate,"Study 2 results, Network Effects, p. 121",pipeline,5.6
+text|study1_tweets_total|n,"Research design, Study 1, p. 111",pipeline,65
+figure_1|network_members|n,"Figure 1 caption, p. 110",pipeline,6687
+table_1|cells|count,"Table 1, p. 111",pipeline,
+table_1|mean_followers_top_ten|n,"The organization and its network, p. 109",pipeline,118988
+table_1|mean_tweets_per_weekday|n,"The organization and its network, p. 109",pipeline,13
+table_1|median_creation_year|year,"The organization and its network, p. 109",pipeline,2008
+figure_1|communities|n,"The organization and its network, p. 109",pipeline,22
+figure_1|modularity|value,"The organization and its network, p. 109",pipeline,0.3
+figure_1|possible_connections|n,"The organization and its network, p. 109",pipeline,44709282
+figure_1|observed_edges|n,"The organization and its network, p. 109",pipeline,131474
+figure_1|graph_density|value,"The organization and its network, p. 109",pipeline,0.0029
+figure_1|median_indegree|n,"The organization and its network, p. 109",pipeline,6
+figure_1|max_outdegree|n,"Analyzing experiments over networks, p. 108",pipeline,601
+figure_2|mean_tweets_per_weekday|value,"The organization and its network, p. 109",pipeline,6.07
+figure_2|sd_tweets_per_weekday|value,"The organization and its network, p. 109",pipeline,10.05
+text|intercoder_kappa|value,"Heterogeneous effects, p. 122",pipeline,0.90
+text|study1_outside_retweeters|n,"Study 1 results, Network Effects, p. 118",pipeline,5
+text|study2_outside_retweeters|n,"Study 1 results, Network Effects, p. 118",pipeline,7
+text|lcv_follower_followers|n,"Study 1 results, Network Effects, p. 118",pipeline,7000000
+figures_a1_a6|screenshots|count,Online Appendix 4,pipeline,
+text|twitter_char_limit|n,"Analyzing experiments over networks, p. 107",definitional,140
+text|study1_follower_cap|n,"The organization and its network, p. 109",definitional,5000
+text|twitter_dm_limit|n,"Footnote 6, p. 112",definitional,250
+text|study1_dm_batches|n,"Research design, Study 1, p. 111",structural,12
+text|study2_dm_batches|n,"Research design, Study 2, p. 114",structural,20
+text|n_treatment_conditions|n,"Research design, Study 1, p. 111",structural,5
+text|study2_months_later|n,"The organization and its network, p. 109",structural,5
+text|ci_level|percent,"Heterogeneous effects, p. 122",definitional,95
+text|intercoder_sample|n,"Heterogeneous effects, p. 122",structural,200
+text|omnibus_permutations|n,Online Appendix 2,structural,1000
+text|projected_dms_per_day|n,"Discussion, p. 125",definitional,250
+text|projected_days|n,"Discussion, p. 125",definitional,30
+text|projected_signatures|n,"Discussion, p. 125",definitional,300
+text|d_encouragement_one_third|holds,"Research design, Study 1, p. 111",descriptive,1
+text|d_study1_pub_zero_signed|holds,"Research design, Study 1, p. 111",descriptive,1
+text|d_study1_dm_significant|holds,"Study 1 results, Main Effects, p. 116",descriptive,1
+text|d_study1_encouragement_half|holds,"Study 1 results, Main Effects, p. 116",descriptive,1
+text|d_study1_organizer_38pp|holds,"Study 1 results, Main Effects, p. 116",descriptive,1
+text|d_study1_follower_twice|holds,"Study 1 results, Main Effects, p. 116",descriptive,1
+text|d_study1_network_null|holds,"Study 1 results, Network Effects, p. 118",descriptive,1
+text|d_study2_larger|holds,"Study 2 results, Main Effects, p. 119",descriptive,1
+text|d_study2_follower_more_effective|holds,"Study 2 results, Main Effects, p. 119",descriptive,1
+text|d_study2_tweeted_network_null|holds,"Study 2 results, Network Effects, p. 121",descriptive,1
+text|d_study2_network_larger_than_main|holds,"Study 2 results, Network Effects, p. 121",descriptive,1
+text|d_public_tweet_null|holds,"Discussion, p. 125",descriptive,1
+text|d_dm_click_4pp|holds,"Discussion, p. 125",descriptive,1
+text|d_dm_signatures_exceed_tweets|holds,"Discussion, p. 125",descriptive,1
+text|d_button_35_to_45|holds,"Discussion, p. 125",descriptive,1
+figure_3|d_study1_org_smaller_signed|holds,"Heterogeneous effects, p. 122",descriptive,1
+figure_3|d_study1_no_het_tweeted|holds,"Heterogeneous effects, p. 122",descriptive,1
+figure_3|d_study2_org_smaller_signed|holds,"Heterogeneous effects, p. 122",descriptive,1
+figure_3|d_no_gender_pattern|holds,"Heterogeneous effects, p. 122",descriptive,1
+table_a1|d_types_1_to_4_zero|holds,Online Appendix 1,descriptive,1

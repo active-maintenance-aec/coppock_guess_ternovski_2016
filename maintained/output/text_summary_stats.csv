@@ -1,0 +1,23 @@
+study,quantity,value
+Study 1,Share of sample: female,30.3723642889188
+Study 1,Share of sample: male,38.41782563182294
+Study 1,Share of sample: org,24.3606998654105
+Study 1,Share of sample: unknown,6.849110213847764
+Study 2,Share of sample: female,32.90231573997884
+Study 2,Share of sample: male,39.344069589749616
+Study 2,Share of sample: org,22.052427412718938
+Study 2,Share of sample: unknown,5.701187257552604
+Study 1,Network members,6687
+Study 2,Network members,8507
+Study 1,Tweets of the link throughout the network,65
+Study 1,Petition signers,109
+Study 1,Followers with positive exposure probability,1176
+Study 1,Second-stage analysis sample,1176
+Study 2,Petition signers,221
+Study 2,Followers with positive exposure probability,1991
+Study 2,Second-stage analysis sample,1975
+Study 1,"Types 5 to 7 combined, percent of population",3.633333333333334
+Study 2,"Types 5 to 7 combined, percent of population",4.409417398244204
+Study 1,"Type 8, proportion of population",0.9636666666666667
+Study 2,"Type 8, proportion of population",0.9559058260175579
+Study 1,"Probability of zero clicks at one click per 10,000 exposed, percent",51.235709943071015

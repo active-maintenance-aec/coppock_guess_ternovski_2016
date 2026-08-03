@@ -1,0 +1,28 @@
+\begin{table}
+\centering
+\begin{talltblr}[         %% tabularray outer open
+caption={Study 2: effects of the tweet button on subsequent tweets.},
+note{}={Robust standard errors (HC2) in parentheses. The constant is the no-encouragement follower arm.},
+]                     %% tabularray outer close
+{                     %% tabularray inner open
+colspec={Q[]Q[]Q[]},
+hline{2}={1-3}{solid, black, 0.05em},
+hline{10}={1-3}{solid, black, 0.05em},
+hline{1}={1-3}{solid, black, 0.08em},
+hline{12}={1-3}{solid, black, 0.08em},
+column{2-3}={}{halign=c},
+column{1}={}{halign=l},
+}                     %% tabularray inner close
+& Tweeted (1) & Tweeted (2) \\
+(Intercept) & 0.100 & 0.083 \\
+& (0.029) & (0.036) \\
+tweetbutton & 0.350 & 0.472 \\
+& (0.055) & (0.077) \\
+treatorg &  & 0.037 \\
+&  & (0.059) \\
+tweetbutton × treatorg &  & -0.241 \\
+&  & (0.110) \\
+Num.Obs. & 221 & 221 \\
+R2 & 0.154 & 0.181 \\
+\end{talltblr}
+\end{table}

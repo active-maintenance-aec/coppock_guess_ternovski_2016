@@ -1,0 +1,40 @@
+\begin{table}
+\centering
+\begin{talltblr}[         %% tabularray outer open
+caption={Study 1: effects of direct message treatments on participation and tweeting.},
+note{}={Robust standard errors (HC2) in parentheses. Eigenvector centrality, number of followers and days on Twitter in standard units and centred at zero.},
+]                     %% tabularray outer close
+{                     %% tabularray inner open
+colspec={Q[]Q[]Q[]Q[]Q[]},
+hline{2}={1-5}{solid, black, 0.05em},
+hline{22}={1-5}{solid, black, 0.05em},
+hline{1}={1-5}{solid, black, 0.08em},
+hline{24}={1-5}{solid, black, 0.08em},
+column{2-5}={}{halign=c},
+column{1}={}{halign=l},
+}                     %% tabularray inner close
+& Signed (1) & Signed (2) & Tweeted (3) & Tweeted (4) \\
+(Intercept) & -0.000 & 0.006 & -0.000 & -0.000 \\
+& (0.000) & (0.003) & (0.000) & (0.002) \\
+treatfol & 0.039 & 0.040 & 0.027 & 0.027 \\
+& (0.005) & (0.005) & (0.004) & (0.004) \\
+treatorg & 0.033 & 0.033 & 0.016 & 0.016 \\
+& (0.005) & (0.005) & (0.003) & (0.003) \\
+account\_typemale &  & -0.004 &  & 0.001 \\
+&  & (0.004) &  & (0.003) \\
+account\_typeorg &  & -0.018 &  & -0.003 \\
+&  & (0.004) &  & (0.003) \\
+account\_typeunknown &  & -0.012 &  & 0.004 \\
+&  & (0.007) &  & (0.007) \\
+centrality\_centered &  & 0.002 &  & -0.000 \\
+&  & (0.002) &  & (0.001) \\
+num\_followers\_centered &  & -0.001 &  & -0.001 \\
+&  & (0.001) &  & (0.001) \\
+days\_on\_twitter\_centered &  & -0.001 &  & -0.001 \\
+&  & (0.002) &  & (0.001) \\
+days\_missingTRUE &  & 0.014 &  & 0.010 \\
+&  & (0.014) &  & (0.015) \\
+Num.Obs. & 6687 & 6687 & 6687 & 6687 \\
+R2 & 0.021 & 0.024 & 0.014 & 0.014 \\
+\end{talltblr}
+\end{table}

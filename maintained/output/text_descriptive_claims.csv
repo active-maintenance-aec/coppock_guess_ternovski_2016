@@ -1,0 +1,21 @@
+claim_id,holds,evidence
+text|d_encouragement_one_third|holds,1,"Share shown the encouragement within each Study 1 direct message arm: 0.3333, 0.3333."
+text|d_study1_pub_zero_signed|holds,1,Study 1 public tweet arm: 0 signatures among 3687 subjects.
+text|d_study1_dm_significant|holds,1,"Study 1 signing: follower 0.039 (p = 5.5e-15), organizer 0.033 (p = 7.2e-13); both positive and both below 0.01."
+text|d_study1_encouragement_half|holds,1,"Study 1 encouragement effect on tweeting among signers: 0.454, read as nearly half."
+text|d_study1_organizer_38pp|holds,1,"Encouragement by organizer interaction, Study 1: -0.384, that is 38.4 percentage points."
+text|d_study1_follower_twice|holds,1,"Study 1 encouragement effect: 62.4 percentage points in the follower arm against 24.0 in the organizer arm, a ratio of 2.60."
+text|d_study1_network_null|holds,1,"Study 1 second stage, columns 2 to 5, p-values: 0.46, 0.46, 0.73, 0.73."
+text|d_study2_larger|holds,1,Signing effects: follower 0.039 in Study 1 against 0.046 in Study 2; organizer 0.033 against 0.043.
+text|d_study2_follower_more_effective|holds,1,"Study 2 tweeting: follower 0.014 against organizer 0.011, difference p = 0.3."
+text|d_study2_tweeted_network_null|holds,1,"Study 2 second stage, tweeting, columns 4 and 5, p-values: 0.18, 0.19."
+text|d_study2_network_larger_than_main|holds,1,Study 2 complier effect on signing 0.056 against direct message effects of 0.046 and 0.043.
+text|d_public_tweet_null|holds,1,Public tweet arms: Study 1 0 signed and 0 tweeted of 3687; Study 2 0 signed and 0 tweeted of 3495.
+text|d_dm_click_4pp|holds,1,"Effect of any direct message on signing: 3.6 percentage points in Study 1 and 4.4 in Study 2, both rounding to 4."
+text|d_dm_signatures_exceed_tweets|holds,1,Study 1: signing 3.6 against tweeting 2.2 percentage points. Study 2: 4.4 against 1.3.
+text|d_button_35_to_45|holds,1,"Tweet encouragement effect on tweeting among signers: 35.0 percentage points in Study 2 and 45.4 in Study 1, a range of 35 to 45 at the precision the article prints."
+figure_3|d_study1_org_smaller_signed|holds,1,"Study 1 signing: the organization conditional effect is the smallest of the four account types for both treatments, by -0.037 and -0.024 against the mean of the others."
+figure_3|d_study1_no_het_tweeted|holds,1,"Study 1 tweeting, treatment by account type interactions, p-values: 0.91, 0.56, 0.53, 0.39, 0.33, 0.69."
+figure_3|d_study2_org_smaller_signed|holds,1,"Study 2 signing: the organization conditional effect is the smallest of the four account types for both treatments, by -0.034 and -0.029. Study 2 tweeting interactions, p-values: 0.083, 0.23, 0.84, 0.13, 0.36, 0.64."
+figure_3|d_no_gender_pattern|holds,1,Male minus female conditional effects across the 8 study by outcome by treatment cells: 4 positive and 4 negative.
+table_a1|d_types_1_to_4_zero|holds,1,Signatures in the public tweet arms: 0 in Study 1 and 0 in Study 2.

@@ -1,0 +1,3 @@
+study,table_figure,permutation_source,old_sampler,llr_observed,sims
+Study 1 (Table A2),table_a2,randomizr::complete_ra(),0.586,265.1937931719149,1000
+Study 2 (Table A3),table_a3,"strata_ra(), written out in LCVsource.r",0.113,196.8696725664231,1000

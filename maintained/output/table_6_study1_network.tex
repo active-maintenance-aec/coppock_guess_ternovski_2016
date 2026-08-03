@@ -1,0 +1,26 @@
+\begin{table}
+\centering
+\begin{talltblr}[         %% tabularray outer open
+caption={Study 1: effects of tweet encouragement on subjects' followers.},
+note{}={Robust standard errors (HC2) in parentheses. All regressions weighted by the inverse probability of exposure.},
+]                     %% tabularray outer close
+{                     %% tabularray inner open
+colspec={Q[]Q[]Q[]Q[]Q[]Q[]},
+hline{2}={1-6}{solid, black, 0.05em},
+hline{8}={1-6}{solid, black, 0.05em},
+hline{1}={1-6}{solid, black, 0.08em},
+hline{10}={1-6}{solid, black, 0.08em},
+column{2-6}={}{halign=c},
+column{1}={}{halign=l},
+}                     %% tabularray inner close
+& Shown tweet OLS (1) & Signed OLS (2) & Signed IV (3) & Tweeted OLS (4) & Tweeted IV (5) \\
+(Intercept) & 0.150 & 0.010 & 0.008 & 0.012 & 0.013 \\
+& (0.025) & (0.005) & (0.006) & (0.010) & (0.012) \\
+exposure & 0.628 & 0.005 &  & -0.004 &  \\
+& (0.029) & (0.006) &  & (0.010) &  \\
+actual\_exposure &  &  & 0.008 &  & -0.006 \\
+&  &  & (0.010) &  & (0.016) \\
+Num.Obs. & 1176 & 1176 & 1176 & 1176 & 1176 \\
+R2 & 0.374 & 0.000 & -0.001 & 0.000 & 0.001 \\
+\end{talltblr}
+\end{table}
