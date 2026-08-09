@@ -1,6 +1,6 @@
 # Active Maintenance Report: coppock_guess_ternovski_2016
 
-2026-08-03
+2026-08-09
 
 - [Summary](#summary)
   - [Does the deposited archive run?](#does-the-deposited-archive-run)
@@ -589,7 +589,7 @@ maintained rewrite produces.
 |:----------|:-----------------------|
 | R version | 4.6.0                  |
 | Platform  | aarch64-apple-darwin23 |
-| Date run  | 2026-08-03             |
+| Date run  | 2026-08-09             |
 
 | Package      | Version |
 |:-------------|:--------|

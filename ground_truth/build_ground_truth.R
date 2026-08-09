@@ -697,11 +697,19 @@ gt <- gt |>
     # A published claim the deposit cannot support is a fact about the deposit, not a
     # gap in this table, so it is named as such rather than left blank beside the
     # rows where the rewrite genuinely disagrees with the article.
+    # A row is adverse when EITHER verdict is 0. Keying the locus on match_rewrite
+    # alone leaves the archive-fails-and-the-rewrite-has-nothing-to-compare shape
+    # with no locus at all, which is what the old-sampler row below used to be.
+    adverse = (!is.na(match) & match == 0) | (!is.na(match_rewrite) & match_rewrite == 0),
     defect_locus = case_when(
       claim_id %in% no_counterpart$claim_id ~ "archive",
-      is.na(match_rewrite) | match_rewrite == 1 ~ NA_character_,
+      !adverse ~ NA_character_,
       claim_id == "table_a2|omnibus|p_value" ~ "archive",
       claim_id == "table_a3|omnibus|p_value" ~ "environment",
+      # The old-sampler rows ask whether R's pre-3.6 sampler recovers the published
+      # p-value. Where it does not, the cause is the unpinned randomizr named above,
+      # and this row is the evidence ruling the sampler out as the explanation.
+      claim_id == "table_a2|omnibus|old_sampler" ~ "archive",
       .default = "paper_internal"
     )
   ) |>
@@ -757,10 +765,17 @@ if (nrow(missing_block) > 0) {
 
 # A note explains why a value does not reproduce, so a row that does reproduce must
 # not carry one: that is the shape a note contradicting its own verdict would take.
-# Every row that does not reproduce must say where the fault lies.
+# The locus rule has three states: an adverse row, meaning either verdict is 0, must
+# name where the fault lies; a clean match, meaning both verdicts are 1, must not; a
+# row with no verdict may. Gating on match_rewrite == 0 alone tests only part of it.
+gt_adverse <- (!is.na(gt$match) & gt$match == 0) |
+  (!is.na(gt$match_rewrite) & gt$match_rewrite == 0)
+gt_clean <- !is.na(gt$match) & gt$match == 1 &
+  !is.na(gt$match_rewrite) & gt$match_rewrite == 1
 stopifnot(
   !any(gt$match_rewrite == 1 & gt$notes != "", na.rm = TRUE),
-  all(!is.na(gt$defect_locus[which(gt$match_rewrite == 0)]))
+  all(!is.na(gt$defect_locus[gt_adverse])),
+  all(is.na(gt$defect_locus[gt_clean]))
 )
 
 write_csv(gt, here::here("ground_truth", "coppock_guess_ternovski_2016_ground_truth.csv"))
