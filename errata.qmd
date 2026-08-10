@@ -1,0 +1,131 @@
+---
+title: "Errata"
+subtitle: "On Coppock, Guess and Ternovski (2016), *Political Behavior* 38(1)"
+format:
+  pdf:
+    output-file: coppock_guess_ternovski_2016_errata.pdf
+    geometry: margin=1.25in
+    fontsize: 11pt
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
+library(here)
+library(tidyverse)
+here::i_am("errata.qmd")
+
+# Every number in a corrected entry below is computed here, from the maintained pipeline's
+# output and from the transcription of the published page, at the time this document is
+# rendered. Nothing below is typed.
+gt <- read_csv(here("ground_truth", "coppock_guess_ternovski_2016_ground_truth.csv"),
+               col_types = cols(value_paper = col_character(), .default = col_guess()))
+
+a3 <- read_csv(here("maintained", "output", "table_a3_study2_balance.csv"),
+               show_col_types = FALSE)
+
+arms <- c(pub = "Public tweet", fol = "Follower DM", org = "Organizer DM")
+
+# The row the article labels "Number of Tweets", as the rewrite computes it and as the
+# published table prints it.
+a3_rewrite <- map_dbl(names(arms), function(a) {
+  hit <- a3 |> filter(covariate == "days_on_twitter", treat == a) |> pull(mean)
+  stopifnot(length(hit) == 1)
+  hit
+})
+a3_published <- map_chr(unname(arms), function(a) {
+  hit <- gt |>
+    filter(table_figure == "table_a3",
+           str_detect(claim, paste0("^Days on Twitter, ", a, ", mean$"))) |>
+    pull(value_paper)
+  stopifnot(length(hit) == 1)
+  hit
+})
+stopifnot(a3_published == sprintf("%.3f", a3_rewrite))
+
+three <- function(x) paste(x, collapse = ", ")
+```
+
+```{r entries}
+# THE ERRATA SPINE. Every entry is defined once, here, and rendered from here: into this
+# document, and into whatever else needs it, which reads the errata_entries.csv written at
+# the bottom of this file rather than keeping a second hand-typed copy.
+#
+# [[...]] marks the span that changes. Each renderer supplies its own markup for it: bold
+# here, \was{} in an edition. Nothing else in a field is markup, so the same string can be
+# set by either.
+#
+# Numbering is APPEND-ONLY once this note is published: an entry can already have been
+# cited, so a later finding is added at the end and never interleaved.
+entries <- tribble(
+  ~entry, ~class, ~source, ~form, ~title, ~location, ~published, ~corrected, ~note,
+
+  1, "label", "pipeline", "brief",
+  "A covariate row of appendix Table A3 carries the wrong label",
+  "published, appendix p. 4",
+  "[[Number of Tweets]]",
+  "Days on Twitter",
+  str_glue(
+    "The changed artifact is the row label alone; the three means beneath it, ",
+    "{three(a3_published)}, are as published and reproduce exactly. The line of the ",
+    "deposited appendix script that produces them is `mean_days = mean(days_on_twitter, ",
+    "na.rm = TRUE)`, and the row label comes from a separate hand-written vector, which ",
+    "says \"Number of Tweets\" where the equivalent vector for Table A2 says \"Days on ",
+    "Twitter\". Table A2's corresponding row is labelled correctly, and the two tables ",
+    "print the same quantity on the same scale. Nothing in the article's text or in any ",
+    "other table quotes the mislabelled row."),
+
+  2, "bibliographic", "reference_audit", "brief",
+  "The title of Bryan et al. (2011) is cut short by a letter",
+  "published p. 127",
+  "Motivating voter turnout by invoking the [[sel]].",
+  "Motivating voter turnout by invoking the self.",
+  paste("Crossref, doi 10.1073/pnas.1103343108: \"Motivating voter turnout by invoking the",
+        "self.\" The article's two in-text citations of the work, on pp. 106 and 108, are",
+        "unaffected.")
+) |>
+  mutate(across(c(title, published, corrected, note), as.character))
+
+stopifnot(nrow(entries) == max(entries$entry), !anyDuplicated(entries$entry))
+
+spell <- function(n) {
+  words <- c("one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten")
+  stopifnot(n >= 1, n <= length(words))
+  words[n]
+}
+
+# The spine's markup, resolved for this document. Another renderer resolves it differently.
+bold <- function(x) str_replace_all(x, "\\[\\[(.*?)\\]\\]", "**\\1**")
+```
+
+This note lists `r spell(nrow(entries))` corrections to "When Treatments Are Tweets: A Network Mobilization Experiment over Twitter," published in *Political Behavior* 38(1):105--128, doi [10.1007/s11109-015-9308-6](https://doi.org/10.1007/s11109-015-9308-6). **Neither changes any conclusion of the paper**, and neither touches an estimate: every coefficient, standard error, p-value and mean in the article and its online appendix reproduces from the deposited replication archive ([10.7910/DVN/29548](https://doi.org/10.7910/DVN/29548)). One is a row label in an appendix table whose values are right; the other is a word missing a letter in the reference list.
+
+Every number quoted below is computed from the deposited archive at the time this document is rendered. The code and output supporting the corrections are at [github.com/active-maintenance-aec/coppock_guess_ternovski_2016](https://github.com/active-maintenance-aec/coppock_guess_ternovski_2016).
+
+```{r entry-1, results="asis"}
+# A heading is only a heading when a blank line precedes it, which is why every emitted
+# entry opens with one.
+e <- entries |> filter(entry == 1)
+cat("\n\n## ", e$entry, ". ", e$title, "\n\nPublished, ",
+    str_remove(e$location, "^published, "), ", the sixth covariate row:\n\n> ",
+    bold(e$published), "\n\nCorrected:\n\n> ", e$corrected, "\n\n", e$note, "\n", sep = "")
+```
+
+# The reference list
+
+The entry below corrects the article's reference list. It was found by an audit that sends every printed entry whole to Crossref and checks the authoritative record back into it, and it is verified against the record named in the note. No cited work is missing and no citation in the text points at the wrong work.
+
+```{r reference-entries, results="asis"}
+walk(entries$entry[entries$source == "reference_audit"], function(n) {
+  e <- entries |> filter(entry == n)
+  cat("\n\n## ", e$entry, ". ", e$title, "\n\nPublished, ",
+      str_remove(e$location, "^published "), ":\n\n> ", bold(e$published),
+      "\n\nCorrected:\n\n> ", e$corrected, "\n\n", e$note, "\n", sep = "")
+})
+```
+
+```{r emit-spine}
+# The machine-readable spine, written wherever this document is rendered. Anything else
+# that needs these entries reads it rather than keeping its own copy, so the two cannot
+# drift.
+write_csv(entries, here("errata_entries.csv"))
+```

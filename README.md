@@ -1,6 +1,6 @@
 # Active Maintenance Report: coppock_guess_ternovski_2016
 
-2026-08-09
+2026-08-10
 
 - [Summary](#summary)
   - [Does the deposited archive run?](#does-the-deposited-archive-run)
@@ -63,8 +63,10 @@ archive in a scratch copy and records what it produces.
 `maintained/in_text_claims.R` reaches the same numbers by a second,
 independent path and prints each one beside the sentence it comes from.
 `original/` is created by the download script and is deliberately absent
-from the repository. This file is the reproducibility report, also
-available as a PDF in `report/`.
+from the repository. `errata.qmd` corrects the published article,
+rendering to `coppock_guess_ternovski_2016_errata.pdf` at the root. This
+file is the reproducibility report, also available as a PDF in
+`report/`.
 
 **License.** CC0 1.0 Universal, matching the terms of the deposit this
 repository maintains. See `LICENSE`.
@@ -269,6 +271,21 @@ the mean of `days_on_twitter` within each arm and gets 1559.503,
 row is days on Twitter, the values are right, and the label is a slip.
 The maintained rewrite labels it “Days on Twitter” and the ground truth
 records the values as matching.
+
+One entry of the reference list is wrong in the same way, and no ground
+truth row reaches it: the article gives the title of Bryan et al. (2011)
+as “Motivating voter turnout by invoking the sel”, where the last word
+is “self”. It was found by an audit that sends every printed reference
+entry whole to Crossref and checks the authoritative record back into
+it, which flagged one other entry here, for a page range printed without
+its dash. That one is a false positive: the entry reads
+“pp. 12,653–12,656” on the page, with the dash present and the thousands
+separators the journal’s style uses.
+
+Both corrections are set out in
+`coppock_guess_ternovski_2016_errata.pdf` at the root of this
+repository, as two numbered entries whose values are computed from the
+pipeline when the document is rendered. Neither changes a conclusion.
 
 The archive’s `strata_ra()` helper carries a second slip with no
 consequence: it writes `"ord"` where it means `"org"` when labelling the
@@ -589,7 +606,7 @@ maintained rewrite produces.
 |:----------|:-----------------------|
 | R version | 4.6.0                  |
 | Platform  | aarch64-apple-darwin23 |
-| Date run  | 2026-08-09             |
+| Date run  | 2026-08-10             |
 
 | Package      | Version |
 |:-------------|:--------|

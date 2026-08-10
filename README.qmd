@@ -60,7 +60,7 @@ This repository holds the actively maintained replication code for Coppock, Gues
 
 **The data are not redistributed here.** The deposit is `r round(sum(manifest$bytes) / 1024)` KB across `r nrow(manifest)` files and lives at Harvard Dataverse, which is the only copy this repository points at. `download_original.R` fetches it and verifies every file against the checksum and byte size recorded in `original_manifest.csv`, and stops if `original/` holds anything the manifest does not list. The exact bytes this code was written against are therefore pinned in version control even though the bytes themselves are not. Checksums are quoted only from the manifest: a file this pipeline writes, such as a figure PDF, records the time it was written and hashes differently on every run.
 
-**Repository layout.** `maintained/` is the maintained rewrite: one script per published table or figure, writing to `output/`, which is committed so a reader can compare a fresh run against it without downloading anything. `ground_truth/` ties every published number to the code that produces it. `published_claims.csv` is the extraction: every numeric token in the article and its appendix, read off the pages and classified by hand. `extract_archive_values.R` runs the deposited archive in a scratch copy and records what it produces. `build_ground_truth.R` joins the two together with the rewrite's output. `maintained/in_text_claims.R` reaches the same numbers by a second, independent path and prints each one beside the sentence it comes from. `original/` is created by the download script and is deliberately absent from the repository. This file is the reproducibility report, also available as a PDF in `report/`.
+**Repository layout.** `maintained/` is the maintained rewrite: one script per published table or figure, writing to `output/`, which is committed so a reader can compare a fresh run against it without downloading anything. `ground_truth/` ties every published number to the code that produces it. `published_claims.csv` is the extraction: every numeric token in the article and its appendix, read off the pages and classified by hand. `extract_archive_values.R` runs the deposited archive in a scratch copy and records what it produces. `build_ground_truth.R` joins the two together with the rewrite's output. `maintained/in_text_claims.R` reaches the same numbers by a second, independent path and prints each one beside the sentence it comes from. `original/` is created by the download script and is deliberately absent from the repository. `errata.qmd` corrects the published article, rendering to `coppock_guess_ternovski_2016_errata.pdf` at the root. This file is the reproducibility report, also available as a PDF in `report/`.
 
 **License.** CC0 1.0 Universal, matching the terms of the deposit this repository maintains. See `LICENSE`.
 
@@ -220,6 +220,13 @@ The deposit runs the same check on Study 2 and its comment records no imbalance.
 # Errata
 
 ```{r errata_setup, include=FALSE}
+# The errata are defined once, in errata.qmd, which writes errata_entries.csv when it
+# renders. This section reads that file rather than keeping a second copy of the count or
+# the numbering, because a second copy is how the two would come to disagree.
+spine <- read_csv(here::here("errata_entries.csv"), show_col_types = FALSE)
+n_errata <- nrow(spine)
+spell_errata <- function(n) c("one", "two", "three", "four", "five")[n]
+
 arms <- c(pub = "Public tweet", fol = "Follower DM", org = "Organizer DM")
 a3_days <- map_dbl(names(arms), \(a) out("table_a3_study2_balance.csv") |>
                      filter(covariate == "days_on_twitter", treat == a) |> pull(mean))
@@ -229,6 +236,10 @@ a3_published <- map_chr(unname(arms),
 ```
 
 One published label is wrong, and the deposit shows how. Table A3 reports a Study 2 covariate as "Number of Tweets" with arm means of `r paste(a3_published, collapse = ", ")`. The line that produces those numbers is `mean_days = mean(days_on_twitter, na.rm = TRUE)`, and the row label comes from a separate hand-written vector that says "Number of Tweets" where Table A2's equivalent says "Days on Twitter". The rewrite takes the mean of `days_on_twitter` within each arm and gets `r paste(sprintf("%.3f", a3_days), collapse = ", ")`, the same three numbers to every printed decimal. The row is days on Twitter, the values are right, and the label is a slip. The maintained rewrite labels it "Days on Twitter" and the ground truth records the values as matching.
+
+One entry of the reference list is wrong in the same way, and no ground truth row reaches it: the article gives the title of Bryan et al. (2011) as "Motivating voter turnout by invoking the sel", where the last word is "self". It was found by an audit that sends every printed reference entry whole to Crossref and checks the authoritative record back into it, which flagged one other entry here, for a page range printed without its dash. That one is a false positive: the entry reads "pp. 12,653--12,656" on the page, with the dash present and the thousands separators the journal's style uses.
+
+Both corrections are set out in `coppock_guess_ternovski_2016_errata.pdf` at the root of this repository, as `r spell_errata(n_errata)` numbered entries whose values are computed from the pipeline when the document is rendered. Neither changes a conclusion.
 
 The archive's `strata_ra()` helper carries a second slip with no consequence: it writes `"ord"` where it means `"org"` when labelling the third arm of a simulated assignment. Since the labels only feed a multinomial logit whose deviance does not depend on them, the Study 2 omnibus p-value is unaffected. The rewrite permutes with `randomizr::block_ra()` instead, which draws the same block-by-block arm sizes.
 
