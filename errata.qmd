@@ -56,8 +56,17 @@ three <- function(x) paste(x, collapse = ", ")
 #
 # Numbering is APPEND-ONLY once this note is published: an entry can already have been
 # cited, so a later finding is added at the end and never interleaved.
+#
+# claim_ids names the ground-truth rows an entry corrects, semicolon-separated, so that
+# "is this finding published?" is a query rather than a judgment. Both entries here are
+# empty, and for different reasons. Entry 1 corrects a row label, and the extraction holds
+# values rather than labels: the three means under the mislabelled row are quoted in its
+# note as evidence, and they are right, so citing them would claim a correction the entry
+# does not make. Entry 2 comes from the reference audit, and a reference list is not an
+# extraction claim. Every id listed here is checked against the ground truth by
+# build_ground_truth.R.
 entries <- tribble(
-  ~entry, ~class, ~source, ~form, ~title, ~location, ~published, ~corrected, ~note,
+  ~entry, ~class, ~source, ~form, ~title, ~location, ~published, ~corrected, ~note, ~claim_ids,
 
   1, "label", "pipeline", "brief",
   "A covariate row of appendix Table A3 carries the wrong label",
@@ -73,6 +82,7 @@ entries <- tribble(
     "Twitter\". Table A2's corresponding row is labelled correctly, and the two tables ",
     "print the same quantity on the same scale. Nothing in the article's text or in any ",
     "other table quotes the mislabelled row."),
+  "",
 
   2, "bibliographic", "reference_audit", "brief",
   "The title of Bryan et al. (2011) is cut short by a letter",
@@ -81,9 +91,10 @@ entries <- tribble(
   "Motivating voter turnout by invoking the self.",
   paste("Crossref, doi 10.1073/pnas.1103343108: \"Motivating voter turnout by invoking the",
         "self.\" The article's two in-text citations of the work, on pp. 106 and 108, are",
-        "unaffected.")
+        "unaffected."),
+  ""
 ) |>
-  mutate(across(c(title, published, corrected, note), as.character))
+  mutate(across(c(title, published, corrected, note, claim_ids), as.character))
 
 stopifnot(nrow(entries) == max(entries$entry), !anyDuplicated(entries$entry))
 
