@@ -342,10 +342,24 @@ Where a table's `stargazer()` call fails, the models behind it still fit, and th
 ```{r gt_unverifiable}
 se_undefined <- gt |> filter(str_detect(replace_na(notes, ""), "^Standard error undefined"))
 n_se_undefined <- nrow(se_undefined)
+n_se_nan <- sum(is.na(se_undefined$value_rewrite))
+n_se_root <- n_se_undefined - n_se_nan
 n_se_substituted <- sum(se_undefined$value_script == 0.00004)
+# The two arm sizes are published claims in their own right, so the bound quoted below is
+# read back out of the table rather than restated, and moves if either row ever changes.
+pub_n_study_1 <- gt |> filter(claim_id == "table_2|pub|n") |> pull(value_rewrite)
+pub_n_study_2 <- gt |> filter(claim_id == "table_3|pub|n") |> pull(value_rewrite)
+pub_bound_study_1 <- binom.test(0, pub_n_study_1)$conf.int[2]
+pub_bound_study_2 <- binom.test(0, pub_n_study_2)$conf.int[2]
 ```
 
-A further `r n_se_undefined` cells are recorded as unverifiable rather than as matches or mismatches. Each is a standard error on a coefficient identified only within the public tweet arm, where no subject signed or tweeted, so every residual there is zero and the robust variance of the term is zero up to floating point, coming back very slightly negative. The published tables print `0.000` for all of them, by two different routes: in `r n_se_undefined - n_se_substituted` cells `vcovHC()` returns a tiny positive variance whose square root rounds to zero, and in the other `r n_se_substituted` it returns `NaN` and the deposit's own wrapper replaces the `NaN` with `0.00004`. `estimatr::lm_robust()` takes the square root and returns `NaN`, which is the correct answer for a variance that is not positive, and the ground truth carries the reason on each row.
+A further `r n_se_undefined` cells are recorded as unverifiable rather than as matches or mismatches. Each is a standard error on a term identified only within the public tweet arm, where no subject signed or tweeted: 0 of `r pub_n_study_1` subjects in Study 1, and 0 of `r pub_n_study_2` in Study 2. Every residual in that arm is therefore exactly zero, and the term's HC2 variance is a sum of zero squared residuals, which is zero up to floating point.
+
+Whether the residue lands positive or negative is arbitrary, and it decides whether a standard error exists at all. `estimatr::lm_robust()` takes the square root, returning `NaN` in `r n_se_nan` of these cells and a root of order 1e-11 in the other `r n_se_root`. A root that small prints as `0.000` and so would round to the published value, but reading that as agreement would make the verdict a report on a sign bit: 16 of these cells changed side between estimatr 1.0.6 and 2.0, 8 in each direction, on the same code and the same data. Both signs are therefore recorded as unverifiable, which fixes the set at `r n_se_undefined` cells instead of at whatever the arithmetic on a given machine happens to produce.
+
+The deposit's verdicts are stable where the rewrite's are not, and the reason is a substitution rather than a better variance estimate. `vcovHC()` returns the same residue, and in `r n_se_substituted` of these cells it comes back as `NaN`, which the deposit's own wrapper replaces with `0.00004`. Both `0.00004` and a tiny positive root print as `0.000`, so the archive reproduces its own printed table in all `r n_se_undefined` cells whichever way the residue falls.
+
+What the design supports for the public tweet arm is a bound rather than a point. Zero signatures from `r pub_n_study_2` Study 2 subjects puts an exact 95 percent upper bound of `r sprintf("%.3f", 100 * pub_bound_study_2)` percent on that arm's signing rate, and zero from `r pub_n_study_1` in Study 1 puts it at `r sprintf("%.3f", 100 * pub_bound_study_1)` percent. Neither figure is one the article prints, and neither is a replacement for the standard errors above, which are on regression terms rather than on a proportion.
 
 # Maintained rewrite
 

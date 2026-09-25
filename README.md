@@ -1,6 +1,6 @@
 # Active Maintenance Report: coppock_guess_ternovski_2016
 
-2026-08-10
+2026-09-25
 
 - [Summary](#summary)
   - [Does the deposited archive run?](#does-the-deposited-archive-run)
@@ -125,7 +125,7 @@ written out by hand in the deposit instead of coming from a package.
 
 ## Does the maintained rewrite reproduce the paper?
 
-Yes, with 4 exceptions out of 682 published values, and none of them
+Yes, with 4 exceptions out of 660 published values, and none of them
 touches a result.
 
 Two are the omnibus balance p-values, which are simulation output and
@@ -187,7 +187,7 @@ exposure is not availability but maintenance. The installed `stargazer`
 is version 5.2.3, dated 2022-03-03, and it carries the call-parsing
 defect described below. `randomizr` is under active development, and the
 argument the archive passes to `complete_ra()` is not one the installed
-version 1.0.1 accepts.
+version 2.0.1 accepts.
 
 Running the two scripts expression by expression, so that one failure
 does not hide the next, separates the faults cleanly. Of the 8
@@ -326,10 +326,10 @@ summary and every non-matching row are below.
 | Table 1: organizations’ Twitter accounts | 4 | 0 / 0 | 0 / 0 |
 | Table 2: Study 1 design and outcomes | 30 | 30 / 30 | 30 / 30 |
 | Table 3: Study 2 design and outcomes | 35 | 35 / 35 | 35 / 35 |
-| Table 4: Study 1 direct message effects | 60 | 60 / 60 | 60 / 60 |
+| Table 4: Study 1 direct message effects | 60 | 60 / 60 | 58 / 58 |
 | Table 5: Study 1 tweet encouragement | 16 | 16 / 16 | 16 / 16 |
 | Table 6: Study 1 network effects | 30 | 30 / 30 | 30 / 30 |
-| Table 7: Study 2 direct message effects | 60 | 60 / 60 | 59 / 59 |
+| Table 7: Study 2 direct message effects | 60 | 60 / 60 | 58 / 58 |
 | Table 8: Study 2 tweet encouragement | 16 | 16 / 16 | 16 / 16 |
 | Table 9: Study 2 network effects | 30 | 30 / 30 | 30 / 30 |
 | Figure 1: Study 1 follower network | 8 | 1 / 1 | 1 / 1 |
@@ -338,8 +338,8 @@ summary and every non-matching row are below.
 | Table A1: possible subject types | 5 | 2 / 3 | 2 / 3 |
 | Table A2: Study 1 balance | 51 | 49 / 51 | 49 / 50 |
 | Table A3: Study 2 balance | 51 | 50 / 51 | 49 / 50 |
-| Table A4: Study 1 heterogeneity | 136 | 136 / 136 | 126 / 126 |
-| Table A5: Study 2 heterogeneity | 136 | 136 / 136 | 125 / 125 |
+| Table A4: Study 1 heterogeneity | 136 | 136 / 136 | 116 / 116 |
+| Table A5: Study 2 heterogeneity | 136 | 136 / 136 | 116 / 116 |
 | Figures A1 to A6: screenshots | 1 | 0 / 0 | 0 / 0 |
 | Running text | 57 | 38 / 39 | 38 / 39 |
 
@@ -377,7 +377,7 @@ with the reason.
 | Running text | Study 2: users outside the LCV network who retweeted | 7 | Both data frames hold only LCV followers, so users outside the network are not in the deposit. |
 | Running text | Total followers of the LCV’s followers | 7000000 | Stated as an order of magnitude in the text. The follower-of-follower counts are not deposited. |
 | Figures A1 to A6: screenshots | Screenshots of the petitions, the tweet encouragement and the public tweets |  | Six screenshots of experimental materials. No numbers and no data. |
-| Figure 3: effects by account type | All 32 plotted conditional effects and their standard errors |  | The figure prints no numbers, so there is nothing to compare against the article. All 32 plotted estimate and standard error pairs agree with the estimates the deposit hands to ggplot to within 7.3e-15. |
+| Figure 3: effects by account type | All 32 plotted conditional effects and their standard errors |  | The figure prints no numbers, so there is nothing to compare against the article. All 32 plotted estimate and standard error pairs agree with the estimates the deposit hands to ggplot to within 5.9e-15. |
 
 Published claims recorded as not comparable, and why.
 
@@ -387,18 +387,38 @@ The model objects are the informative comparison, because they separate
 a printing failure from an estimation failure, and here the failure is
 entirely in the printing.
 
-A further 22 cells are recorded as unverifiable rather than as matches
-or mismatches. Each is a standard error on a coefficient identified only
-within the public tweet arm, where no subject signed or tweeted, so
-every residual there is zero and the robust variance of the term is zero
-up to floating point, coming back very slightly negative. The published
-tables print `0.000` for all of them, by two different routes: in 11
-cells `vcovHC()` returns a tiny positive variance whose square root
-rounds to zero, and in the other 11 it returns `NaN` and the deposit’s
-own wrapper replaces the `NaN` with `0.00004`. `estimatr::lm_robust()`
-takes the square root and returns `NaN`, which is the correct answer for
-a variance that is not positive, and the ground truth carries the reason
-on each row.
+A further 44 cells are recorded as unverifiable rather than as matches
+or mismatches. Each is a standard error on a term identified only within
+the public tweet arm, where no subject signed or tweeted: 0 of 3687
+subjects in Study 1, and 0 of 3495 in Study 2. Every residual in that
+arm is therefore exactly zero, and the term’s HC2 variance is a sum of
+zero squared residuals, which is zero up to floating point.
+
+Whether the residue lands positive or negative is arbitrary, and it
+decides whether a standard error exists at all. `estimatr::lm_robust()`
+takes the square root, returning `NaN` in 24 of these cells and a root
+of order 1e-11 in the other 20. A root that small prints as `0.000` and
+so would round to the published value, but reading that as agreement
+would make the verdict a report on a sign bit: 16 of these cells changed
+side between estimatr 1.0.6 and 2.0, 8 in each direction, on the same
+code and the same data. Both signs are therefore recorded as
+unverifiable, which fixes the set at 44 cells instead of at whatever the
+arithmetic on a given machine happens to produce.
+
+The deposit’s verdicts are stable where the rewrite’s are not, and the
+reason is a substitution rather than a better variance estimate.
+`vcovHC()` returns the same residue, and in 20 of these cells it comes
+back as `NaN`, which the deposit’s own wrapper replaces with `0.00004`.
+Both `0.00004` and a tiny positive root print as `0.000`, so the archive
+reproduces its own printed table in all 44 cells whichever way the
+residue falls.
+
+What the design supports for the public tweet arm is a bound rather than
+a point. Zero signatures from 3495 Study 2 subjects puts an exact 95
+percent upper bound of 0.105 percent on that arm’s signing rate, and
+zero from 3687 in Study 1 puts it at 0.100 percent. Neither figure is
+one the article prints, and neither is a replacement for the standard
+errors above, which are on regression terms rather than on a proportion.
 
 # Maintained rewrite
 
@@ -499,7 +519,7 @@ The figure plots conditional average treatment effects of the two direct
 message treatments within each account type, for each outcome and each
 study. The figure prints no numbers, so there is nothing to compare
 against the article. All 32 plotted estimate and standard error pairs
-agree with the estimates the deposit hands to ggplot to within 7.3e-15.
+agree with the estimates the deposit hands to ggplot to within 5.9e-15.
 What the article does print is the caption, which reports the account
 type composition of both samples, and all eight of those percentages
 reproduce.
@@ -530,7 +550,7 @@ interval rather than the estimate plus or minus 1.96 standard errors.
 
 # Maintained rewrite verification
 
-**678** of 682 published values are reproduced to the precision the
+**656** of 660 published values are reproduced to the precision the
 article prints. The 4 that are not are listed below with what separates
 them, and with where the fault lies.
 
@@ -606,19 +626,19 @@ maintained rewrite produces.
 |:----------|:-----------------------|
 | R version | 4.6.0                  |
 | Platform  | aarch64-apple-darwin23 |
-| Date run  | 2026-08-10             |
+| Date run  | 2026-09-25             |
 
-| Package      | Version |
-|:-------------|:--------|
-| estimatr     | 1.0.6   |
-| randomizr    | 1.0.1   |
-| nnet         | 7.3.20  |
-| modelsummary | 2.6.0   |
-| AER          | 1.2.17  |
-| dplyr        | 1.2.1   |
-| ggplot2      | 4.0.3   |
-| tidyr        | 1.3.2   |
-| purrr        | 1.2.2   |
-| here         | 1.0.2   |
+| Package      | Version    |
+|:-------------|:-----------|
+| estimatr     | 2.0.0.9000 |
+| randomizr    | 2.0.1      |
+| nnet         | 7.3.20     |
+| modelsummary | 2.6.0      |
+| AER          | 1.2.17     |
+| dplyr        | 1.2.1      |
+| ggplot2      | 4.0.3      |
+| tidyr        | 1.3.2      |
+| purrr        | 1.2.2      |
+| here         | 1.0.2      |
 
 Package versions used for the run behind this report.

@@ -659,31 +659,60 @@ note_text <- c(
 ) |>
   as.character()
 
+# A standard error that is zero up to floating point ----
+# Every term with a degenerate standard error here is identified only within the public
+# tweet arm, where no subject signed or tweeted, so its HC2 variance is a sum of zero
+# squared residuals. Whether the residue lands positive or negative is arbitrary, and it
+# decides whether a standard error exists at all: lm_robust() takes the square root and
+# returns NaN in the one case and a root of order 1e-11 in the other. Which cells fall
+# which way moved when estimatr went from 1.0.6 to 2.0, so recording the positive ones as
+# agreement would make the verdict a report on a sign bit. Both signs are unverifiable.
+# The threshold sits in seven empty orders of magnitude: the largest residue these tables
+# produce is 2.0e-10 and the smallest genuine standard error in them is 6.9e-4, so any
+# threshold between 1e-9 and 1e-5 selects the same cells.
+se_residue_tol <- 1e-6
+
 gt <- gt |>
   left_join(no_counterpart, by = "claim_id") |>
   mutate(
+    se_degenerate = str_detect(claim, "standard error$") &
+      (is.na(value_rewrite) | abs(value_rewrite) < se_residue_tol),
     notes = case_when(
       !is.na(notes) ~ notes,
       claim_id == "table_a2|omnibus|p_value" ~ note_text[1],
       claim_id == "table_a3|omnibus|p_value" ~ note_text[2],
       claim_id == "text|study2_second_stage_pool|n" ~ note_text[3],
       claim_id == "table_a1|study2_types_5_to_7|percent" ~ note_text[4],
-      # Written per row rather than once: the deposit returns a numerically tiny
-      # variance for some of these cells and the 0.00004 LCVsource.r substitutes
-      # for a NaN in the others, and a single note would be false for half of them.
-      str_detect(claim, "standard error$") & is.na(value_rewrite) ~ as.character(str_glue(
-        "Standard error undefined: the coefficient is identified only within the ",
-        "public tweet arm, where no subject signed or tweeted, so the robust variance ",
-        "of the term is zero up to floating point and comes back very slightly ",
-        "negative. The deposit's HC2 wrapper returns {signif(value_script, 3)}, which ",
-        "prints as 0.000; lm_robust takes the square root and returns NaN, so the ",
-        "rewrite records the cell as unverifiable.")),
+      # Two branches rather than one: the note says which way the residue fell in the
+      # cell it annotates, and a single text would be false for the half of these cells
+      # it does not describe. The deposit's own number is carried in both, because its
+      # wrapper substitutes 0.00004 for a NaN in some of them and a tiny root in others.
+      se_degenerate & is.na(value_rewrite) ~ as.character(str_glue(
+        "Standard error undefined: the term is identified only within the public tweet ",
+        "arm, where no subject signed or tweeted, so every residual there is zero and ",
+        "the term's HC2 variance is zero up to floating point. Here the residue comes ",
+        "back negative and lm_robust() returns NaN. The deposit's own wrapper returns ",
+        "{signif(value_script, 3)}, which prints as 0.000. The sign of a residue this ",
+        "size is arbitrary, so the cell is recorded as unverifiable.")),
+      se_degenerate ~ as.character(str_glue(
+        "Standard error undefined: the term is identified only within the public tweet ",
+        "arm, where no subject signed or tweeted, so every residual there is zero and ",
+        "the term's HC2 variance is zero up to floating point. Here the residue comes ",
+        "back positive and lm_robust() returns {signif(value_rewrite, 3)}, which prints ",
+        "as 0.000 and would round to the published value. The deposit's own wrapper ",
+        "returns {signif(value_script, 3)}. Agreement at that precision would be a ",
+        "report on the sign of the residue, which is arbitrary, so the cell is recorded ",
+        "as unverifiable.")),
       claim_id %in% c("table_a1|type_8_lower|proportion",
                       "table_a1|type_8_upper|proportion") ~ note_text[5],
       claim_id == "text|study1_button_imbalance_p|p_value" ~ note_text[6],
       claim_id == "text|projected_signatures|n" ~ note_text[7],
       .default = ""
     ),
+    # Half of these rows do hold a number, and it does round to the published 0.000, so
+    # the verdict has to be cleared explicitly rather than left to arrive on its own
+    # through an NA value_rewrite.
+    match_rewrite = if_else(se_degenerate, NA_integer_, match_rewrite),
     # The printed interval is a rounded envelope rather than a point, so agreement
     # to printed precision is the wrong test and both ends are recorded unverifiable.
     across(c(match, match_rewrite),

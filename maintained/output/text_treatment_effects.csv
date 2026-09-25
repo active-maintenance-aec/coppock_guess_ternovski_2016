@@ -1,10 +1,10 @@
 study,quantity,estimate,std_error,p_value
-Study 1,"Effect of any direct message on signing, percentage points",3.6333333333334337,0.341686489772678,3.366719460078468e-26
-Study 2,"Effect of any direct message on signing, percentage points",4.409417398244211,0.2900253493391905,1.5875054560520974e-51
-Study 1,"Organizer minus follower effect on tweeting, percentage points",-1.133333333333345,0.5314035578625895,0.033028978087911054
-Study 2,"Organizer minus follower effect on tweeting, percentage points",-0.32738999473246483,0.317348453654833,0.30228965348850645
-Study 1,"Tweet encouragement effect in the fol arm, percentage points",62.44239631336409,10.365818577653014,2.549734689160531e-8
-Study 1,"Tweet encouragement effect in the org arm, percentage points",24.02597402597405,13.43212682606079,0.07654770325998583
-Study 2,"Tweet encouragement effect in the fol arm, percentage points",47.222222222222236,7.715875664778247,4.318407668702565e-9
-Study 2,"Tweet encouragement effect in the org arm, percentage points",23.087719298245617,7.888147785408868,0.0037882574502251004
-Study 1,"Tweet encouragement assignment predicting signing, percentage points",2.0500000000000096,0.7865722062567259,0.009199403794986752
+Study 1,"Effect of any direct message on signing, percentage points",3.633333333333372,0.3416864897726863,3.366719460094051e-26
+Study 2,"Effect of any direct message on signing, percentage points",4.409417398244215,0.29002534933921414,1.5875054560811123e-51
+Study 1,"Organizer minus follower effect on tweeting, percentage points",-1.1333333333333133,0.5314035578625863,0.03302897808791494
+Study 2,"Organizer minus follower effect on tweeting, percentage points",-0.32738999473247665,0.31734845365483794,0.3022896534884965
+Study 1,"Tweet encouragement effect in the fol arm, percentage points",62.44239631336409,10.365818577653021,2.5497346891605834e-8
+Study 1,"Tweet encouragement effect in the org arm, percentage points",24.025974025974016,13.432126826060786,0.07654770325998611
+Study 2,"Tweet encouragement effect in the fol arm, percentage points",47.22222222222218,7.715875664778242,4.318407668702629e-9
+Study 2,"Tweet encouragement effect in the org arm, percentage points",23.087719298245627,7.888147785408833,0.0037882574502249326
+Study 1,"Tweet encouragement assignment predicting signing, percentage points",2.04999999999999,0.7865722062567184,0.009199403794986764
