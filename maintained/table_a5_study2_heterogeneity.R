@@ -15,7 +15,7 @@ moderators <- c("centrality_centered", "num_followers_centered",
 # Each fit is treatment, one moderator, and their interaction. Nobody in the public
 # tweet arm signed or tweeted, so the moderator main effects are estimated on an
 # arm with no outcome variation. They come back as floating point noise around zero
-# with a robust variance that is zero up to rounding and so a standard error of NaN;
+# with a robust variance that is zero up to rounding and so a standard error of NA;
 # that is a property of the design rather than a fitting failure.
 fits <- expand_grid(dv = c("signed", "tweeted"), moderator = moderators) |>
   mutate(

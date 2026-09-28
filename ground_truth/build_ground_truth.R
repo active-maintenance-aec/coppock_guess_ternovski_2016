@@ -663,8 +663,9 @@ note_text <- c(
 # Every term with a degenerate standard error here is identified only within the public
 # tweet arm, where no subject signed or tweeted, so its HC2 variance is a sum of zero
 # squared residuals. Whether the residue lands positive or negative is arbitrary, and it
-# decides whether a standard error exists at all: lm_robust() takes the square root and
-# returns NaN in the one case and a root of order 1e-11 in the other. Which cells fall
+# decides whether a standard error exists at all: lm_robust() returns NA in the one case
+# (from estimatr 2.0.1 also for a positive residue it treats as zero) and a root of order
+# 1e-11 in the other. Which cells fall
 # which way moved when estimatr went from 1.0.6 to 2.0, so recording the positive ones as
 # agreement would make the verdict a report on a sign bit. Both signs are unverifiable.
 # The threshold sits in seven empty orders of magnitude: the largest residue these tables
@@ -691,7 +692,8 @@ gt <- gt |>
         "Standard error undefined: the term is identified only within the public tweet ",
         "arm, where no subject signed or tweeted, so every residual there is zero and ",
         "the term's HC2 variance is zero up to floating point. Here the residue comes ",
-        "back negative and lm_robust() returns NaN. The deposit's own wrapper returns ",
+        "back negative, or small enough that estimatr treats the variance as zero, and ",
+        "lm_robust() returns NA. The deposit's own wrapper returns ",
         "{signif(value_script, 3)}, which prints as 0.000. The sign of a residue this ",
         "size is arbitrary, so the cell is recorded as unverifiable.")),
       se_degenerate ~ as.character(str_glue(

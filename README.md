@@ -1,6 +1,6 @@
 # Active Maintenance Report: coppock_guess_ternovski_2016
 
-2026-09-25
+2026-09-28
 
 - [Summary](#summary)
   - [Does the deposited archive run?](#does-the-deposited-archive-run)
@@ -396,14 +396,15 @@ zero squared residuals, which is zero up to floating point.
 
 Whether the residue lands positive or negative is arbitrary, and it
 decides whether a standard error exists at all. `estimatr::lm_robust()`
-takes the square root, returning `NaN` in 24 of these cells and a root
-of order 1e-11 in the other 20. A root that small prints as `0.000` and
-so would round to the published value, but reading that as agreement
-would make the verdict a report on a sign bit: 16 of these cells changed
-side between estimatr 1.0.6 and 2.0, 8 in each direction, on the same
-code and the same data. Both signs are therefore recorded as
-unverifiable, which fixes the set at 44 cells instead of at whatever the
-arithmetic on a given machine happens to produce.
+returns `NA` in 29 of these cells, where the residue is negative or
+small enough that estimatr treats the variance as zero, and a root of
+order 1e-11 in the other 15. A root that small prints as `0.000` and so
+would round to the published value, but reading that as agreement would
+make the verdict a report on a sign bit: 16 of these cells changed side
+between estimatr 1.0.6 and 2.0, 8 in each direction, on the same code
+and the same data. Both signs are therefore recorded as unverifiable,
+which fixes the set at 44 cells instead of at whatever the arithmetic on
+a given machine happens to produce.
 
 The deposit’s verdicts are stable where the rewrite’s are not, and the
 reason is a substitution rather than a better variance estimate.
@@ -626,19 +627,19 @@ maintained rewrite produces.
 |:----------|:-----------------------|
 | R version | 4.6.0                  |
 | Platform  | aarch64-apple-darwin23 |
-| Date run  | 2026-09-25             |
+| Date run  | 2026-09-28             |
 
-| Package      | Version    |
-|:-------------|:-----------|
-| estimatr     | 2.0.0.9000 |
-| randomizr    | 2.0.1      |
-| nnet         | 7.3.20     |
-| modelsummary | 2.6.0      |
-| AER          | 1.2.17     |
-| dplyr        | 1.2.1      |
-| ggplot2      | 4.0.3      |
-| tidyr        | 1.3.2      |
-| purrr        | 1.2.2      |
-| here         | 1.0.2      |
+| Package      | Version |
+|:-------------|:--------|
+| estimatr     | 2.0.1   |
+| randomizr    | 2.0.1   |
+| nnet         | 7.3.20  |
+| modelsummary | 2.6.0   |
+| AER          | 1.2.17  |
+| dplyr        | 1.2.1   |
+| ggplot2      | 4.0.3   |
+| tidyr        | 1.3.2   |
+| purrr        | 1.2.2   |
+| here         | 1.0.2   |
 
 Package versions used for the run behind this report.
