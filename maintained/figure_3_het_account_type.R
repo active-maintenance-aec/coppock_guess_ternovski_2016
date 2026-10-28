@@ -43,7 +43,10 @@ gg_df <- bind_rows(
 
 write_csv(gg_df, here::here("maintained", "output", "figure_3_het_account_type.csv"))
 
-# Direct labels replace the legend, placed once in the upper left panel to the
+# The title, strip and axis words are the published figure's (p. 124); its strips
+# are lower case in the labeller only, so the CSV keeps the labels the claim
+# scripts filter on. Direct
+# labels replace its legend, placed once in the upper left panel to the
 # right of the two estimates for unknown accounts.
 label_df <- gg_df |>
   filter(study == "Study 1", outcome_label == "Signed", account_label == "Unknown")
@@ -58,8 +61,10 @@ figure_3 <- ggplot(gg_df, aes(x = estimate, y = account_label, shape = treatment
             hjust = -0.15, size = 3) +
   scale_shape_manual(values = c(Follower = 19, Organizer = 21)) +
   scale_x_continuous(limits = c(-0.025, 0.10)) +
-  labs(x = "Conditional average treatment effect", y = "Account type") +
-  facet_grid(study ~ outcome_label) +
+  labs(title = "Heterogeneous Effects of Treatment by Account Type",
+       x = "Conditional Average Treatment Effects", y = "Account Type") +
+  facet_grid(study ~ outcome_label,
+             labeller = labeller(outcome_label = str_to_lower)) +
   theme_bw() +
   theme(legend.position = "none")
 

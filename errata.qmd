@@ -58,11 +58,11 @@ three <- function(x) paste(x, collapse = ", ")
 # cited, so a later finding is added at the end and never interleaved.
 #
 # claim_ids names the ground-truth rows an entry corrects, semicolon-separated, so that
-# "is this finding published?" is a query rather than a judgment. Both entries here are
-# empty, and for different reasons. Entry 1 corrects a row label, and the extraction holds
-# values rather than labels: the three means under the mislabelled row are quoted in its
-# note as evidence, and they are right, so citing them would claim a correction the entry
-# does not make. Entry 2 comes from the reference audit, and a reference list is not an
+# "is this finding published?" is a query rather than a judgment. All three entries here
+# are empty. Entries 1 and 3 correct row labels, and the extraction holds values rather
+# than labels: the three means under entry 1's mislabelled row are quoted in its note as
+# evidence, and they are right, so citing them would claim a correction the entry does
+# not make. Entry 2 comes from the reference audit, and a reference list is not an
 # extraction claim. Every id listed here is checked against the ground truth by
 # build_ground_truth.R.
 entries <- tribble(
@@ -92,6 +92,16 @@ entries <- tribble(
   paste("Crossref, doi 10.1073/pnas.1103343108: \"Motivating voter turnout by invoking the",
         "self.\" The article's two in-text citations of the work, on pp. 106 and 108, are",
         "unaffected."),
+  "",
+
+  3, "spelling", "remaster", "brief",
+  "Table 8 misspells \"encouragement\" in its constant's label",
+  "published, Table 8, p. 123",
+  "Constant (treatment: no [[encouragment]])",
+  "Constant (treatment: no encouragement)",
+  paste("Table 5 on p. 119 prints the same label spelled correctly. The authors' source",
+        "for both tables misspells it, so the press corrected one and not the other. The",
+        "values beneath the label are as published."),
   ""
 ) |>
   mutate(across(c(title, published, corrected, note, claim_ids), as.character))
@@ -108,7 +118,7 @@ spell <- function(n) {
 bold <- function(x) str_replace_all(x, "\\[\\[(.*?)\\]\\]", "**\\1**")
 ```
 
-This note lists `r spell(nrow(entries))` corrections to "When Treatments Are Tweets: A Network Mobilization Experiment over Twitter," published in *Political Behavior* 38(1):105--128, doi [10.1007/s11109-015-9308-6](https://doi.org/10.1007/s11109-015-9308-6). **Neither changes any conclusion of the paper**, and neither touches an estimate: every coefficient, standard error, p-value and mean in the article and its online appendix reproduces from the deposited replication archive ([10.7910/DVN/29548](https://doi.org/10.7910/DVN/29548)). One is a row label in an appendix table whose values are right; the other is a word missing a letter in the reference list.
+This note lists `r spell(nrow(entries))` corrections to "When Treatments Are Tweets: A Network Mobilization Experiment over Twitter," published in *Political Behavior* 38(1):105--128, doi [10.1007/s11109-015-9308-6](https://doi.org/10.1007/s11109-015-9308-6). **None of the three changes any conclusion of the paper**, and none touches an estimate: every coefficient, standard error, p-value and mean in the article and its online appendix reproduces from the deposited replication archive ([10.7910/DVN/29548](https://doi.org/10.7910/DVN/29548)). One is a row label in an appendix table whose values are right, one is a word missing a letter in the reference list, and one is a misspelled word in the row label of a table whose values are right.
 
 Every number quoted below is computed from the deposited archive at the time this document is rendered. The code and output supporting the corrections are at [github.com/active-maintenance-aec/coppock_guess_ternovski_2016](https://github.com/active-maintenance-aec/coppock_guess_ternovski_2016).
 
@@ -132,6 +142,16 @@ walk(entries$entry[entries$source == "reference_audit"], function(n) {
       str_remove(e$location, "^published "), ":\n\n> ", bold(e$published),
       "\n\nCorrected:\n\n> ", e$corrected, "\n\n", e$note, "\n", sep = "")
 })
+```
+
+# Spelling
+
+```{r entry-3, results="asis"}
+e <- entries |> filter(entry == 3)
+cat("\n\n## ", e$entry, ". ", e$title, "\n\nPublished, ",
+    str_remove(e$location, "^published, "), ", the constant's row label:\n\n> ",
+    bold(e$published), "\n\nCorrected:\n\n> ", e$corrected, "\n\n", e$note, "\n",
+    sep = "")
 ```
 
 ```{r emit-spine}
