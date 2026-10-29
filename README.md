@@ -1,6 +1,6 @@
 # Active Maintenance Report: coppock_guess_ternovski_2016
 
-2026-09-28
+2026-10-29
 
 - [Summary](#summary)
   - [Does the deposited archive run?](#does-the-deposited-archive-run)
@@ -177,7 +177,7 @@ points.
 | LCV Experiments 1 and 2 analysis.R | 55 | the condition has length \> 1 | 2 (lines 142, 188) |
 | LCV Appendix analysis.R | 78 | unused argument (condition_names = c(“pub”, “fol”, “org”)) | 2 (lines 206, 241) |
 
-The deposited archive on R 4.6.0. LCVsource.r is not listed: it defines
+The deposited archive on R 4.6.1. LCVsource.r is not listed: it defines
 functions, is sourced by both scripts, and needs no changes.
 
 Every package the archive names still installs from CRAN: `stargazer`,
@@ -272,20 +272,25 @@ row is days on Twitter, the values are right, and the label is a slip.
 The maintained rewrite labels it “Days on Twitter” and the ground truth
 records the values as matching.
 
-One entry of the reference list is wrong in the same way, and no ground
-truth row reaches it: the article gives the title of Bryan et al. (2011)
-as “Motivating voter turnout by invoking the sel”, where the last word
-is “self”. It was found by an audit that sends every printed reference
-entry whole to Crossref and checks the authoritative record back into
-it, which flagged one other entry here, for a page range printed without
-its dash. That one is a false positive: the entry reads
-“pp. 12,653–12,656” on the page, with the dash present and the thousands
-separators the journal’s style uses.
+Two entries of the reference list are wrong, and no ground truth row
+reaches them: the article gives the title of Bryan et al. (2011) as
+“Motivating voter turnout by invoking the sel”, where the last word is
+“self”, and the pages of Verplanken and Holland (2002) as “434”, the
+first page of a range that runs to 447. Both were found by an audit that
+sends every printed reference entry whole to Crossref and checks the
+authoritative record back into it. Its first run flagged one other entry
+here, for a page range printed without its dash. That one is a false
+positive: the entry reads “pp. 12,653–12,656” on the page, with the dash
+present and the thousands separators the journal’s style uses.
 
-Both corrections are set out in
-`coppock_guess_ternovski_2016_errata.pdf` at the root of this
-repository, as two numbered entries whose values are computed from the
-pipeline when the document is rendered. Neither changes a conclusion.
+Table 8 also misspells “encouragement” in the label of its constant,
+where Table 5 prints the same label correctly. The values beneath it are
+as published.
+
+All of these are set out in `coppock_guess_ternovski_2016_errata.pdf` at
+the root of this repository, as four numbered entries whose values are
+computed from the pipeline when the document is rendered. None changes a
+conclusion.
 
 The archive’s `strata_ra()` helper carries a second slip with no
 consequence: it writes `"ord"` where it means `"org"` when labelling the
@@ -625,21 +630,21 @@ maintained rewrite produces.
 
 | Item      | Value                  |
 |:----------|:-----------------------|
-| R version | 4.6.0                  |
+| R version | 4.6.1                  |
 | Platform  | aarch64-apple-darwin23 |
-| Date run  | 2026-09-28             |
+| Date run  | 2026-10-29             |
 
-| Package      | Version |
-|:-------------|:--------|
-| estimatr     | 2.0.1   |
-| randomizr    | 2.0.1   |
-| nnet         | 7.3.20  |
-| modelsummary | 2.6.0   |
-| AER          | 1.2.17  |
-| dplyr        | 1.2.1   |
-| ggplot2      | 4.0.3   |
-| tidyr        | 1.3.2   |
-| purrr        | 1.2.2   |
-| here         | 1.0.2   |
+| Package      | Version    |
+|:-------------|:-----------|
+| estimatr     | 2.0.1.9000 |
+| randomizr    | 2.0.1      |
+| nnet         | 7.3.20     |
+| modelsummary | 2.6.0      |
+| AER          | 1.2.17     |
+| dplyr        | 1.2.1      |
+| ggplot2      | 4.0.3      |
+| tidyr        | 1.3.2      |
+| purrr        | 1.2.2      |
+| here         | 1.0.2      |
 
 Package versions used for the run behind this report.

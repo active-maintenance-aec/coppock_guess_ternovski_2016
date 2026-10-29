@@ -58,12 +58,12 @@ three <- function(x) paste(x, collapse = ", ")
 # cited, so a later finding is added at the end and never interleaved.
 #
 # claim_ids names the ground-truth rows an entry corrects, semicolon-separated, so that
-# "is this finding published?" is a query rather than a judgment. All three entries here
+# "is this finding published?" is a query rather than a judgment. All four entries here
 # are empty. Entries 1 and 3 correct row labels, and the extraction holds values rather
 # than labels: the three means under entry 1's mislabelled row are quoted in its note as
 # evidence, and they are right, so citing them would claim a correction the entry does
-# not make. Entry 2 comes from the reference audit, and a reference list is not an
-# extraction claim. Every id listed here is checked against the ground truth by
+# not make. Entries 2 and 4 come from the reference audit, and a reference list is not
+# an extraction claim. Every id listed here is checked against the ground truth by
 # build_ground_truth.R.
 entries <- tribble(
   ~entry, ~class, ~source, ~form, ~title, ~location, ~published, ~corrected, ~note, ~claim_ids,
@@ -102,6 +102,15 @@ entries <- tribble(
   paste("Table 5 on p. 119 prints the same label spelled correctly. The authors' source",
         "for both tables misspells it, so the press corrected one and not the other. The",
         "values beneath the label are as published."),
+  "",
+
+  4, "bibliographic", "reference_audit", "brief",
+  "The Verplanken and Holland reference prints a first page in place of a page range",
+  "published p. 128",
+  "Journal of Personality and Social Psychology, 82(3), [[434]].",
+  "Journal of Personality and Social Psychology, 82(3), 434--447.",
+  paste("Crossref, doi 10.1037/0022-3514.82.3.434, gives the article's pages as 434 to",
+        "447. The entries around it on the page print full ranges."),
   ""
 ) |>
   mutate(across(c(title, published, corrected, note, claim_ids), as.character))
@@ -118,7 +127,7 @@ spell <- function(n) {
 bold <- function(x) str_replace_all(x, "\\[\\[(.*?)\\]\\]", "**\\1**")
 ```
 
-This note lists `r spell(nrow(entries))` corrections to "When Treatments Are Tweets: A Network Mobilization Experiment over Twitter," published in *Political Behavior* 38(1):105--128, doi [10.1007/s11109-015-9308-6](https://doi.org/10.1007/s11109-015-9308-6). **None of the three changes any conclusion of the paper**, and none touches an estimate: every coefficient, standard error, p-value and mean in the article and its online appendix reproduces from the deposited replication archive ([10.7910/DVN/29548](https://doi.org/10.7910/DVN/29548)). One is a row label in an appendix table whose values are right, one is a word missing a letter in the reference list, and one is a misspelled word in the row label of a table whose values are right.
+This note lists `r spell(nrow(entries))` corrections to "When Treatments Are Tweets: A Network Mobilization Experiment over Twitter," published in *Political Behavior* 38(1):105--128, doi [10.1007/s11109-015-9308-6](https://doi.org/10.1007/s11109-015-9308-6). **None of the four changes any conclusion of the paper**, and none touches an estimate: every coefficient, standard error, p-value and mean in the article and its online appendix reproduces from the deposited replication archive ([10.7910/DVN/29548](https://doi.org/10.7910/DVN/29548)). One is a row label in an appendix table whose values are right, two are in the reference list (a word missing a letter and a page range cut to its first page), and one is a misspelled word in the row label of a table whose values are right.
 
 Every number quoted below is computed from the deposited archive at the time this document is rendered. The code and output supporting the corrections are at [github.com/active-maintenance-aec/coppock_guess_ternovski_2016](https://github.com/active-maintenance-aec/coppock_guess_ternovski_2016).
 
@@ -133,7 +142,7 @@ cat("\n\n## ", e$entry, ". ", e$title, "\n\nPublished, ",
 
 # The reference list
 
-The entry below corrects the article's reference list. It was found by an audit that sends every printed entry whole to Crossref and checks the authoritative record back into it, and it is verified against the record named in the note. No cited work is missing and no citation in the text points at the wrong work.
+The two entries below correct the article's reference list. Both were found by an audit that sends every printed entry whole to Crossref and checks the authoritative record back into it, and each is verified against the record named in its note. No cited work is missing and no citation in the text points at the wrong work.
 
 ```{r reference-entries, results="asis"}
 walk(entries$entry[entries$source == "reference_audit"], function(n) {
