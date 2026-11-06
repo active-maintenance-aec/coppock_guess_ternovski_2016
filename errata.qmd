@@ -65,8 +65,15 @@ three <- function(x) paste(x, collapse = ", ")
 # not make. Entries 2 and 4 come from the reference audit, and a reference list is not
 # an extraction claim. Every id listed here is checked against the ground truth by
 # build_ground_truth.R.
+#
+# corrected_values runs parallel to claim_ids, one value per id in the same order, carrying
+# the corrected quantity as a number rather than as a sentence. The sentence already holds
+# it, but only inside prose a reader has to parse. Each value comes from the same expression
+# that glues the sentence, so the two cannot be written apart, and the gate below re-checks
+# that each one is still inside the span it belongs to. An entry of a class that changes no
+# quantity carries NA, and so does a note-form entry, which corrects nothing.
 entries <- tribble(
-  ~entry, ~class, ~source, ~form, ~title, ~location, ~published, ~corrected, ~note, ~claim_ids,
+  ~entry, ~class, ~source, ~form, ~title, ~location, ~published, ~corrected, ~note, ~claim_ids, ~corrected_values,
 
   1, "label", "pipeline", "brief",
   "A covariate row of appendix Table A3 carries the wrong label",
@@ -83,6 +90,7 @@ entries <- tribble(
     "print the same quantity on the same scale. Nothing in the article's text or in any ",
     "other table quotes the mislabelled row."),
   "",
+  NA_character_,
 
   2, "bibliographic", "reference_audit", "brief",
   "The title of Bryan et al. (2011) is cut short by a letter",
@@ -93,6 +101,7 @@ entries <- tribble(
         "self.\" The article's two in-text citations of the work, on pp. 106 and 108, are",
         "unaffected."),
   "",
+  NA_character_,
 
   3, "spelling", "remaster", "brief",
   "Table 8 misspells \"encouragement\" in its constant's label",
@@ -103,6 +112,7 @@ entries <- tribble(
         "for both tables misspells it, so the press corrected one and not the other. The",
         "values beneath the label are as published."),
   "",
+  NA_character_,
 
   4, "bibliographic", "reference_audit", "brief",
   "The Verplanken and Holland reference prints a first page in place of a page range",
@@ -111,9 +121,11 @@ entries <- tribble(
   "Journal of Personality and Social Psychology, 82(3), 434--447.",
   paste("Crossref, doi 10.1037/0022-3514.82.3.434, gives the article's pages as 434 to",
         "447. The entries around it on the page print full ranges."),
-  ""
+  "",
+  NA_character_
 ) |>
-  mutate(across(c(title, published, corrected, note, claim_ids), as.character))
+  mutate(across(c(title, published, corrected, note, claim_ids, corrected_values),
+                as.character))
 
 stopifnot(nrow(entries) == max(entries$entry), !anyDuplicated(entries$entry))
 
@@ -122,6 +134,48 @@ spell <- function(n) {
   stopifnot(n >= 1, n <= length(words))
   words[n]
 }
+
+# Gate: corrected_values agrees with the sentence it was glued into ----
+# The column and the sentence are written from one expression, so they begin in agreement
+# and this gate exists for the edit that separates them: a value moved from one marked span
+# to another, a span reworded to carry a second number, a claim id appended without its
+# value. Each value has to be inside the span it belongs to, matched by position where the
+# counts line up, and inside SOME span where an entry marks a label as well as a number and
+# its spans outnumber its values.
+marked_spans <- function(x) str_match_all(x, "\\[\\[(.*?)\\]\\]")[[1]][, 2]
+
+quantified <- entries |>
+  filter(!is.na(corrected_values)) |>
+  mutate(ids = str_split(claim_ids, ";"), values = str_split(corrected_values, ";"),
+         spans = map(corrected, marked_spans))
+
+stopifnot(all(lengths(quantified$ids) == lengths(quantified$values)))
+
+value_placed <- pmap_lgl(quantified, function(...) {
+  e <- list(...)
+  if (length(e$values) == length(e$spans)) {
+    all(map2_lgl(e$values, e$spans, \(v, s) str_detect(s, fixed(v))))
+  } else {
+    all(map_lgl(e$values, \(v) any(map_lgl(e$spans, \(s) str_detect(s, fixed(v))))))
+  }
+})
+
+if (!all(value_placed)) {
+  print(quantified |> filter(!value_placed) |> select(entry, title, corrected_values, corrected))
+  stop("An entry's corrected_values are not in the spans of its corrected sentence.")
+}
+
+# An entry that changes a quantity has to say which one, and an entry that changes none may
+# not carry a value. The class is the declaration and this is where it binds. A note-form
+# entry corrects nothing, so it carries NA whatever its class. An empty claim_ids is stored
+# as "" and counts as missing here.
+has_ids <- !is.na(entries$claim_ids) & entries$claim_ids != ""
+needs_value <- entries$class == "quantity" & entries$form != "note" & has_ids
+stopifnot(
+  all(!is.na(entries$corrected_values[needs_value])),
+  all(is.na(entries$corrected_values[!needs_value])),
+  all(is.na(entries$corrected_values) | has_ids)
+)
 
 # The spine's markup, resolved for this document. Another renderer resolves it differently.
 bold <- function(x) str_replace_all(x, "\\[\\[(.*?)\\]\\]", "**\\1**")
