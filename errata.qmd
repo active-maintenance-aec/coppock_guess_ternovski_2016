@@ -54,15 +54,18 @@ three <- function(x) paste(x, collapse = ", ")
 # here, \was{} in an edition. Nothing else in a field is markup, so the same string can be
 # set by either.
 #
-# Numbering is APPEND-ONLY once this note is published: an entry can already have been
-# cited, so a later finding is added at the end and never interleaved.
+# Numbering follows PROCEDURES.md Stage 4b: entries are ordered by severity block (quantity;
+# description, interpretation, definition; label, float, cross_reference; wording, spelling,
+# typography; bibliographic), discovery order inside a block, and a finding that lands in an
+# earlier block renumbers the entries after it. Renumbered 2026-11-07; the old-to-new map is
+# in that day's commit message.
 #
 # claim_ids names the ground-truth rows an entry corrects, semicolon-separated, so that
 # "is this finding published?" is a query rather than a judgment. All four entries here
-# are empty. Entries 1 and 3 correct row labels, and the extraction holds values rather
+# are empty. Entries 1 and 2 correct row labels, and the extraction holds values rather
 # than labels: the three means under entry 1's mislabelled row are quoted in its note as
 # evidence, and they are right, so citing them would claim a correction the entry does
-# not make. Entries 2 and 4 come from the reference audit, and a reference list is not
+# not make. Entries 3 and 4 come from the reference audit, and a reference list is not
 # an extraction claim. Every id listed here is checked against the ground truth by
 # build_ground_truth.R.
 #
@@ -77,7 +80,7 @@ entries <- tribble(
 
   1, "label", "pipeline", "brief",
   "A covariate row of appendix Table A3 carries the wrong label",
-  "published, appendix p. 4",
+  "app. p. 4",
   "[[Number of Tweets]]",
   "Days on Twitter",
   str_glue(
@@ -92,20 +95,9 @@ entries <- tribble(
   "",
   NA_character_,
 
-  2, "bibliographic", "reference_audit", "brief",
-  "The title of Bryan et al. (2011) is cut short by a letter",
-  "published p. 127",
-  "Motivating voter turnout by invoking the [[sel]].",
-  "Motivating voter turnout by invoking the self.",
-  paste("Crossref, doi 10.1073/pnas.1103343108: \"Motivating voter turnout by invoking the",
-        "self.\" The article's two in-text citations of the work, on pp. 106 and 108, are",
-        "unaffected."),
-  "",
-  NA_character_,
-
-  3, "spelling", "remaster", "brief",
+  2, "spelling", "reading", "brief",
   "Table 8 misspells \"encouragement\" in its constant's label",
-  "published, Table 8, p. 123",
+  "p. 123, Table 8",
   "Constant (treatment: no [[encouragment]])",
   "Constant (treatment: no encouragement)",
   paste("Table 5 on p. 119 prints the same label spelled correctly. The authors' source",
@@ -114,9 +106,20 @@ entries <- tribble(
   "",
   NA_character_,
 
+  3, "bibliographic", "reference_audit", "brief",
+  "The title of Bryan et al. (2011) is cut short by a letter",
+  "p. 127",
+  "Motivating voter turnout by invoking the [[sel]].",
+  "Motivating voter turnout by invoking the self.",
+  paste("Crossref, doi 10.1073/pnas.1103343108: \"Motivating voter turnout by invoking the",
+        "self.\" The article's two in-text citations of the work, on pp. 106 and 108, are",
+        "unaffected."),
+  "",
+  NA_character_,
+
   4, "bibliographic", "reference_audit", "brief",
   "The Verplanken and Holland reference prints a first page in place of a page range",
-  "published p. 128",
+  "p. 128",
   "Journal of Personality and Social Psychology, 82(3), [[434]].",
   "Journal of Personality and Social Psychology, 82(3), 434--447.",
   paste("Crossref, doi 10.1037/0022-3514.82.3.434, gives the article's pages as 434 to",
@@ -194,6 +197,16 @@ cat("\n\n## ", e$entry, ". ", e$title, "\n\nPublished, ",
     bold(e$published), "\n\nCorrected:\n\n> ", e$corrected, "\n\n", e$note, "\n", sep = "")
 ```
 
+# Spelling
+
+```{r entry-2, results="asis"}
+e <- entries |> filter(entry == 2)
+cat("\n\n## ", e$entry, ". ", e$title, "\n\nPublished, ",
+    str_remove(e$location, "^published, "), ", the constant's row label:\n\n> ",
+    bold(e$published), "\n\nCorrected:\n\n> ", e$corrected, "\n\n", e$note, "\n",
+    sep = "")
+```
+
 # The reference list
 
 The two entries below correct the article's reference list. Both were found by an audit that sends every printed entry whole to Crossref and checks the authoritative record back into it, and each is verified against the record named in its note. No cited work is missing and no citation in the text points at the wrong work.
@@ -207,19 +220,16 @@ walk(entries$entry[entries$source == "reference_audit"], function(n) {
 })
 ```
 
-# Spelling
-
-```{r entry-3, results="asis"}
-e <- entries |> filter(entry == 3)
-cat("\n\n## ", e$entry, ". ", e$title, "\n\nPublished, ",
-    str_remove(e$location, "^published, "), ", the constant's row label:\n\n> ",
-    bold(e$published), "\n\nCorrected:\n\n> ", e$corrected, "\n\n", e$note, "\n",
-    sep = "")
-```
-
 ```{r emit-spine}
 # The machine-readable spine, written wherever this document is rendered. Anything else
 # that needs these entries reads it rather than keeping its own copy, so the two cannot
 # drift.
+# The spine's vocabularies are closed (cleanup of 2026-11-07): a value outside them is a
+# typo, and the edition builders read these columns to shape every entry.
+stopifnot(
+  all(entries$class %in% c("quantity", "description", "interpretation", "definition", "label", "float", "cross_reference", "wording", "spelling", "typography", "bibliographic")),
+  all(entries$form %in% c("full", "brief", "note")),
+  all(entries$source %in% c("pipeline", "reading", "reference_audit", "publisher_record", "authors_archive", "proof"))
+)
 write_csv(entries, here("errata_entries.csv"))
 ```
