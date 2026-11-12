@@ -24,6 +24,8 @@
 - [In-text claims](#in-text-claims)
 - [R environment](#r-environment)
 
+**Archived at Zenodo:** [doi:10.5281/zenodo.24168358](https://doi.org/10.5281/zenodo.24168358). This DOI always resolves to the latest release of the maintained version.
+
 This repository holds the actively maintained replication code for
 Coppock, Guess and Ternovski (2016), together with the reproducibility
 report that documents what the original archive did and did not do. It
