@@ -70,6 +70,14 @@ tidy_fit <- function(fit, model) {
 # ground_truth/build_ground_truth.R uses, where the reason for 1e-6 is written out.
 se_residue_tol <- 1e-6
 
+# The same terms have point estimates of order 1e-16 whose sign is just as arbitrary,
+# so a table printed to three places shows "-0.000" on one machine and "0.000" on
+# another. Tables format through this so a rounded zero carries no sign.
+fmt_unsigned_zero <- function(x) {
+  sprintf("%.3f", x) |>
+    str_replace("^-(0\\.000)$", "\\1")
+}
+
 drop_se_residue <- function(fit, tol) {
   residue <- !is.na(fit$std.error) & fit$std.error < tol
   for (field in c("std.error", "statistic", "p.value", "conf.low", "conf.high")) {

@@ -43,7 +43,7 @@ write_csv(results, here::here("maintained", "output", "table_4_study1_dm_effects
 
 modelsummary(
   list("Signed (1)" = m1, "Signed (2)" = m2, "Tweeted (3)" = m3, "Tweeted (4)" = m4),
-  fmt = 3,
+  fmt = fmt_unsigned_zero,
   gof_map = c("nobs", "r.squared"),
   title = "Study 1: effects of direct message treatments on participation and tweeting.",
   notes = "Robust standard errors (HC2) in parentheses. Eigenvector centrality, number of followers and days on Twitter in standard units and centred at zero.",

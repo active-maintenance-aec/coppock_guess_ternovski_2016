@@ -32,7 +32,7 @@ write_csv(results, here::here("maintained", "output", "table_a5_study2_heterogen
 
 modelsummary(
   set_names(fits$fit, paste0("(", seq_len(nrow(fits)), ")")),
-  fmt = 3,
+  fmt = fmt_unsigned_zero,
   gof_map = c("nobs", "r.squared"),
   title = "Study 2: heterogeneous effects of treatments. Columns 1 to 4 take signing as the outcome, columns 5 to 8 tweeting.",
   notes = "Robust standard errors (HC2) in parentheses. Eigenvector centrality, number of followers and days on Twitter in standard units and centred at zero.",
