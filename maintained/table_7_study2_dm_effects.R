@@ -10,10 +10,14 @@ lcv_study_2 <- read_rds(here::here("maintained", "output", "lcv_study_2.rds"))
 covariates <- "account_type + centrality_centered + num_followers_centered + days_on_twitter_centered + days_missing"
 
 # Models ----
-m1 <- lm_robust(signed ~ treat, data = lcv_study_2)
-m2 <- lm_robust(as.formula(paste("signed ~ treat +", covariates)), data = lcv_study_2)
-m3 <- lm_robust(tweeted ~ treat, data = lcv_study_2)
-m4 <- lm_robust(as.formula(paste("tweeted ~ treat +", covariates)), data = lcv_study_2)
+m1 <- lm_robust(signed ~ treat, data = lcv_study_2) |>
+  drop_se_residue(tol = se_residue_tol)
+m2 <- lm_robust(as.formula(paste("signed ~ treat +", covariates)), data = lcv_study_2) |>
+  drop_se_residue(tol = se_residue_tol)
+m3 <- lm_robust(tweeted ~ treat, data = lcv_study_2) |>
+  drop_se_residue(tol = se_residue_tol)
+m4 <- lm_robust(as.formula(paste("tweeted ~ treat +", covariates)), data = lcv_study_2) |>
+  drop_se_residue(tol = se_residue_tol)
 
 # Follower against organizer ----
 dm_only <- lcv_study_2 |>

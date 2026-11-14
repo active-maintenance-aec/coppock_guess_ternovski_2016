@@ -15,13 +15,15 @@ moderators <- c("centrality_centered", "num_followers_centered",
 # Each fit is treatment, one moderator, and their interaction. Nobody in the public
 # tweet arm signed or tweeted, so the moderator main effects are estimated on an
 # arm with no outcome variation. They come back as floating point noise around zero
-# with a robust variance that is zero up to rounding and so a standard error of NA;
-# that is a property of the design rather than a fitting failure.
+# with a robust variance that is zero up to rounding. Whether lm_robust() returns NA or
+# a root of order 1e-11 for those depends on the platform, so drop_se_residue() records
+# both as NA; that is a property of the design rather than a fitting failure.
 fits <- expand_grid(dv = c("signed", "tweeted"), moderator = moderators) |>
   mutate(
     label = str_glue("{dv} x {moderator}"),
     fit = map2(dv, moderator, \(y, m) lm_robust(
-      as.formula(str_glue("{y} ~ treat * {m}")), data = lcv_study_1))
+      as.formula(str_glue("{y} ~ treat * {m}")), data = lcv_study_1) |>
+      drop_se_residue(tol = se_residue_tol))
   )
 
 results <- map2(fits$fit, fits$label, tidy_fit) |> list_rbind()

@@ -1,6 +1,6 @@
 # Active Maintenance Report: coppock_guess_ternovski_2016
 
-2026-10-29
+2026-11-14
 
 - [Summary](#summary)
   - [Does the deposited archive run?](#does-the-deposited-archive-run)
@@ -402,24 +402,31 @@ arm is therefore exactly zero, and the term’s HC2 variance is a sum of
 zero squared residuals, which is zero up to floating point.
 
 Whether the residue lands positive or negative is arbitrary, and it
-decides whether a standard error exists at all. `estimatr::lm_robust()`
-returns `NA` in 29 of these cells, where the residue is negative or
-small enough that estimatr treats the variance as zero, and a root of
-order 1e-11 in the other 15. A root that small prints as `0.000` and so
-would round to the published value, but reading that as agreement would
-make the verdict a report on a sign bit: 16 of these cells changed side
-between estimatr 1.0.6 and 2.0, 8 in each direction, on the same code
-and the same data. Both signs are therefore recorded as unverifiable,
-which fixes the set at 44 cells instead of at whatever the arithmetic on
-a given machine happens to produce.
+decides whether a standard error exists at all: `estimatr::lm_robust()`
+returns `NA` where the residue is negative or small enough that estimatr
+treats the variance as zero, and a root of order 1e-11 where it is
+positive. Which cells fall which way does not hold still. Sixteen of
+these cells changed side between estimatr 1.0.6 and 2.0, 8 in each
+direction, on the same code and the same data, and a Linux runner splits
+them differently from a Mac again. A root that small prints as `0.000`
+and so would round to the published value, but reading that as agreement
+would make the verdict a report on a sign bit. The maintained table
+scripts therefore record any standard error below 1e-6 as `NA`
+(`drop_se_residue()` in `maintained/helpers.R`), so all 44 cells come
+out blank on every machine and are recorded as unverifiable. No genuine
+standard error in these tables is anywhere near that threshold; the
+smallest is 6.9e-4.
 
 The deposit’s verdicts are stable where the rewrite’s are not, and the
 reason is a substitution rather than a better variance estimate.
-`vcovHC()` returns the same residue, and in 20 of these cells it comes
-back as `NaN`, which the deposit’s own wrapper replaces with `0.00004`.
-Both `0.00004` and a tiny positive root print as `0.000`, so the archive
+`vcovHC()` returns the same residue; where it comes back as `NaN`, the
+deposit’s own wrapper replaces it with `0.00004`, and elsewhere the
+wrapper returns a tiny root. Both print as `0.000`, so the archive
 reproduces its own printed table in all 44 cells whichever way the
-residue falls.
+residue falls. Which cells take the substitute also differs between
+machines, so the archive record stores each of these standard errors as
+the 0 it stands for (`ground_truth/extract_archive_values.R`). The
+verdicts are the same either way.
 
 What the design supports for the public tweet arm is a bound rather than
 a point. Zero signatures from 3495 Study 2 subjects puts an exact 95
@@ -634,7 +641,7 @@ maintained rewrite produces.
 |:----------|:-----------------------|
 | R version | 4.6.1                  |
 | Platform  | aarch64-apple-darwin23 |
-| Date run  | 2026-10-29             |
+| Date run  | 2026-11-14             |
 
 | Package      | Version    |
 |:-------------|:-----------|

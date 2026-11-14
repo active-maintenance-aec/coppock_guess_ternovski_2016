@@ -670,7 +670,8 @@ note_text <- c(
 # agreement would make the verdict a report on a sign bit. Both signs are unverifiable.
 # The threshold sits in seven empty orders of magnitude: the largest residue these tables
 # produce is 2.0e-10 and the smallest genuine standard error in them is 6.9e-4, so any
-# threshold between 1e-9 and 1e-5 selects the same cells.
+# threshold between 1e-9 and 1e-5 selects the same cells. maintained/helpers.R carries
+# the same value as drop_se_residue()'s threshold, applied to the fits themselves.
 se_residue_tol <- 1e-6
 
 gt <- gt |>
@@ -684,36 +685,27 @@ gt <- gt |>
       claim_id == "table_a3|omnibus|p_value" ~ note_text[2],
       claim_id == "text|study2_second_stage_pool|n" ~ note_text[3],
       claim_id == "table_a1|study2_types_5_to_7|percent" ~ note_text[4],
-      # Two branches rather than one: the note says which way the residue fell in the
-      # cell it annotates, and a single text would be false for the half of these cells
-      # it does not describe. The deposit's own number is carried in both, because its
-      # wrapper substitutes 0.00004 for a NaN in some of them and a tiny root in others.
-      se_degenerate & is.na(value_rewrite) ~ as.character(str_glue(
+      # One text for every such cell, and it names no number: which cells come back NA
+      # and which a tiny root differs between platforms, on the deposit's side as well
+      # as ours, so a note quoting either value would itself move with the sign bit.
+      se_degenerate ~ paste0(
         "Standard error undefined: the term is identified only within the public tweet ",
         "arm, where no subject signed or tweeted, so every residual there is zero and ",
-        "the term's HC2 variance is zero up to floating point. Here the residue comes ",
-        "back negative, or small enough that estimatr treats the variance as zero, and ",
-        "lm_robust() returns NA. The deposit's own wrapper returns ",
-        "{signif(value_script, 3)}, which prints as 0.000. The sign of a residue this ",
-        "size is arbitrary, so the cell is recorded as unverifiable.")),
-      se_degenerate ~ as.character(str_glue(
-        "Standard error undefined: the term is identified only within the public tweet ",
-        "arm, where no subject signed or tweeted, so every residual there is zero and ",
-        "the term's HC2 variance is zero up to floating point. Here the residue comes ",
-        "back positive and lm_robust() returns {signif(value_rewrite, 3)}, which prints ",
-        "as 0.000 and would round to the published value. The deposit's own wrapper ",
-        "returns {signif(value_script, 3)}. Agreement at that precision would be a ",
-        "report on the sign of the residue, which is arbitrary, so the cell is recorded ",
-        "as unverifiable.")),
+        "the term's HC2 variance is zero up to floating point. Whether lm_robust() ",
+        "returns NA or a root of order 1e-11 depends on the sign of that residue, which ",
+        "is arbitrary and differs between machines, so the maintained tables record ",
+        "any standard error below 1e-6 as NA. The deposit's own wrapper returns either ",
+        "0.00004, its substitute for a NaN, or a root of the same tiny order; both print ",
+        "as 0.000. The cell is recorded as unverifiable."),
       claim_id %in% c("table_a1|type_8_lower|proportion",
                       "table_a1|type_8_upper|proportion") ~ note_text[5],
       claim_id == "text|study1_button_imbalance_p|p_value" ~ note_text[6],
       claim_id == "text|projected_signatures|n" ~ note_text[7],
       .default = ""
     ),
-    # Half of these rows do hold a number, and it does round to the published 0.000, so
-    # the verdict has to be cleared explicitly rather than left to arrive on its own
-    # through an NA value_rewrite.
+    # The maintained tables now write NA for every such cell, but the verdict is still
+    # cleared explicitly, so a residue that ever slips past the scripts' threshold cannot
+    # arrive as agreement with the published 0.000.
     match_rewrite = if_else(se_degenerate, NA_integer_, match_rewrite),
     # The printed interval is a rounded envelope rather than a point, so agreement
     # to printed precision is the wrong test and both ends are recorded unverifiable.

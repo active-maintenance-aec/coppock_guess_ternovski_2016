@@ -217,6 +217,13 @@ value <- function(table_figure, row_label, quantity, value) {
 fit_rows <- function(table_figure, model, fit, term_map) {
   coefs <- getcoefs(fit)
   ses <- getrobustses(fit)
+  # A term identified only within the public tweet arm has an HC2 variance of zero up to
+  # floating point. The wrapper returns 0.00004, its substitute for a NaN, when the
+  # residue comes back negative and a root of order 1e-11 when it comes back positive,
+  # and which cells fall which way differs between machines. Both print as 0.000, so the
+  # residue is recorded as the 0 it stands for and the record stops moving with a sign
+  # bit. The 1e-6 is se_residue_tol in build_ground_truth.R and maintained/helpers.R.
+  ses[which(ses == 0.00004 | ses < 1e-6)] <- 0
   bind_rows(
     map(names(term_map),
         \(g) value(table_figure, paste0(model, ":", g), "coef", coefs[[term_map[[g]]]])) |>

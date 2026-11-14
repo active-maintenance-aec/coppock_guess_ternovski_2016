@@ -60,6 +60,24 @@ tidy_fit <- function(fit, model) {
            conf.low, conf.high, nobs, r_squared)
 }
 
+# Standard errors that are zero up to floating point ----
+# A term identified only within the public tweet arm, where nobody signed or tweeted,
+# has an HC2 variance that is a sum of zero squared residuals. The residue's sign is
+# arbitrary and differs between platforms, so lm_robust() returns NA on one machine
+# and a root of order 1e-11 on another for the same cell. Any standard error below
+# `tol` is set to NA together with the inference built on it, on the fit itself so the
+# CSV and the modelsummary table agree. The threshold is the one
+# ground_truth/build_ground_truth.R uses, where the reason for 1e-6 is written out.
+se_residue_tol <- 1e-6
+
+drop_se_residue <- function(fit, tol) {
+  residue <- !is.na(fit$std.error) & fit$std.error < tol
+  for (field in c("std.error", "statistic", "p.value", "conf.low", "conf.high")) {
+    fit[[field]][residue] <- NA
+  }
+  fit
+}
+
 # Randomization inference p-value for the omnibus balance test ----
 # Fits the multinomial logit of assignment on all covariates and on an intercept
 # alone, takes the deviance difference as the likelihood ratio statistic, then
