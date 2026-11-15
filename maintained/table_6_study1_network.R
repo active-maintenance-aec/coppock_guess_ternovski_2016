@@ -31,7 +31,7 @@ write_csv(results, here::here("maintained", "output", "table_6_study1_network.cs
 modelsummary(
   list("Shown tweet OLS (1)" = m1, "Signed OLS (2)" = m2, "Signed IV (3)" = m3,
        "Tweeted OLS (4)" = m4, "Tweeted IV (5)" = m5),
-  fmt = 3,
+  fmt = fmt_unsigned_zero,
   gof_map = c("nobs", "r.squared"),
   title = "Study 1: effects of tweet encouragement on subjects' followers.",
   notes = "Robust standard errors (HC2) in parentheses. All regressions weighted by the inverse probability of exposure.",

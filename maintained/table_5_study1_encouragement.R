@@ -22,7 +22,7 @@ write_csv(results, here::here("maintained", "output", "table_5_study1_encouragem
 
 modelsummary(
   list("Tweeted (1)" = m1, "Tweeted (2)" = m2),
-  fmt = 3,
+  fmt = fmt_unsigned_zero,
   gof_map = c("nobs", "r.squared"),
   title = "Study 1: effects of tweet encouragement.",
   notes = "Robust standard errors (HC2) in parentheses. The constant is the no-encouragement follower arm.",
